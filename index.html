@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Strategic Governance & Decision Cockpit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    input[type=range] {
+      accent-color: #0f172a;
+    }
+    .badge-transition {
+      transition: all 0.2s ease-in-out;
+    }
+    .inline-edit-input {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+    .inline-edit-input:hover {
+      background: #ffffff;
+      border-color: #cbd5e1;
+    }
+    .inline-edit-input:focus {
+      background: #ffffff;
+      border-color: #1e3a8a;
+      outline: none;
+      box-shadow: 0 0 0 1px #1e3a8a;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(147, 51, 234, 0); }
+      50% { box-shadow: 0 0 0 8px rgba(147, 51, 234, 0.25); }
+    }
+    .ai-glow-pulse {
+      animation: pulseGlow 1.2s ease-in-out 2;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; color: #000000 !important; }
+      .print-border { border: 1px solid #cbd5e1 !important; }
+      #board-dossier-body { display: block !important; }
+      #paralysis-popover { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="h-9 w-2 bg-slate-900 rounded-xs"></div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500" data-i18n="nav_system_tag">STRAT-GOV ENTERPRISE</span>
+            <span class="text-slate-300">/</span>
+            <span class="text-[11px] font-semibold text-blue-900 uppercase tracking-wider" data-i18n="nav_subtitle">Executive Decision Cockpit</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight" data-i18n="app_title">
+            Enterprise Strategic Governance & Decision Cockpit
+          </h1>
+        </div>
+      </div>
+
+      <!-- Action Utilities & Language Toggle -->
+      <div class="flex items-center flex-wrap gap-2.5 no-print">
+        <!-- Language Switcher -->
+        <div class="inline-flex rounded-md border border-slate-300 bg-slate-50 p-0.5">
+          <button id="lang-btn-it" onclick="setLanguage('it')" class="px-2.5 py-1 text-xs font-semibold rounded bg-white text-slate-900 shadow-xs transition">IT</button>
+          <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 text-xs font-medium rounded text-slate-600 hover:text-slate-900 transition">EN</button>
+        </div>
+
+        <!-- CSV Export -->
+        <button onclick="exportComprehensiveCSV()" class="inline-flex items-center space-x-1.5 bg-white hover:bg-slate-50 text-slate-700 font-medium px-3 py-1.5 rounded text-xs border border-slate-300 transition cursor-pointer shadow-xs" title="Download comprehensive Excel ledger">
+          <svg class="w-3.5 h-3.5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span data-i18n="btn_export_csv">Esporta Dati Completi (Excel/CSV)</span>
+        </button>
+
+        <!-- PDF Export -->
+        <button onclick="window.print()" class="inline-flex items-center space-x-1.5 bg-slate-900 hover:bg-slate-800 text-white font-medium px-3.5 py-1.5 rounded text-xs transition cursor-pointer shadow-xs">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span data-i18n="btn_export_pdf">Stampa Report PDF</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-message" class="fixed bottom-4 right-4 z-50 transform transition-all duration-300 translate-y-20 opacity-0 bg-slate-900 text-white text-xs px-4 py-2.5 rounded-lg shadow-lg border border-slate-700 flex items-center space-x-2 pointer-events-none">
+    <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span id="toast-text">Operazione completata</span>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1 w-full">
+
+    <section class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500" data-i18n="sec1_step">Contesto Strategico & Dimensione Iniziativa</span>
+          <h2 class="text-sm font-bold text-slate-900" data-i18n="sec1_title">Seleziona uno Scenario o personalizza i parametri di governance</h2>
+        </div>
+        <div class="flex items-center space-x-2 text-xs text-slate-500">
+          <span data-i18n="lbl_active_scenario">Scenario Attivo:</span>
+          <span id="current-scenario-label" class="font-semibold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+            Lancio Nuovo Prodotto
+          </span>
+        </div>
+      </div>
+
+      <!-- Preset Buttons Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-2.5 mb-5">
+        <button id="btn-scen-1" onclick="applyScenarioPreset(1)" class="scenario-btn p-3 rounded border-2 border-slate-900 bg-slate-50 text-left transition cursor-pointer">
+          <div class="text-xs font-bold text-slate-900" data-i18n="scen_1_btn_title">1. Lancio Prodotto</div>
+          <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="scen_1_btn_sub">Go-to-market & Digital</div>
+        </button>
+        <button id="btn-scen-2" onclick="applyScenarioPreset(2)" class="scenario-btn p-3 rounded border border-slate-200 bg-white hover:bg-slate-50 text-left transition cursor-pointer">
+          <div class="text-xs font-bold text-slate-900" data-i18n="scen_2_btn_title">2. Nuovo ERP</div>
+          <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="scen_2_btn_sub">Core SAP / S4HANA</div>
+        </button>
+        <button id="btn-scen-3" onclick="applyScenarioPreset(3)" class="scenario-btn p-3 rounded border border-slate-200 bg-white hover:bg-slate-50 text-left transition cursor-pointer">
+          <div class="text-xs font-bold text-slate-900" data-i18n="scen_3_btn_title">3. Riorganizzazione</div>
+          <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="scen_3_btn_sub">Supply Chain & Costi</div>
+        </button>
+        <button id="btn-scen-4" onclick="applyScenarioPreset(4)" class="scenario-btn p-3 rounded border border-slate-200 bg-white hover:bg-slate-50 text-left transition cursor-pointer">
+          <div class="text-xs font-bold text-slate-900" data-i18n="scen_4_btn_title">4. Audit & Normativa</div>
+          <div class="text-[11px] text-slate-500 mt-0.5" data-i18n="scen_4_btn_sub">ESG & CSRD Report</div>
+        </button>
+        <button id="btn-scen-custom" onclick="activateCustomScenario()" class="scenario-btn p-3 rounded border border-dashed border-blue-600 bg-blue-50/40 hover:bg-blue-50 text-left transition cursor-pointer">
+          <div class="text-xs font-bold text-blue-900 flex items-center justify-between">
+            <span data-i18n="scen_custom_title">5. Personalizzato</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+          </div>
+          <div class="text-[11px] text-blue-700 mt-0.5" data-i18n="scen_custom_sub">Configurazione libera</div>
+        </button>
+      </div>
+
+      <!-- Parametri Modificabili -->
+      <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            <span data-i18n="box_editable_params">Parametri Economici e Temporali Baseline</span>
+          </span>
+          <span class="text-[11px] text-slate-500" data-i18n="txt_editable_hint">Modifica i valori per ricalcolare il modello</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label for="input-project-name" class="block text-xs font-medium text-slate-700 mb-1" data-i18n="lbl_project_name">Nome Iniziativa / Programma</label>
+            <input type="text" id="input-project-name" value="Lancio Piattaforma Omnicanale 2026" class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-900 font-medium focus:ring-2 focus:ring-slate-900 focus:outline-none">
+          </div>
+
+          <div>
+            <label for="input-total-budget" class="block text-xs font-medium text-slate-700 mb-1" data-i18n="lbl_total_budget">Budget Totale Stanziato (€)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-xs text-slate-400 font-mono-num">€</span>
+              <input type="number" id="input-total-budget" value="1200000" step="50000" min="50000" class="w-full bg-white border border-slate-300 rounded pl-7 pr-3 py-1.5 text-xs text-slate-900 font-mono-num font-semibold focus:ring-2 focus:ring-slate-900 focus:outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label for="input-project-months" class="block text-xs font-medium text-slate-700 mb-1" data-i18n="lbl_project_months">Durata Baseline Contrattuale (Mesi)</label>
+            <input type="number" id="input-project-months" value="6" step="1" min="1" max="60" class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-900 font-mono-num font-semibold focus:ring-2 focus:ring-slate-900 focus:outline-none">
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label for="input-daily-cost" class="text-xs font-medium text-slate-700" data-i18n="lbl_daily_cost">Costo Medio Giornaliero Team (€)</label>
+              <button onclick="autoCalcDailyRate()" class="text-[10px] text-blue-700 hover:underline cursor-pointer" data-i18n="btn_autocalc">Auto-calcola</button>
+            </div>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-xs text-slate-400 font-mono-num">€</span>
+              <input type="number" id="input-daily-cost" value="3200" step="100" min="500" class="w-full bg-white border border-slate-300 rounded pl-7 pr-3 py-1.5 text-xs text-slate-900 font-mono-num font-semibold focus:ring-2 focus:ring-slate-900 focus:outline-none">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- KPI 1 -->
+      <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs">
+        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <span data-i18n="kpi_delay_title">Ritardo Cumulato Stimato</span>
+          <span id="badge-delay-severity" class="badge-transition px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900">Sotto Controllo</span>
+        </div>
+        <div class="mt-2.5 flex items-baseline justify-between">
+          <span id="kpi-delay-days" class="text-3xl font-bold font-mono-num text-slate-900">+0 gg</span>
+          <span id="kpi-delay-weeks" class="text-xs font-medium text-slate-500 font-mono-num">(+0.0 sett.)</span>
+        </div>
+        <div class="mt-2 pt-2 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+          <span data-i18n="lbl_new_finish_date">Rilascio ricalcolato:</span>
+          <span id="kpi-finish-date" class="font-semibold text-slate-800">--</span>
+        </div>
+      </div>
+
+      <!-- KPI 2 -->
+      <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs">
+        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <span data-i18n="kpi_waste_title">Costo Diretto di Latenza</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-900" data-i18n="badge_dispersed">Erosione Margine</span>
+        </div>
+        <div class="mt-2.5 flex items-baseline justify-between">
+          <span id="kpi-cost-waste" class="text-3xl font-bold font-mono-num text-rose-700">€ 0</span>
+          <span id="kpi-budget-percentage" class="text-xs font-medium text-slate-500 font-mono-num">0% budget</span>
+        </div>
+        <div class="mt-2 pt-2 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+          <span data-i18n="lbl_team_idle">Costo immobilizzo risorse:</span>
+          <span class="text-slate-700 font-medium" data-i18n="lbl_unproductive_time">Tempo improduttivo</span>
+        </div>
+      </div>
+
+      <!-- KPI 3 -->
+      <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs">
+        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <span data-i18n="kpi_domino_total_title">Esposizione Totale Aziendale</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-900" data-i18n="badge_portfolio">Portfolio Risk</span>
+        </div>
+        <div class="mt-2.5 flex items-baseline justify-between">
+          <span id="kpi-total-domino-cost" class="text-3xl font-bold font-mono-num text-purple-900">€ 0</span>
+          <span class="text-xs font-medium text-slate-500" data-i18n="lbl_pilot_plus_linked">Diretto + Indotto</span>
+        </div>
+        <div class="mt-2 pt-2 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+          <span data-i18n="lbl_downstream_blocked">Iniziative a valle compromesse:</span>
+          <span id="kpi-domino-blocked-count" class="font-bold text-slate-800">0 su 3</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: Indice di Paralisi con SINGOLA barra di avanzamento percentuale -->
+      <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-xs relative">
+        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <span class="flex items-center gap-1.5">
+            <span data-i18n="kpi_paralysis_title">Indice di Paralisi Decisionale</span>
+            <!-- Info trigger per popover discreto -->
+            <button type="button" onclick="toggleParalysisPopover(event)" class="text-slate-400 hover:text-blue-900 focus:outline-none transition cursor-pointer" title="Dettagli e Formula">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </button>
+          </span>
+          <span class="text-[10px] text-slate-400 font-mono-num" data-i18n="badge_friction_score">Governance Score</span>
+        </div>
+        <div class="mt-2.5 flex items-baseline justify-between">
+          <span id="kpi-paralysis-level" class="text-3xl font-bold text-emerald-700">Fluido</span>
+          <span id="kpi-paralysis-index" class="text-xs font-bold font-mono-num text-slate-500">22%</span>
+        </div>
+
+        <!-- Singola fascia orizzontale rappresentante la percentuale indicata -->
+        <div class="mt-3 w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200/80">
+          <div id="kpi-paralysis-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 22%;"></div>
+        </div>
+
+        <div class="mt-2.5 pt-2 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+          <span data-i18n="lbl_gov_state">Frizione di governance:</span>
+          <span id="kpi-governance-label" class="font-medium text-slate-700">Bassa Frizione</span>
+        </div>
+
+        <!-- Popover contestuale non intrusivo -->
+        <div id="paralysis-popover" class="hidden absolute top-full left-0 right-0 sm:right-auto sm:w-80 mt-2 z-50 bg-slate-900 text-white rounded-lg shadow-xl border border-slate-700 p-4 text-xs space-y-3 transition">
+          <div class="flex justify-between items-start border-b border-slate-800 pb-2">
+            <div>
+              <span class="font-bold text-slate-100 block text-[11px] uppercase tracking-wider" data-i18n="pop_title">Come funziona l'Indice di Paralisi</span>
+              <span class="text-[10px] text-slate-400 font-mono" data-i18n="pop_formula">Score = 30% Perimetro + 40% Approvazioni + 30% Stakeholder</span>
+            </div>
+            <button type="button" onclick="toggleParalysisPopover(event)" class="text-slate-400 hover:text-white text-sm leading-none">&times;</button>
+          </div>
+
+          <div class="space-y-1.5 text-[11px]">
+            <div class="flex items-center justify-between p-1.5 rounded bg-slate-800/80">
+              <span class="font-bold text-emerald-400">0% &ndash; 39% &bull; <span data-i18n="pop_range_1_name">Fluido / Agile</span></span>
+              <span class="text-slate-300 text-[10px]" data-i18n="pop_range_1_desc">Team reattivo, decisioni veloci</span>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded bg-slate-800/80">
+              <span class="font-bold text-amber-400">40% &ndash; 69% &bull; <span data-i18n="pop_range_2_name">Tensionato</span></span>
+              <span class="text-slate-300 text-[10px]" data-i18n="pop_range_2_desc">Colli di bottiglia e latenze</span>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded bg-slate-800/80">
+              <span class="font-bold text-rose-400">70% &ndash; 100% &bull; <span data-i18n="pop_range_3_name">Paralisi Critica</span></span>
+              <span class="text-slate-300 text-[10px]" data-i18n="pop_range_3_desc">Veti incrociati e stallo totale</span>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-400 leading-tight pt-1" data-i18n="pop_footer">
+            Misura la probabilità che il ritardo del progetto diventi incontrollabile a causa di frizioni organizzative interne.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Leve di Governance (5 cols) -->
+      <section class="lg:col-span-5 bg-white p-5 rounded-lg border border-slate-200 shadow-xs space-y-5 flex flex-col justify-between">
+        <div>
+          <div class="border-b border-slate-100 pb-3 mb-4">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500" data-i18n="sec2_step">Regolazione Comportamenti Organizzativi</span>
+            <h2 class="text-sm font-bold text-slate-900" data-i18n="sec2_title">Fattori di attrito e rallentamento decisionale</h2>
+          </div>
+
+          <div class="space-y-5">
+            <!-- Slider 1 -->
+            <div class="space-y-1">
+              <div class="flex justify-between items-center text-xs font-medium text-slate-700">
+                <label for="slider-scope-changes" class="cursor-pointer" data-i18n="lbl_slider_scope">Frequenza modifiche perimetro e richieste extra</label>
+                <span id="label-scope-changes" class="font-bold font-mono-num text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-[11px]">Modeste (Livello 3)</span>
+              </div>
+              <input type="range" id="slider-scope-changes" min="1" max="5" step="1" value="3" class="w-full h-1.5 bg-slate-200 rounded appearance-none cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                <span data-i18n="slider_scope_min">Stabile (Scope locked)</span>
+                <span data-i18n="slider_scope_mid">Frequenti</span>
+                <span data-i18n="slider_scope_max">Elevate (Continuo scope creep)</span>
+              </div>
+            </div>
+
+            <!-- Slider 2 -->
+            <div class="space-y-1 pt-2 border-t border-slate-100">
+              <div class="flex justify-between items-center text-xs font-medium text-slate-700">
+                <label for="slider-approval-days" class="cursor-pointer" data-i18n="lbl_slider_approval">Latenza media di firma o approvazione formale</label>
+                <span id="label-approval-days" class="font-bold font-mono-num text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-[11px]">8 giorni</span>
+              </div>
+              <input type="range" id="slider-approval-days" min="2" max="30" step="1" value="8" class="w-full h-1.5 bg-slate-200 rounded appearance-none cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                <span data-i18n="slider_approval_min">2 gg (Snello)</span>
+                <span data-i18n="slider_approval_mid">15 gg (Latenza media)</span>
+                <span data-i18n="slider_approval_max">30 gg (Paralisi burocratica)</span>
+              </div>
+            </div>
+
+            <!-- Slider 3 -->
+            <div class="space-y-1 pt-2 border-t border-slate-100">
+              <div class="flex justify-between items-center text-xs font-medium text-slate-700">
+                <label for="slider-stakeholder-count" class="cursor-pointer" data-i18n="lbl_slider_stakeholder">Entità decisionali con potere di firma o veto</label>
+                <span id="label-stakeholder-count" class="font-bold font-mono-num text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-[11px]">4 responsabili</span>
+              </div>
+              <input type="range" id="slider-stakeholder-count" min="1" max="8" step="1" value="4" class="w-full h-1.5 bg-slate-200 rounded appearance-none cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                <span data-i18n="slider_stakeholder_min">1-2 (Agile)</span>
+                <span data-i18n="slider_stakeholder_mid">4 (Comitato standard)</span>
+                <span data-i18n="slider_stakeholder_max">8 (Matrice complessa)</span>
+              </div>
+            </div>
+
+            <!-- Slider 4 -->
+            <div class="space-y-1 pt-2 border-t border-slate-100">
+              <div class="flex justify-between items-center text-xs font-medium text-slate-700">
+                <label for="slider-strictness" class="cursor-pointer" data-i18n="lbl_slider_strictness">Rigidità milestone e vincoli sanzionatori</label>
+                <span id="label-strictness" class="font-bold font-mono-num text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-[11px]">Media</span>
+              </div>
+              <input type="range" id="slider-strictness" min="1" max="3" step="1" value="2" class="w-full h-1.5 bg-slate-200 rounded appearance-none cursor-pointer">
+              <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                <span data-i18n="slider_strictness_min">Flessibile</span>
+                <span data-i18n="slider_strictness_mid">Significativa</span>
+                <span data-i18n="slider_strictness_max">Fissata per legge/penali</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box Sintesi Rapida Esecutiva -->
+        <div class="bg-slate-50 border border-slate-200 rounded-md p-3.5 mt-3">
+          <div class="flex items-center space-x-2 text-xs font-bold text-slate-800 uppercase tracking-wide">
+            <svg class="w-3.5 h-3.5 text-blue-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span data-i18n="box_summary_header">Valutazione Sintetica di Governo</span>
+          </div>
+          <p id="executive-summary-text" class="text-xs text-slate-600 leading-relaxed mt-1.5">
+            Elaborazione modello in corso...
+          </p>
+        </div>
+      </section>
+
+      <!-- Grafico a Barre Dipartimentale (7 cols) -->
+      <section class="lg:col-span-7 bg-white p-5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="border-b border-slate-100 pb-3 mb-4 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500" data-i18n="sec_chart_tag">Attribuzione Colli di Bottiglia</span>
+              <h2 class="text-sm font-bold text-slate-900" data-i18n="sec_chart_title">Ripartizione quantitativa dei giorni di ritardo per dipartimento</h2>
+            </div>
+            <span class="text-[11px] text-slate-500 font-mono-num bg-slate-50 px-2 py-0.5 rounded border border-slate-200" data-i18n="lbl_quantitative_attr">
+              Attribuzione Quantitativa
+            </span>
+          </div>
+
+          <!-- Chart Container -->
+          <div class="h-60 w-full relative">
+            <canvas id="bottleneckChart"></canvas>
+          </div>
+
+          <!-- Dettaglio Numerico sotto il Grafico -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-4 pt-3 border-t border-slate-100 text-center">
+            <div class="p-2 bg-slate-50 rounded border border-slate-200">
+              <span class="text-[10px] uppercase font-bold text-slate-500 block" data-i18n="dept_legal">Ufficio Legale</span>
+              <span id="num-dept-legal" class="text-xs font-bold font-mono-num text-slate-900">+0 gg</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded border border-slate-200">
+              <span class="text-[10px] uppercase font-bold text-slate-500 block" data-i18n="dept_mgmt">Direzione / C-Level</span>
+              <span id="num-dept-management" class="text-xs font-bold font-mono-num text-blue-900">+0 gg</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded border border-slate-200">
+              <span class="text-[10px] uppercase font-bold text-slate-500 block" data-i18n="dept_it">IT / Architettura</span>
+              <span id="num-dept-it" class="text-xs font-bold font-mono-num text-indigo-900">+0 gg</span>
+            </div>
+            <div class="p-2 bg-slate-50 rounded border border-slate-200">
+              <span class="text-[10px] uppercase font-bold text-slate-500 block" data-i18n="dept_proc">Acquisti & Vendor</span>
+              <span id="num-dept-procurement" class="text-xs font-bold font-mono-num text-amber-900">+0 gg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+          <span data-i18n="lbl_top_friction_dept">Reparto con maggiore incidenza di ritardo:</span>
+          <span id="top-bottleneck-badge" class="font-semibold text-slate-900 px-2 py-0.5 bg-slate-100 rounded border border-slate-200">Top Management</span>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="bg-white p-6 rounded-lg border border-slate-200 shadow-xs">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 pb-4 mb-5">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-900 uppercase tracking-wider" data-i18n="domino_badge">
+              Impatto a Catena
+            </span>
+            <span class="text-xs font-semibold text-slate-500" data-i18n="domino_subtitle">Cross-Portfolio Domino Impact</span>
+            <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded border border-slate-200 font-mono" data-i18n="lbl_auto_scaled">Auto-calibrato sul progetto</span>
+          </div>
+          <h2 class="text-base font-bold text-slate-900 mt-1" data-i18n="domino_title">
+            Mappa Iniziative Dipendenti a Valle
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="domino_desc">
+            Monitoraggio degli impatti e dei costi indotti sulle iniziative operative collegate. I buffer e i tassi di danno si ricalcolano automaticamente sui parametri del progetto; puoi anche personalizzarli liberamente.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <!-- Pulsante Compatto IA con Tooltip su Hover -->
+          <div class="relative group">
+            <button id="btn-ai-domino" type="button" onclick="generateAIDominoDependencies()" aria-label="Auto-adatta Iniziative con IA" class="inline-flex items-center justify-center space-x-1 bg-purple-50 hover:bg-purple-100 active:bg-purple-200 text-purple-700 px-2.5 py-2 rounded-md border border-purple-200 transition cursor-pointer shadow-xs focus:outline-none focus:ring-2 focus:ring-purple-400">
+              <svg class="w-4 h-4 text-purple-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span class="text-xs select-none">✨</span>
+            </button>
+            <!-- Tooltip al passaggio del mouse -->
+            <div class="absolute bottom-full mb-2 right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-30 whitespace-nowrap bg-slate-900 text-white text-[11px] font-medium py-1 px-2.5 rounded shadow-lg border border-slate-700">
+              <span id="ai-domino-tooltip" data-i18n="btn_ai_domino">Auto-adatta Iniziative con IA</span>
+              <div class="w-1.5 h-1.5 bg-slate-900 rotate-45 absolute -bottom-1 right-3 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 border-r border-b border-slate-700"></div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-md px-4 py-2 text-right">
+            <span class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold block" data-i18n="lbl_domino_only_cost">Danno Indotto a Valle</span>
+            <span id="kpi-domino-only-cost" class="text-xl font-bold font-mono-num text-purple-900">€ 0</span>
+            <span class="text-[10px] text-slate-400 block mt-0.5" data-i18n="lbl_domino_note">(Penali fornitura, canoni prorogati e vendite compromesse)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domino Cards Container (Inline-Editable) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="domino-cards-container">
+        <!-- Card 1 -->
+        <div id="domino-card-1" class="border border-slate-200 rounded-lg p-4 bg-slate-50/70 transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider" data-i18n="domino_item_1">Iniziativa Dipendente 1</span>
+              <span id="domino-status-badge-1" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 badge-transition">Regolare</span>
+            </div>
+            <input type="text" id="domino-input-title-1" class="inline-edit-input text-xs font-bold text-slate-900 px-1 py-0.5 font-sans" value="Campagna Vendite & Marketing" oninput="onDominoFieldChange(0)">
+            <textarea id="domino-input-desc-1" rows="2" class="inline-edit-input text-xs text-slate-600 mt-1 px-1 py-0.5 resize-none leading-relaxed" oninput="onDominoFieldChange(0)">Pianificazione budget promozionale ed ingaggio rete commerciale.</textarea>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-500">
+              <span data-i18n="domino_tol_lbl">Tolleranza buffer:</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-mono-num">+</span>
+                <input type="number" id="domino-input-tol-1" min="1" max="90" value="10" class="w-14 bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-900 font-mono-num font-semibold text-right" oninput="onDominoFieldChange(0)">
+                <span class="text-[11px] font-mono-num" data-i18n="txt_days_abbr">gg</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center text-slate-500">
+              <span data-i18n="domino_loss_rate_lbl">Danno latenza/giorno:</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-mono-num">€</span>
+                <input type="number" id="domino-input-rate-1" min="100" max="50000" step="100" value="2800" class="w-20 bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-900 font-mono-num font-semibold text-right" oninput="onDominoFieldChange(0)">
+              </div>
+            </div>
+
+            <div class="flex justify-between text-slate-500 pt-1 border-t border-slate-100">
+              <span data-i18n="domino_impact_lbl">Stato Operativo:</span>
+              <span id="domino-consequence-1" class="font-medium text-slate-700 text-right">Nessun impatto</span>
+            </div>
+            <div class="flex justify-between text-slate-500">
+              <span data-i18n="domino_loss_lbl">Perdita economica indotta:</span>
+              <span id="domino-loss-1" class="font-bold text-slate-800 font-mono-num">€ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div id="domino-card-2" class="border border-slate-200 rounded-lg p-4 bg-slate-50/70 transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider" data-i18n="domino_item_2">Iniziativa Dipendente 2</span>
+              <span id="domino-status-badge-2" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 badge-transition">Regolare</span>
+            </div>
+            <input type="text" id="domino-input-title-2" class="inline-edit-input text-xs font-bold text-slate-900 px-1 py-0.5 font-sans" value="Accordi Contrattuali con Partner" oninput="onDominoFieldChange(1)">
+            <textarea id="domino-input-desc-2" rows="2" class="inline-edit-input text-xs text-slate-600 mt-1 px-1 py-0.5 resize-none leading-relaxed" oninput="onDominoFieldChange(1)">Firma degli accordi commerciali per la distribuzione congiunta.</textarea>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-500">
+              <span data-i18n="domino_tol_lbl">Tolleranza buffer:</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-mono-num">+</span>
+                <input type="number" id="domino-input-tol-2" min="1" max="90" value="20" class="w-14 bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-900 font-mono-num font-semibold text-right" oninput="onDominoFieldChange(1)">
+                <span class="text-[11px] font-mono-num" data-i18n="txt_days_abbr">gg</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center text-slate-500">
+              <span data-i18n="domino_loss_rate_lbl">Danno latenza/giorno:</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-mono-num">€</span>
+                <input type="number" id="domino-input-rate-2" min="100" max="50000" step="100" value="3500" class="w-20 bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-900 font-mono-num font-semibold text-right" oninput="onDominoFieldChange(1)">
+              </div>
+            </div>
+
+            <div class="flex justify-between text-slate-500 pt-1 border-t border-slate-100">
+              <span data-i18n="domino_impact_lbl">Stato Operativo:</span>
+              <span id="domino-consequence-2" class="font-medium text-slate-700 text-right">Nessun impatto</span>
+            </div>
+            <div class="flex justify-between text-slate-500">
+              <span data-i18n="domino_loss_lbl">Perdita economica indotta:</span>
+              <span id="domino-loss-2" class="font-bold text-slate-800 font-mono-num">€ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div id="domino-card-3" class="border border-slate-200 rounded-lg p-4 bg-slate-50/70 transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider" data-i18n="domino_item_3">Iniziativa Dipendente 3</span>
+              <span id="domino-status-badge-3" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 badge-transition">Regolare</span>
+            </div>
+            <input type="text" id="domino-input-title-3" class="inline-edit-input text-xs font-bold text-slate-900 px-1 py-0.5 font-sans" value="Dismissione Piattaforma Precedente" oninput="onDominoFieldChange(2)">
+            <textarea id="domino-input-desc-3" rows="2" class="inline-edit-input text-xs text-slate-600 mt-1 px-1 py-0.5 resize-none leading-relaxed" oninput="onDominoFieldChange(2)">Migrazione dei clienti storici e spegnimento vecchie licenze server.</textarea>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-500">
+              <span data-i18n="domino_tol_lbl">Tolleranza buffer:</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-mono-num">+</span>
+                <input type="number" id="domino-input-tol-3" min="1" max="90" value="30" class="w-14 bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-900 font-mono-num font-semibold text-right" oninput="onDominoFieldChange(2)">
+                <span class="text-[11px] font-mono-num" data-i18n="txt_days_abbr">gg</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center text-slate-500">
+              <span data-i18n="domino_loss_rate_lbl">Danno latenza/giorno:</span>
+              <div class="flex items-center gap-1">
+                <span class="text-[11px] font-mono-num">€</span>
+                <input type="number" id="domino-input-rate-3" min="100" max="50000" step="100" value="1900" class="w-20 bg-white border border-slate-300 rounded px-1.5 py-0.5 text-xs text-slate-900 font-mono-num font-semibold text-right" oninput="onDominoFieldChange(2)">
+              </div>
+            </div>
+
+            <div class="flex justify-between text-slate-500 pt-1 border-t border-slate-100">
+              <span data-i18n="domino_impact_lbl">Stato Operativo:</span>
+              <span id="domino-consequence-3" class="font-medium text-slate-700 text-right">Nessun impatto</span>
+            </div>
+            <div class="flex justify-between text-slate-500">
+              <span data-i18n="domino_loss_lbl">Perdita economica indotta:</span>
+              <span id="domino-loss-3" class="font-bold text-slate-800 font-mono-num">€ 0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white p-6 rounded-lg border border-slate-200 shadow-xs">
+      <div class="border-b border-slate-200 pb-3 mb-5">
+        <div class="flex items-center space-x-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900 uppercase tracking-wider" data-i18n="tradeoff_badge">
+            Analisi di Recupero
+          </span>
+          <span class="text-xs font-semibold text-slate-500" data-i18n="tradeoff_sub">Mitigation Trade-Off Analysis</span>
+        </div>
+        <h2 class="text-base font-bold text-slate-900 mt-1" data-i18n="tradeoff_title">
+          Modellizzazione Scenari di Mitigazione e Rientro
+        </h2>
+        <p class="text-xs text-slate-500 mt-0.5" data-i18n="tradeoff_desc">
+          Diagnosi automatica del collo di bottiglia e quantificazione delle leve di salvaguardia della deadline. Clicca su una delle opzioni per simularne l'effetto.
+        </p>
+
+        <!-- Active Simulation Feedback Banner -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-3 pt-2.5 border-t border-slate-100">
+          <div class="flex items-center space-x-2">
+            <span class="text-[11px] font-semibold text-slate-500" data-i18n="lbl_rec_prefix">Raccomandazione AI/Algo:</span>
+            <span id="tradeoff-best-fit-name" class="font-bold text-xs text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              Opzione B (De-Scoping Selettivo)
+            </span>
+          </div>
+
+          <!-- Dynamic Active Simulation Bar -->
+          <div id="mitigation-active-indicator" class="hidden inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-300 px-3 py-1 rounded-md text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+            <span class="text-emerald-900 font-semibold" data-i18n="lbl_sim_active">Simulazione Attiva:</span>
+            <span id="mitigation-active-name" class="font-bold text-emerald-900 font-mono-num">--</span>
+            <span id="mitigation-active-benefit" class="font-bold text-emerald-700 bg-white px-2 py-0.5 rounded border border-emerald-200 font-mono-num text-[11px]">+0 gg</span>
+            <button onclick="revertMitigationSimulation()" class="ml-1 text-[11px] font-bold text-slate-700 hover:text-slate-900 underline cursor-pointer" data-i18n="btn_revert_sim">Ripristina Baseline</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- Opzione 1: Fast-Tracking -->
+        <div id="card-opt-1" class="border border-slate-200 rounded-lg p-4 bg-slate-50 flex flex-col justify-between transition-all duration-200">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-slate-900" data-i18n="opt1_title">Opzione A: Fast-Tracking Budget</span>
+                <span id="badge-rec-opt1" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-700 text-white font-bold tracking-wider uppercase">BEST FIT</span>
+              </div>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 text-blue-900 font-semibold" data-i18n="opt1_tag">Extra-Capacità</span>
+            </div>
+            <p id="opt1-desc-dynamic" class="text-xs text-slate-600 leading-relaxed" data-i18n="opt1_desc">
+              Iniezione di contingency per raddoppiare risorse o consulenti esterni sul dipartimento collo di bottiglia principale.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_extra_invest">Investimento Richiesto:</span>
+              <span id="opt1-cost" class="font-bold font-mono-num text-slate-900">€ 35.000</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_days_recup">Giorni Recuperabili:</span>
+              <span id="opt1-days" class="font-bold font-mono-num text-emerald-700">-12 gg</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_roi_mitigation">ROI Mitigazione:</span>
+              <span id="opt1-roi" class="font-semibold text-blue-900">1.8x</span>
+            </div>
+            <button id="btn-mitig-1" onclick="toggleMitigationSimulation(1)" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white font-medium py-1.5 px-2 rounded text-xs transition cursor-pointer shadow-2xs">
+              Simula Fast-Tracking
+            </button>
+          </div>
+        </div>
+
+        <!-- Opzione 2: De-Scoping -->
+        <div id="card-opt-2" class="border border-slate-200 rounded-lg p-4 bg-slate-50 flex flex-col justify-between transition-all duration-200">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-slate-900" data-i18n="opt2_title">Opzione B: De-Scoping Selettivo</span>
+                <span id="badge-rec-opt2" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-700 text-white font-bold tracking-wider uppercase">BEST FIT</span>
+              </div>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-900 font-semibold" data-i18n="opt2_tag">Costo Zero</span>
+            </div>
+            <p id="opt2-desc-dynamic" class="text-xs text-slate-600 leading-relaxed" data-i18n="opt2_desc">
+              Rinvio alla release successiva delle funzionalità accessorie per proteggere la scadenza contrattuale.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_extra_invest">Investimento Richiesto:</span>
+              <span class="font-bold font-mono-num text-emerald-700" data-i18n="val_zero_cost">€ 0 (Zero Cost)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_days_recup">Giorni Recuperabili:</span>
+              <span id="opt2-days" class="font-bold font-mono-num text-emerald-700">-16 gg</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_descoping_pct">Taglio Perimetro Stimato:</span>
+              <span id="opt2-pct" class="font-semibold text-emerald-700">15% del Perimetro</span>
+            </div>
+            <button id="btn-mitig-2" onclick="toggleMitigationSimulation(2)" class="w-full mt-3 bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-1.5 px-2 rounded text-xs transition cursor-pointer shadow-2xs">
+              Simula De-Scoping
+            </button>
+          </div>
+        </div>
+
+        <!-- Opzione 3: SLA & Governance Compression -->
+        <div id="card-opt-3" class="border border-slate-200 rounded-lg p-4 bg-slate-50 flex flex-col justify-between transition-all duration-200">
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-xs font-bold text-slate-900" data-i18n="opt3_title">Opzione C: Protocollo Fast-Sign</span>
+                <span id="badge-rec-opt3" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-700 text-white font-bold tracking-wider uppercase">BEST FIT</span>
+              </div>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-100 text-purple-900 font-semibold" data-i18n="opt3_tag">Governance</span>
+            </div>
+            <p id="opt3-desc-dynamic" class="text-xs text-slate-600 leading-relaxed" data-i18n="opt3_desc">
+              Delega decisionale con silenzio-assenso a 48 ore e riduzione dei firmatari a un solo responsabile chiave.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-2 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_extra_invest">Investimento Richiesto:</span>
+              <span class="font-bold font-mono-num text-slate-900" data-i18n="val_internal_policy">Policy Interna (€ 0)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_days_recup">Giorni Recuperabili:</span>
+              <span id="opt3-days" class="font-bold font-mono-num text-emerald-700">-10 gg</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500" data-i18n="lbl_roi_mitigation">Impatto Frizione:</span>
+              <span id="opt3-friction" class="font-semibold text-purple-900">-45% Latenza</span>
+            </div>
+            <button id="btn-mitig-3" onclick="toggleMitigationSimulation(3)" class="w-full mt-3 bg-purple-700 hover:bg-purple-800 text-white font-medium py-1.5 px-2 rounded text-xs transition cursor-pointer shadow-2xs">
+              Simula Fast-Sign
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-lg border border-slate-200 shadow-xs overflow-hidden">
+      <!-- Accordion Header -->
+      <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border-b border-slate-100 cursor-pointer select-none" onclick="toggleBoardDossier()">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-900 uppercase tracking-wider" data-i18n="board_badge">
+              Dossier Direzionale
+            </span>
+            <span class="text-xs font-semibold text-slate-500" data-i18n="board_subtitle">Formal Steering Committee Executive Memo</span>
+          </div>
+          <h2 class="text-base font-bold text-slate-900 mt-1" data-i18n="board_title">
+            Dossier Dettagliato per il Comitato di Direzione
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5" data-i18n="board_desc">
+            Memorandum formale strutturato per l'Amministratore Delegato e lo Steering Committee.
+          </p>
+        </div>
+
+        <div class="flex items-center space-x-2.5 shrink-0 no-print">
+          <button type="button" class="inline-flex items-center space-x-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-3 py-1.5 rounded text-xs transition border border-slate-300 cursor-pointer">
+            <span id="accordion-toggle-text" data-i18n="btn_expand_dossier">Espandi Dossier per il Board</span>
+            <svg id="accordion-arrow" class="w-3.5 h-3.5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+
+          <button onclick="event.stopPropagation(); copyBoardMemo();" class="inline-flex items-center space-x-1 bg-slate-900 hover:bg-slate-800 text-white font-medium px-3 py-1.5 rounded text-xs transition cursor-pointer shadow-xs">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span data-i18n="btn_copy_board">Copia Testo</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Accordion Body (Collapsed by default) -->
+      <div id="board-dossier-body" class="hidden p-5 bg-slate-50 border-t border-slate-200">
+        <div class="bg-white border border-slate-200 rounded-lg p-6 font-mono text-xs text-slate-800 leading-relaxed space-y-4 shadow-2xs">
+          <div class="border-b border-slate-200 pb-3 flex justify-between items-center text-[11px] text-slate-500">
+            <span data-i18n="memo_header_tag">MEMORANDUM DI GOVERNANCE STRATEGICA &ndash; COMITATO ESECUTIVO</span>
+            <span id="memo-date" class="font-mono-num font-medium">Data: --</span>
+          </div>
+
+          <div id="board-memo-content" class="space-y-3 whitespace-pre-line text-slate-700">
+            Caricamento memorandum direzionale in corso...
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-auto py-4 px-6 text-slate-500 text-xs text-center sm:text-left">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div>
+        <strong class="font-semibold text-slate-700">Enterprise Strategic Governance & Decision Cockpit</strong> &bull; Executive Delivery & Portfolio Risk Framework
+      </div>
+      <div class="font-mono-num text-[11px] text-slate-400">
+        Corporate Decision & Portfolio Oversight Engine
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      it: {
+        nav_system_tag: "STRAT-GOV ENTERPRISE",
+        nav_subtitle: "Executive Decision Cockpit",
+        app_title: "Enterprise Strategic Governance & Decision Cockpit",
+        btn_export_csv: "Esporta Dati Completi (Excel/CSV)",
+        btn_export_pdf: "Stampa Report PDF",
+        sec1_step: "Contesto Strategico & Dimensione Iniziativa",
+        sec1_title: "Seleziona uno Scenario o personalizza i parametri di governance",
+        lbl_active_scenario: "Scenario Attivo:",
+        scen_1_btn_title: "1. Lancio Prodotto",
+        scen_1_btn_sub: "Go-to-market & Digital",
+        scen_2_btn_title: "2. Nuovo ERP",
+        scen_2_btn_sub: "Core SAP / S4HANA",
+        scen_3_btn_title: "3. Riorganizzazione",
+        scen_3_btn_sub: "Supply Chain & Costi",
+        scen_4_btn_title: "4. Audit & Normativa",
+        scen_4_btn_sub: "ESG & CSRD Report",
+        scen_custom_title: "5. Personalizzato",
+        scen_custom_sub: "Configurazione libera",
+        box_editable_params: "Parametri Economici e Temporali Baseline",
+        txt_editable_hint: "Modifica i valori per ricalcolare il modello",
+        lbl_project_name: "Nome Iniziativa / Programma",
+        lbl_total_budget: "Budget Totale Stanziato (€)",
+        lbl_project_months: "Durata Baseline Contrattuale (Mesi)",
+        lbl_daily_cost: "Costo Medio Giornaliero Team (€)",
+        btn_autocalc: "Auto-calcola",
+        kpi_delay_title: "Ritardo Cumulato Stimato",
+        lbl_new_finish_date: "Rilascio ricalcolato:",
+        kpi_waste_title: "Costo Diretto di Latenza",
+        badge_dispersed: "Erosione Margine",
+        lbl_team_idle: "Costo immobilizzo risorse:",
+        lbl_unproductive_time: "Tempo improduttivo",
+        kpi_domino_total_title: "Esposizione Totale Aziendale",
+        badge_portfolio: "Portfolio Risk",
+        lbl_pilot_plus_linked: "Diretto + Indotto",
+        lbl_downstream_blocked: "Iniziative a valle compromesse:",
+        kpi_paralysis_title: "Indice di Paralisi Decisionale",
+        badge_friction_score: "Governance Score",
+        lbl_gov_state: "Frizione di governance:",
+        pop_title: "Come funziona l'Indice di Paralisi",
+        pop_formula: "Score = 30% Perimetro + 40% Approvazioni + 30% Stakeholder",
+        pop_range_1_name: "Fluido / Agile",
+        pop_range_1_desc: "Team reattivo, decisioni veloci",
+        pop_range_2_name: "Tensionato",
+        pop_range_2_desc: "Colli di bottiglia e latenze",
+        pop_range_3_name: "Paralisi Critica",
+        pop_range_3_desc: "Veti incrociati e stallo totale",
+        pop_footer: "Misura la probabilità che il ritardo del progetto diventi incontrollabile a causa di frizioni organizzative interne.",
+        sec2_step: "Regolazione Comportamenti Organizzativi",
+        sec2_title: "Fattori di attrito e rallentamento decisionale",
+        lbl_slider_scope: "Frequenza modifiche perimetro e richieste extra",
+        slider_scope_min: "Stabile (Scope locked)",
+        slider_scope_mid: "Frequenti",
+        slider_scope_max: "Elevate (Continuo scope creep)",
+        lbl_slider_approval: "Latenza media di firma o approvazione formale",
+        slider_approval_min: "2 gg (Snello)",
+        slider_approval_mid: "15 gg (Latenza media)",
+        slider_approval_max: "30 gg (Paralisi burocratica)",
+        lbl_slider_stakeholder: "Entità decisionali con potere di firma o veto",
+        slider_stakeholder_min: "1-2 (Agile)",
+        slider_stakeholder_mid: "4 (Comitato standard)",
+        slider_stakeholder_max: "8 (Matrice complessa)",
+        lbl_slider_strictness: "Rigidità milestone e vincoli sanzionatori",
+        slider_strictness_min: "Flessibile",
+        slider_strictness_mid: "Significativa",
+        slider_strictness_max: "Fissata per legge/penali",
+        box_summary_header: "Valutazione Sintetica di Governo",
+        sec_chart_tag: "Attribuzione Colli di Bottiglia",
+        sec_chart_title: "Ripartizione quantitativa dei giorni di ritardo per dipartimento",
+        lbl_quantitative_attr: "Attribuzione Quantitativa",
+        dept_legal: "Ufficio Legale",
+        dept_mgmt: "Direzione / C-Level",
+        dept_it: "IT / Architettura",
+        dept_proc: "Acquisti & Vendor",
+        lbl_top_friction_dept: "Reparto con maggiore incidenza di ritardo:",
+        domino_badge: "Impatto a Catena",
+        domino_subtitle: "Cross-Portfolio Domino Impact",
+        lbl_auto_scaled: "Auto-calibrato sul progetto",
+        btn_ai_domino: "✨ Auto-adatta Iniziative con IA",
+        domino_title: "Mappa Iniziative Dipendenti a Valle",
+        domino_desc: "Monitoraggio degli impatti e dei costi indotti sulle iniziative operative collegate. I buffer e i tassi di danno si ricalcolano automaticamente sui parametri del progetto; puoi anche personalizzarli liberamente.",
+        lbl_domino_only_cost: "Danno Indotto a Valle",
+        lbl_domino_note: "(Penali fornitura, canoni prorogati e vendite compromesse)",
+        domino_item_1: "Iniziativa Dipendente 1",
+        domino_item_2: "Iniziativa Dipendente 2",
+        domino_item_3: "Iniziativa Dipendente 3",
+        domino_tol_lbl: "Tolleranza buffer:",
+        domino_loss_rate_lbl: "Danno latenza/giorno:",
+        domino_impact_lbl: "Stato Operativo:",
+        domino_loss_lbl: "Perdita economica indotta:",
+        txt_days_abbr: "gg",
+        tradeoff_badge: "Analisi di Recupero",
+        tradeoff_sub: "Mitigation Trade-Off Analysis",
+        lbl_rec_prefix: "Raccomandazione AI/Algo:",
+        tradeoff_title: "Modellizzazione Scenari di Mitigazione e Rientro",
+        tradeoff_desc: "Diagnosi automatica del collo di bottiglia e quantificazione delle leve di salvaguardia della deadline. Clicca su una delle opzioni per simularne l'effetto.",
+        lbl_sim_active: "Simulazione Attiva:",
+        btn_revert_sim: "Ripristina Baseline",
+        opt1_title: "Opzione A: Fast-Tracking Budget",
+        opt1_tag: "Extra-Capacità",
+        opt1_desc: "Iniezione di contingency per raddoppiare risorse o consulenti esterni sul dipartimento collo di bottiglia principale.",
+        btn_apply_mitig_1: "Simula Fast-Tracking",
+        opt2_title: "Opzione B: De-Scoping Selettivo",
+        opt2_tag: "Costo Zero",
+        opt2_desc: "Rinvio alla release successiva delle funzionalità accessorie per proteggere la scadenza contrattuale.",
+        btn_apply_mitig_2: "Simula De-Scoping",
+        opt3_title: "Opzione C: Protocollo Fast-Sign",
+        opt3_tag: "Governance",
+        opt3_desc: "Delega decisionale con silenzio-assenso a 48 ore e riduzione dei firmatari a un solo responsabile chiave.",
+        btn_apply_mitig_3: "Simula Fast-Sign",
+        lbl_extra_invest: "Investimento Richiesto:",
+        lbl_days_recup: "Giorni Recuperabili:",
+        lbl_roi_mitigation: "ROI Mitigazione:",
+        lbl_descoping_pct: "Taglio Perimetro Stimato:",
+        val_zero_cost: "€ 0 (Zero Cost)",
+        val_max_efficiency: "Massima Efficienza",
+        val_internal_policy: "Policy Interna (€ 0)",
+        board_badge: "Dossier Direzionale",
+        board_subtitle: "Formal Steering Committee Executive Memo",
+        board_title: "Dossier Dettagliato per il Comitato di Direzione",
+        board_desc: "Memorandum formale strutturato per l'Amministratore Delegato e lo Steering Committee.",
+        btn_expand_dossier: "Espandi Dossier per il Board",
+        btn_collapse_dossier: "Comprimi Dossier",
+        btn_copy_board: "Copia Testo",
+        memo_header_tag: "MEMORANDUM DI GOVERNANCE STRATEGICA – COMITATO ESECUTIVO"
+      },
+      en: {
+        nav_system_tag: "STRAT-GOV ENTERPRISE",
+        nav_subtitle: "Executive Decision Cockpit",
+        app_title: "Enterprise Strategic Governance & Decision Cockpit",
+        btn_export_csv: "Export Full Ledger (Excel/CSV)",
+        btn_export_pdf: "Print PDF Report",
+        sec1_step: "Strategic Context & Initiative Sizing",
+        sec1_title: "Select an Enterprise Scenario or customize governance parameters",
+        lbl_active_scenario: "Active Scenario:",
+        scen_1_btn_title: "1. Product Launch",
+        scen_1_btn_sub: "Go-to-Market & Digital",
+        scen_2_btn_title: "2. Core ERP Rollout",
+        scen_2_btn_sub: "SAP S/4HANA Upgrade",
+        scen_3_btn_title: "3. Restructuring",
+        scen_3_btn_sub: "Supply Chain & Costs",
+        scen_4_btn_title: "4. Compliance & Audit",
+        scen_4_btn_sub: "ESG & CSRD Report",
+        scen_custom_title: "5. Custom Setup",
+        scen_custom_sub: "Configurable Model",
+        box_editable_params: "Baseline Economic and Schedule Parameters",
+        txt_editable_hint: "Modify input values to recalculate baseline dynamics",
+        lbl_project_name: "Initiative / Program Name",
+        lbl_total_budget: "Allocated Total Budget (€)",
+        lbl_project_months: "Contracted Baseline Duration (Months)",
+        lbl_daily_cost: "Average Daily Burn Rate (€)",
+        btn_autocalc: "Auto-calc",
+        kpi_delay_title: "Projected Cumulative Delay",
+        lbl_new_finish_date: "Recalculated completion:",
+        kpi_waste_title: "Direct Latency Carrying Cost",
+        badge_dispersed: "Margin Erosion",
+        lbl_team_idle: "Carrying cost of idle resources:",
+        lbl_unproductive_time: "Unproductive latency",
+        kpi_domino_total_title: "Total Enterprise Financial Exposure",
+        badge_portfolio: "Portfolio Risk",
+        lbl_pilot_plus_linked: "Direct + Downstream",
+        lbl_downstream_blocked: "Impaired downstream initiatives:",
+        kpi_paralysis_title: "Decision Paralysis Index",
+        badge_friction_score: "Governance Score",
+        lbl_gov_state: "Governance friction:",
+        pop_title: "How the Paralysis Index Works",
+        pop_formula: "Score = 30% Scope + 40% Approvals + 30% Stakeholders",
+        pop_range_1_name: "Fluid / Agile",
+        pop_range_1_desc: "Responsive execution & rapid buy-in",
+        pop_range_2_name: "Strained",
+        pop_range_2_desc: "Approval latency and delivery friction",
+        pop_range_3_name: "Critical Paralysis",
+        pop_range_3_desc: "Cross-functional gridlock and delivery stall",
+        pop_footer: "Quantifies the mathematical likelihood that schedule drift escalates due to internal organizational governance bottlenecks.",
+        sec2_step: "Organizational Behavior Calibration",
+        sec2_title: "Governance friction and decision latency drivers",
+        lbl_slider_scope: "Frequency of scope changes and extra requests",
+        slider_scope_min: "Stable (Scope locked)",
+        slider_scope_mid: "Frequent",
+        slider_scope_max: "High (Continuous scope creep)",
+        lbl_slider_approval: "Average formal sign-off and approval cycle time",
+        slider_approval_min: "2 days (Agile)",
+        slider_approval_mid: "15 days (Moderate latency)",
+        slider_approval_max: "30 days (Bureaucratic halt)",
+        lbl_slider_stakeholder: "Decision bodies with veto or sign-off authority",
+        slider_stakeholder_min: "1-2 (Agile)",
+        slider_stakeholder_mid: "4 (Standard board)",
+        slider_stakeholder_max: "8 (Complex matrix)",
+        lbl_slider_strictness: "Milestone rigidity and penalty constraints",
+        slider_strictness_min: "Flexible",
+        slider_strictness_mid: "Significant",
+        slider_strictness_max: "Regulatory / Contract fines",
+        box_summary_header: "Executive Governance Summary",
+        sec_chart_tag: "Bottleneck Attribution",
+        sec_chart_title: "Quantitative delay breakdown by department",
+        lbl_quantitative_attr: "Quantitative Attribution",
+        dept_legal: "Legal & Compliance",
+        dept_mgmt: "Executive / C-Level",
+        dept_it: "IT / Architecture",
+        dept_proc: "Procurement & Vendors",
+        lbl_top_friction_dept: "Leading friction department:",
+        domino_badge: "Cascading Impact",
+        domino_subtitle: "Cross-Portfolio Domino Impact",
+        lbl_auto_scaled: "Auto-scaled to project",
+        btn_ai_domino: "✨ Auto-adapt via AI",
+        domino_title: "Downstream Dependent Initiatives Map",
+        domino_desc: "Tracking collateral damages and costs incurred by operational initiatives linked to milestone delivery. Tolerance buffers and loss rates scale automatically from project parameters.",
+        lbl_domino_only_cost: "Downstream Collateral Loss",
+        lbl_domino_note: "(Vendor breach fees, idle licenses and lost pipeline)",
+        domino_item_1: "Dependent Initiative 1",
+        domino_item_2: "Dependent Initiative 2",
+        domino_item_3: "Dependent Initiative 3",
+        domino_tol_lbl: "Buffer tolerance:",
+        domino_loss_rate_lbl: "Latency damage/day:",
+        domino_impact_lbl: "Operational Status:",
+        domino_loss_lbl: "Induced economic loss:",
+        txt_days_abbr: "d",
+        tradeoff_badge: "Recovery Modeling",
+        tradeoff_sub: "Mitigation Trade-Off Analysis",
+        lbl_rec_prefix: "AI/Algo Recommendation:",
+        tradeoff_title: "Mitigation & Schedule Clawback Modeling",
+        tradeoff_desc: "Automatic friction diagnosis and quantitative mitigation levers. Click any option to simulate its immediate impact on the roadmap.",
+        lbl_sim_active: "Active Simulation:",
+        btn_revert_sim: "Revert to Baseline",
+        opt1_title: "Option A: Budget Fast-Tracking",
+        opt1_tag: "Extra Capacity",
+        opt1_desc: "Inject contingency capital to double external throughput on the primary bottleneck department.",
+        btn_apply_mitig_1: "Simulate Fast-Tracking",
+        opt2_title: "Option B: Selective De-Scoping",
+        opt2_tag: "Zero Cost",
+        opt2_desc: "Defer non-critical functional scope to Phase 2 to preserve hard contractual completion dates.",
+        btn_apply_mitig_2: "Simulate De-Scoping",
+        opt3_title: "Option C: Fast-Sign Governance Protocol",
+        opt3_tag: "Governance",
+        opt3_desc: "Institute 48-hour tacit consent rules and collapse approval sign-offs to a single empowered sponsor.",
+        btn_apply_mitig_3: "Simulate Fast-Sign",
+        lbl_extra_invest: "Required Investment:",
+        lbl_days_recup: "Clawback Days:",
+        lbl_roi_mitigation: "Mitigation ROI:",
+        lbl_descoping_pct: "Estimated Scope Trim:",
+        val_zero_cost: "€ 0 (Zero Cost)",
+        val_max_efficiency: "Maximum Efficiency",
+        val_internal_policy: "Internal Policy (€ 0)",
+        board_badge: "Executive Dossier",
+        board_subtitle: "Formal Steering Committee Executive Memo",
+        board_title: "Comprehensive Dossier for the Board of Directors",
+        board_desc: "Structured formal memorandum prepared for the CEO and the Executive Steering Committee.",
+        btn_expand_dossier: "Expand Board Dossier",
+        btn_collapse_dossier: "Collapse Dossier",
+        btn_copy_board: "Copy Text",
+        memo_header_tag: "STRATEGIC GOVERNANCE MEMORANDUM – EXECUTIVE STEERING COMMITTEE"
+      }
+    };
+
+    let currentLang = 'it';
+    let isDossierExpanded = false;
+    let userHasCustomizedDominoText = false;
+    let activeMitigationIndex = 0; // 0: Baseline, 1: Fast-track, 2: De-scoping, 3: Fast-sign
+    let baselineStateBeforeMitigation = null;
+
+    // Preset Scenari
+    const scenarioPresets = {
+      1: {
+        id: 1,
+        label_it: "Lancio Nuovo Prodotto",
+        label_en: "Product Launch GTM",
+        name_it: "Lancio Piattaforma Omnicanale 2026",
+        name_en: "Omnichannel Customer Platform 2026",
+        budget: 1200000,
+        months: 6,
+        dailyCost: 3200,
+        weights: [0.20, 0.40, 0.25, 0.15],
+        domino_it: [
+          { title: "Campagna Vendite & Marketing", desc: "Pianificazione budget promozionale ed ingaggio rete commerciale.", tolPct: 0.08, ratePct: 0.85 },
+          { title: "Accordi Contrattuali con Partner", desc: "Firma degli accordi commerciali per la distribuzione congiunta.", tolPct: 0.16, ratePct: 1.10 },
+          { title: "Dismissione Piattaforma Precedente", desc: "Migrazione dei clienti storici e spegnimento vecchie licenze server.", tolPct: 0.25, ratePct: 0.60 }
+        ],
+        domino_en: [
+          { title: "Sales & Marketing Global Campaign", desc: "Advertising budget commitment and commercial salesforce enablement.", tolPct: 0.08, ratePct: 0.85 },
+          { title: "Strategic Distribution Partner Alliances", desc: "Joint co-selling agreements and distributor go-live commitments.", tolPct: 0.16, ratePct: 1.10 },
+          { title: "Legacy Infrastructure Decommissioning", desc: "Client base migration and shutdown of expensive legacy hosting contracts.", tolPct: 0.25, ratePct: 0.60 }
+        ]
+      },
+      2: {
+        id: 2,
+        label_it: "Nuovo Gestionale ERP",
+        label_en: "Core ERP Rollout",
+        name_it: "Migrazione Core SAP S/4HANA",
+        name_en: "SAP S/4HANA Enterprise Migration",
+        budget: 3500000,
+        months: 12,
+        dailyCost: 7500,
+        weights: [0.15, 0.25, 0.45, 0.15],
+        domino_it: [
+          { title: "Chiusura Fiscale & Contabilità", desc: "Certificazione dei saldi e riconciliazione contabile di fine esercizio.", tolPct: 0.06, ratePct: 0.75 },
+          { title: "Tracciabilità Magazzino & Logistica", desc: "Automazione bolle di consegna e integrazione con spedizionieri globali.", tolPct: 0.10, ratePct: 0.90 },
+          { title: "Formazione di 850 Dipendenti", desc: "Percorsi di aggiornamento obbligatori sui nuovi processi di lavoro.", tolPct: 0.15, ratePct: 0.55 }
+        ],
+        domino_en: [
+          { title: "Fiscal Year-End & General Ledger Close", desc: "Balance sheet reconciliations and external auditor compliance sign-offs.", tolPct: 0.06, ratePct: 0.75 },
+          { title: "Supply Chain & Warehouse Automation", desc: "Automated pick-pack flows and global carrier EDI integrations.", tolPct: 0.10, ratePct: 0.90 },
+          { title: "Enterprise Workforce Upskilling (850 Users)", desc: "Mandatory corporate training curriculum on new ERP operational workflows.", tolPct: 0.15, ratePct: 0.55 }
+        ]
+      },
+      3: {
+        id: 3,
+        label_it: "Riorganizzazione Operativa",
+        label_en: "Operational Restructuring",
+        name_it: "Efficientamento Supply Chain & Riduzione Costi",
+        name_en: "Supply Chain Rationalization & OpEx Reductions",
+        budget: 850000,
+        months: 5,
+        dailyCost: 2600,
+        weights: [0.35, 0.30, 0.10, 0.25],
+        domino_it: [
+          { title: "Rinegoziazione Fornitori Strategici", desc: "Nuovi accordi quadro con sconti volume del 12%.", tolPct: 0.10, ratePct: 0.90 },
+          { title: "Accorpamento Sedi Operative", desc: "Disdetta spazi in eccesso e trasloco delle divisioni centrali.", tolPct: 0.18, ratePct: 1.25 },
+          { title: "Nuovo Modello Organizzativo & Mansioni", desc: "Formalizzazione dei nuovi ruoli con le parti sociali.", tolPct: 0.28, ratePct: 1.05 }
+        ],
+        domino_en: [
+          { title: "Master Vendor Renegotiations", desc: "Contracting new tiered master service agreements with 12% volume rebates.", tolPct: 0.10, ratePct: 0.90 },
+          { title: "Facility Consolidation & Real Estate Exit", desc: "Lease terminations and office consolidation into central hubs.", tolPct: 0.18, ratePct: 1.25 },
+          { title: "Organizational Operating Model Restructure", desc: "Workforce reorganization and updated job descriptions alignment.", tolPct: 0.28, ratePct: 1.05 }
+        ]
+      },
+      4: {
+        id: 4,
+        label_it: "Audit & Normativa",
+        label_en: "ESG & Compliance Audit",
+        name_it: "Conformità ESG & CSRD Reporting Obbligatorio",
+        name_en: "Corporate CSRD Reporting & ESG Compliance Audit",
+        budget: 650000,
+        months: 4,
+        dailyCost: 2900,
+        weights: [0.45, 0.25, 0.15, 0.15],
+        domino_it: [
+          { title: "Certificazione Ente Terzo Indipendente", desc: "Audit di conformità richiesto per l'accesso a linee di credito agevolate.", tolPct: 0.10, ratePct: 1.05 },
+          { title: "Report Integrato per gli Investitori", desc: "Pubblicazione del fascicolo di sostenibilità per l'assemblea soci annuale.", tolPct: 0.18, ratePct: 1.45 },
+          { title: "Rinnovo Qualifica Fornitori Grandi Clienti", desc: "Requisito d'accesso obbligatorio per gare d'appalto della pubblica amministrazione.", tolPct: 0.30, ratePct: 1.30 }
+        ],
+        domino_en: [
+          { title: "Independent External Audit Certification", desc: "Mandatory compliance attestation required for green credit lines.", tolPct: 0.10, ratePct: 1.05 },
+          { title: "Annual Integrated Stakeholder Report", desc: "Statutory ESG disclosure release ahead of annual shareholder assembly.", tolPct: 0.18, ratePct: 1.45 },
+          { title: "Enterprise RFP Vendor Qualification", desc: "Prerequisite compliance credentials for public and enterprise tenders.", tolPct: 0.30, ratePct: 1.30 }
+        ]
+      }
+    };
+
+    let activeScenarioId = 1;
+    let customScenarioActive = false;
+    let bottleneckChartInstance = null;
+
+    // Popover visibility handler
+    function toggleParalysisPopover(e) {
+      if (e) e.stopPropagation();
+      const pop = document.getElementById('paralysis-popover');
+      if (pop) pop.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+      const pop = document.getElementById('paralysis-popover');
+      if (pop && !pop.classList.contains('hidden') && !pop.contains(e.target)) {
+        pop.classList.add('hidden');
+      }
+    });
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      const itBtn = document.getElementById('lang-btn-it');
+      const enBtn = document.getElementById('lang-btn-en');
+      if (lang === 'it') {
+        itBtn.className = "px-2.5 py-1 text-xs font-semibold rounded bg-white text-slate-900 shadow-xs transition";
+        enBtn.className = "px-2.5 py-1 text-xs font-medium rounded text-slate-600 hover:text-slate-900 transition";
+      } else {
+        enBtn.className = "px-2.5 py-1 text-xs font-semibold rounded bg-white text-slate-900 shadow-xs transition";
+        itBtn.className = "px-2.5 py-1 text-xs font-medium rounded text-slate-600 hover:text-slate-900 transition";
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+
+      const toggleText = document.getElementById('accordion-toggle-text');
+      if (toggleText) {
+        toggleText.innerText = isDossierExpanded ? translations[lang].btn_collapse_dossier : translations[lang].btn_expand_dossier;
+      }
+
+      if (!customScenarioActive) {
+        const scen = scenarioPresets[activeScenarioId];
+        document.getElementById('input-project-name').value = lang === 'it' ? scen.name_it : scen.name_en;
+        document.getElementById('current-scenario-label').innerText = lang === 'it' ? scen.label_it : scen.label_en;
+        populateDominoFieldsFromPreset(activeScenarioId, lang);
+      } else {
+        document.getElementById('current-scenario-label').innerText = lang === 'it' ? "Personalizzato" : "Custom Setup";
+        autoScaleDominoNumerics();
+      }
+
+      if (bottleneckChartInstance) {
+        bottleneckChartInstance.data.labels = lang === 'it' 
+          ? ['Ufficio Legale', 'Direzione / C-Level', 'IT / Architettura', 'Acquisti & Vendor']
+          : ['Legal & Compliance', 'C-Level / Steering', 'IT / Architecture', 'Procurement & Vendors'];
+        bottleneckChartInstance.update();
+      }
+
+      runEngine();
+      showToast(lang === 'it' ? "Lingua impostata: Italiano" : "Language set: English");
+    }
+
+    function toggleBoardDossier() {
+      const body = document.getElementById('board-dossier-body');
+      const arrow = document.getElementById('accordion-arrow');
+      const toggleText = document.getElementById('accordion-toggle-text');
+
+      isDossierExpanded = !isDossierExpanded;
+
+      if (isDossierExpanded) {
+        body.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+        toggleText.innerText = translations[currentLang].btn_collapse_dossier;
+      } else {
+        body.classList.add('hidden');
+        arrow.classList.remove('rotate-180');
+        toggleText.innerText = translations[currentLang].btn_expand_dossier;
+      }
+    }
+
+    function initChart() {
+      const ctx = document.getElementById('bottleneckChart').getContext('2d');
+      const labels = currentLang === 'it' 
+        ? ['Ufficio Legale', 'Direzione / C-Level', 'IT / Architettura', 'Acquisti & Vendor']
+        : ['Legal & Compliance', 'C-Level / Steering', 'IT / Architecture', 'Procurement & Vendors'];
+
+      bottleneckChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: [0, 0, 0, 0],
+            backgroundColor: [
+              'rgba(51, 65, 85, 0.85)',
+              'rgba(30, 58, 138, 0.85)',
+              'rgba(67, 56, 202, 0.85)',
+              'rgba(217, 119, 6, 0.85)'
+            ],
+            borderColor: ['#334155', '#1e3a8a', '#4338ca', '#d97706'],
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return currentLang === 'it' 
+                    ? ` +${context.raw} giorni di ritardo attribuiti`
+                    : ` +${context.raw} days of attributed latency`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(v) { return v + (currentLang === 'it' ? ' gg' : ' d'); },
+                font: { family: 'Inter', size: 10 }
+              },
+              grid: { color: '#f1f5f9' }
+            },
+            x: {
+              ticks: { font: { family: 'Inter', size: 11, weight: 500 }, color: '#334155' },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    function autoScaleDominoNumerics() {
+      const months = parseFloat(document.getElementById('input-project-months').value) || 6;
+      const dailyCost = parseFloat(document.getElementById('input-daily-cost').value) || 3000;
+      const totalWorkDays = Math.max(20, Math.round(months * 21));
+
+      const tol1 = Math.max(4, Math.round(totalWorkDays * 0.08));
+      const tol2 = Math.max(8, Math.round(totalWorkDays * 0.16));
+      const tol3 = Math.max(14, Math.round(totalWorkDays * 0.25));
+
+      const rate1 = Math.round(dailyCost * 0.85);
+      const rate2 = Math.round(dailyCost * 1.15);
+      const rate3 = Math.round(dailyCost * 0.65);
+
+      document.getElementById('domino-input-tol-1').value = tol1;
+      document.getElementById('domino-input-tol-2').value = tol2;
+      document.getElementById('domino-input-tol-3').value = tol3;
+
+      document.getElementById('domino-input-rate-1').value = rate1;
+      document.getElementById('domino-input-rate-2').value = rate2;
+      document.getElementById('domino-input-rate-3').value = rate3;
+    }
+
+    function generateSmartLocalDomino(name, budget, months, dailyCost) {
+      const q = (name || "").toLowerCase();
+      const b = parseFloat(budget) || 1000000;
+      const d = parseFloat(dailyCost) || 3000;
+      const m = parseFloat(months) || 6;
+      const totalDays = Math.round(m * 21);
+
+      if (q.includes("erp") || q.includes("sap") || q.includes("gestion") || q.includes("migraz")) {
+        return [
+          {
+            title: currentLang === 'it' ? "Chiusura Fiscale & Contabilità Generale" : "Fiscal Year-End & General Ledger Close",
+            desc: currentLang === 'it' ? "Certificazione dei saldi e quadratura bilancio con revisori." : "Balance sheet certifications and financial audit compliance.",
+            tolDays: Math.max(5, Math.round(totalDays * 0.06)),
+            lossPerDay: Math.round(d * 0.8)
+          },
+          {
+            title: currentLang === 'it' ? "Automazione Magazzino & Logistica Globale" : "Supply Chain & Warehouse EDI Integration",
+            desc: currentLang === 'it' ? "Emissione bolle e interfacciamento con corrieri mondiali." : "Automated pick-pack flows and global carrier EDI interfaces.",
+            tolDays: Math.max(9, Math.round(totalDays * 0.12)),
+            lossPerDay: Math.round(d * 1.1)
+          },
+          {
+            title: currentLang === 'it' ? "Formazione Operativa e Certificazione Staff" : "Enterprise Workforce Operational Training",
+            desc: currentLang === 'it' ? "Corsi obbligatori su nuovi processi di lavoro gestionali." : "Mandatory workflow training on new enterprise procedures.",
+            tolDays: Math.max(15, Math.round(totalDays * 0.22)),
+            lossPerDay: Math.round(d * 0.6)
+          }
+        ];
+      }
+
+      if (q.includes("audit") || q.includes("esg") || q.includes("csrd") || q.includes("complian")) {
+        return [
+          {
+            title: currentLang === 'it' ? "Certificazione Ente Terzo Indipendente" : "Independent Third-Party Certification",
+            desc: currentLang === 'it' ? "Audit di conformità richiesto per linee di credito agevolate." : "Auditor assessment required for preferential financing lines.",
+            tolDays: Math.max(6, Math.round(totalDays * 0.08)),
+            lossPerDay: Math.round(d * 1.0)
+          },
+          {
+            title: currentLang === 'it' ? "Report Integrato per l'Assemblea Azionisti" : "Integrated Shareholder & Board Disclosure",
+            desc: currentLang === 'it' ? "Pubblicazione annuale obbligatoria degli indici di sostenibilità." : "Statutory annual sustainability and governance disclosure.",
+            tolDays: Math.max(10, Math.round(totalDays * 0.15)),
+            lossPerDay: Math.round(d * 1.35)
+          },
+          {
+            title: currentLang === 'it' ? "Rinnovo Qualifica Fornitori Grandi Gare" : "Strategic Enterprise RFP Qualification",
+            desc: currentLang === 'it' ? "Accreditamento a bandi pubblici e appalti multinazionali." : "Accreditation to participate in major corporate tenders.",
+            tolDays: Math.max(16, Math.round(totalDays * 0.26)),
+            lossPerDay: Math.round(d * 0.95)
+          }
+        ];
+      }
+
+      // Default high-impact commercial / strategic project
+      return [
+        {
+          title: currentLang === 'it' ? `Campagna Lancio Commerciale ${name}` : `Go-to-Market & Sales Enablement ${name}`,
+          desc: currentLang === 'it' ? "Ingaggio rete commerciale e prenotazione budget promozionale." : "Salesforce enablement and promotional media commitments.",
+          tolDays: Math.max(5, Math.round(totalDays * 0.08)),
+          lossPerDay: Math.round(d * 0.85)
+        },
+        {
+          title: currentLang === 'it' ? "Accordi con Partner Strategici e Canali" : "Strategic Distribution Partner Alliances",
+          desc: currentLang === 'it' ? "Sottoscrizione accordi commerciali per distribuzione congiunta." : "Joint co-selling agreements and partner delivery commitments.",
+          tolDays: Math.max(10, Math.round(totalDays * 0.16)),
+          lossPerDay: Math.round(d * 1.15)
+        },
+        {
+          title: currentLang === 'it' ? "Dismissione Sistemi Precedenti e Licenze" : "Legacy Infrastructure Decommissioning",
+          desc: currentLang === 'it' ? "Migrazione clienti storici e spegnimento server obsoleti." : "Client migration and termination of legacy hosting contracts.",
+          tolDays: Math.max(16, Math.round(totalDays * 0.25)),
+          lossPerDay: Math.round(d * 0.65)
+        }
+      ];
+    }
+
+    function autoAdaptDominoSemantic(name) {
+      if (userHasCustomizedDominoText) return;
+      const budget = document.getElementById('input-total-budget').value;
+      const months = document.getElementById('input-project-months').value;
+      const dailyCost = document.getElementById('input-daily-cost').value;
+      const items = generateSmartLocalDomino(name, budget, months, dailyCost);
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(`domino-input-title-${i+1}`).value = items[i].title;
+        document.getElementById(`domino-input-desc-${i+1}`).value = items[i].desc;
+        document.getElementById(`domino-input-tol-${i+1}`).value = items[i].tolDays;
+        document.getElementById(`domino-input-rate-${i+1}`).value = items[i].lossPerDay;
+      }
+    }
+
+    function populateDominoFieldsFromPreset(presetId, lang) {
+      const data = scenarioPresets[presetId];
+      const items = lang === 'it' ? data.domino_it : data.domino_en;
+      const totalWorkDays = Math.max(20, Math.round(data.months * 21));
+
+      for (let i = 0; i < 3; i++) {
+        const item = items[i];
+        document.getElementById(`domino-input-title-${i+1}`).value = item.title;
+        document.getElementById(`domino-input-desc-${i+1}`).value = item.desc;
+        document.getElementById(`domino-input-tol-${i+1}`).value = Math.max(3, Math.round(totalWorkDays * item.tolPct));
+        document.getElementById(`domino-input-rate-${i+1}`).value = Math.round(data.dailyCost * item.ratePct);
+      }
+      userHasCustomizedDominoText = false;
+    }
+
+    function applyScenarioPreset(id) {
+      if (activeMitigationIndex !== 0) revertMitigationSimulation();
+      customScenarioActive = false;
+      userHasCustomizedDominoText = false;
+      activeScenarioId = id;
+      const data = scenarioPresets[id];
+
+      for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById(`btn-scen-${i}`);
+        btn.className = (i === id) 
+          ? "scenario-btn p-3 rounded border-2 border-slate-900 bg-slate-50 text-left transition cursor-pointer"
+          : "scenario-btn p-3 rounded border border-slate-200 bg-white hover:bg-slate-50 text-left transition cursor-pointer";
+      }
+      document.getElementById('btn-scen-custom').className = "scenario-btn p-3 rounded border border-dashed border-blue-600 bg-blue-50/40 hover:bg-blue-50 text-left transition cursor-pointer";
+      
+      document.getElementById('current-scenario-label').innerText = currentLang === 'it' ? data.label_it : data.label_en;
+      document.getElementById('input-project-name').value = currentLang === 'it' ? data.name_it : data.name_en;
+      document.getElementById('input-total-budget').value = data.budget;
+      document.getElementById('input-project-months').value = data.months;
+      document.getElementById('input-daily-cost').value = data.dailyCost;
+
+      populateDominoFieldsFromPreset(id, currentLang);
+      runEngine();
+    }
+
+    function activateCustomScenario() {
+      customScenarioActive = true;
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`btn-scen-${i}`).className = "scenario-btn p-3 rounded border border-slate-200 bg-white hover:bg-slate-50 text-left transition cursor-pointer";
+      }
+      document.getElementById('btn-scen-custom').className = "scenario-btn p-3 rounded border-2 border-blue-700 bg-blue-50 text-left transition cursor-pointer";
+      document.getElementById('current-scenario-label').innerText = currentLang === 'it' ? "Personalizzato" : "Custom Setup";
+    }
+
+    function onDominoFieldChange(idx) {
+      userHasCustomizedDominoText = true;
+      if (!customScenarioActive) activateCustomScenario();
+      runEngine();
+    }
+
+    function autoCalcDailyRate() {
+      const budget = parseFloat(document.getElementById('input-total-budget').value) || 0;
+      const months = parseFloat(document.getElementById('input-project-months').value) || 1;
+      const workingDays = Math.max(20, months * 21);
+      const calculated = Math.round(budget / workingDays);
+      document.getElementById('input-daily-cost').value = calculated;
+      autoScaleDominoNumerics();
+      runEngine();
+      showToast(currentLang === 'it' ? "Tariffa e impatti ricalcolati" : "Daily burn rate and domino scale recalculated");
+    }
+
+    async function generateAIDominoDependencies() {
+      const btn = document.getElementById('btn-ai-domino');
+      const tooltip = document.getElementById('ai-domino-tooltip');
+      const projectName = document.getElementById('input-project-name').value || "Iniziativa Corporate";
+      const budget = document.getElementById('input-total-budget').value || "1000000";
+      const months = document.getElementById('input-project-months').value || "6";
+      const dailyCost = document.getElementById('input-daily-cost').value || "3000";
+
+      btn.disabled = true;
+      btn.classList.add('animate-pulse');
+      if (tooltip) tooltip.innerText = currentLang === 'it' ? "✨ Generazione IA..." : "✨ AI generating...";
+
+      let items = null;
+
+      try {
+        // Tentativo chiamata API se disponibile, altrimenti fallback automatico immediato
+        const prompt = `Sei un Senior Enterprise Portfolio Manager. 
+Data la seguente iniziativa aziendale:
+- Nome Iniziativa: "${projectName}"
+- Budget totale: € ${budget}
+- Durata prevista: ${months} mesi
+- Burn rate giornaliero: € ${dailyCost}
+
+Genera esattamente 3 iniziative/progetti a valle (downstream dependencies) realistiche che rischiano di subire danni a catena (effetto domino) in caso di ritardo.
+Fornisci per ciascuna:
+1. title: Titolo chiaro e professionale (in lingua ${currentLang === 'it' ? 'Italiana' : 'Inglese'})
+2. desc: Descrizione concreta del perché dipende da questa iniziativa (in lingua ${currentLang === 'it' ? 'Italiana' : 'Inglese'})
+3. tolDays: Giorni lavorativi di tolleranza prima che subisca impatti (numero intero coerente tra 6 e 35)
+4. lossPerDay: Stima del danno economico al giorno di ritardo (numero intero in Euro coerente tra 1500 e 9000)`;
+
+        const payload = {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: {
+              type: "ARRAY",
+              items: {
+                type: "OBJECT",
+                properties: {
+                  title: { type: "STRING" },
+                  desc: { type: "STRING" },
+                  tolDays: { type: "NUMBER" },
+                  lossPerDay: { type: "NUMBER" }
+                },
+                required: ["title", "desc", "tolDays", "lossPerDay"]
+              }
+            }
+          }
+        };
+
+        const apiKey = "";
+        if (apiKey) {
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json();
+          const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (jsonText) {
+            items = JSON.parse(jsonText);
+          }
+        }
+      } catch (err) {
+        // Fail gracefully
+      }
+
+      // Se API non disponibile o fallita, usa motore euristico avanzato immediato
+      if (!items || !items.length) {
+        items = generateSmartLocalDomino(projectName, budget, months, dailyCost);
+      }
+
+      for (let i = 0; i < Math.min(3, items.length); i++) {
+        document.getElementById(`domino-input-title-${i+1}`).value = items[i].title;
+        document.getElementById(`domino-input-desc-${i+1}`).value = items[i].desc;
+        document.getElementById(`domino-input-tol-${i+1}`).value = Math.round(items[i].tolDays);
+        document.getElementById(`domino-input-rate-${i+1}`).value = Math.round(items[i].lossPerDay);
+
+        const card = document.getElementById(`domino-card-${i+1}`);
+        if (card) {
+          card.classList.add('ai-glow-pulse');
+          setTimeout(() => card.classList.remove('ai-glow-pulse'), 1400);
+        }
+      }
+
+      userHasCustomizedDominoText = true;
+      activateCustomScenario();
+      runEngine();
+
+      btn.disabled = false;
+      btn.classList.remove('animate-pulse');
+      if (tooltip) tooltip.innerText = translations[currentLang].btn_ai_domino;
+      showToast(currentLang === 'it' ? "✨ Iniziative a valle ricalcolate con successo!" : "✨ Downstream initiatives auto-adapted successfully!");
+    }
+
+    function toggleMitigationSimulation(optionIndex) {
+      if (activeMitigationIndex === optionIndex) {
+        // Cliccato sulla simulazione già attiva: disattiva e ripristina
+        revertMitigationSimulation();
+        return;
+      }
+
+      if (activeMitigationIndex === 0) {
+        // Salva stato baseline originario prima di applicare modifiche
+        baselineStateBeforeMitigation = {
+          scopeVal: document.getElementById('slider-scope-changes').value,
+          approvalDays: document.getElementById('slider-approval-days').value,
+          stakeholders: document.getElementById('slider-stakeholder-count').value
+        };
+      } else {
+        // Ripristina prima temporaneamente i valori di base
+        document.getElementById('slider-scope-changes').value = baselineStateBeforeMitigation.scopeVal;
+        document.getElementById('slider-approval-days').value = baselineStateBeforeMitigation.approvalDays;
+        document.getElementById('slider-stakeholder-count').value = baselineStateBeforeMitigation.stakeholders;
+      }
+
+      activeMitigationIndex = optionIndex;
+      const indicator = document.getElementById('mitigation-active-indicator');
+      const activeName = document.getElementById('mitigation-active-name');
+      const activeBenefit = document.getElementById('mitigation-active-benefit');
+      indicator.classList.remove('hidden');
+
+      if (optionIndex === 1) {
+        activeName.innerText = currentLang === 'it' ? "Opzione A (Fast-Tracking)" : "Option A (Fast-Tracking)";
+        document.getElementById('slider-approval-days').value = Math.max(2, Math.round(parseInt(baselineStateBeforeMitigation.approvalDays) * 0.5));
+      } else if (optionIndex === 2) {
+        activeName.innerText = currentLang === 'it' ? "Opzione B (De-Scoping)" : "Option B (De-Scoping)";
+        document.getElementById('slider-scope-changes').value = 1;
+      } else if (optionIndex === 3) {
+        activeName.innerText = currentLang === 'it' ? "Opzione C (Fast-Sign)" : "Option C (Fast-Sign)";
+        document.getElementById('slider-approval-days').value = Math.max(2, Math.min(3, Math.round(parseInt(baselineStateBeforeMitigation.approvalDays) * 0.35)));
+        document.getElementById('slider-stakeholder-count').value = Math.max(1, Math.min(2, Math.round(parseInt(baselineStateBeforeMitigation.stakeholders) * 0.4)));
+      }
+
+      highlightMitigationCards(optionIndex);
+      runEngine();
+
+      // Calcola beneficio immediato
+      const daysRecovered = document.getElementById(`opt${optionIndex}-days`).innerText;
+      activeBenefit.innerText = `${currentLang === 'it' ? 'Recupero stimato' : 'Clawback'}: ${daysRecovered}`;
+      showToast(currentLang === 'it' ? `Simulazione rientro attivata: ${activeName.innerText}` : `Recovery simulation active: ${activeName.innerText}`);
+    }
+
+    function revertMitigationSimulation() {
+      if (baselineStateBeforeMitigation) {
+        document.getElementById('slider-scope-changes').value = baselineStateBeforeMitigation.scopeVal;
+        document.getElementById('slider-approval-days').value = baselineStateBeforeMitigation.approvalDays;
+        document.getElementById('slider-stakeholder-count').value = baselineStateBeforeMitigation.stakeholders;
+      }
+      activeMitigationIndex = 0;
+      document.getElementById('mitigation-active-indicator').classList.add('hidden');
+      highlightMitigationCards(0);
+      runEngine();
+      showToast(currentLang === 'it' ? "Ripristinata baseline originaria" : "Restored baseline parameters");
+    }
+
+    function highlightMitigationCards(activeIdx) {
+      for (let i = 1; i <= 3; i++) {
+        const card = document.getElementById(`card-opt-${i}`);
+        const btn = document.getElementById(`btn-mitig-${i}`);
+        const defaultText = i === 1 
+          ? translations[currentLang].btn_apply_mitig_1 
+          : (i === 2 ? translations[currentLang].btn_apply_mitig_2 : translations[currentLang].btn_apply_mitig_3);
+
+        if (i === activeIdx) {
+          card.className = "border-2 border-emerald-600 rounded-lg p-4 bg-emerald-50/60 flex flex-col justify-between shadow-xs transition-all duration-200";
+          btn.className = "w-full mt-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-1.5 px-2 rounded text-xs transition cursor-pointer shadow-xs";
+          btn.innerText = currentLang === 'it' ? "✓ Attivo (Clicca per Annullare)" : "✓ Active (Click to Revert)";
+        } else {
+          card.className = "border border-slate-200 rounded-lg p-4 bg-slate-50 flex flex-col justify-between transition-all duration-200";
+          const defaultBtnBg = i === 1 ? "bg-slate-900 hover:bg-slate-800" : (i === 2 ? "bg-emerald-700 hover:bg-emerald-800" : "bg-purple-700 hover:bg-purple-800");
+          btn.className = `w-full mt-3 ${defaultBtnBg} text-white font-medium py-1.5 px-2 rounded text-xs transition cursor-pointer shadow-2xs`;
+          btn.innerText = defaultText;
+        }
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-message');
+      const text = document.getElementById('toast-text');
+      text.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function runEngine() {
+      const projectName = document.getElementById('input-project-name').value || (currentLang === 'it' ? "Iniziativa Corporate" : "Enterprise Initiative");
+      const totalBudget = parseFloat(document.getElementById('input-total-budget').value) || 100000;
+      const projectMonths = parseFloat(document.getElementById('input-project-months').value) || 6;
+      const dailyBurnRate = parseFloat(document.getElementById('input-daily-cost').value) || 2000;
+
+      const scopeVal = parseInt(document.getElementById('slider-scope-changes').value);
+      const approvalDays = parseInt(document.getElementById('slider-approval-days').value);
+      const stakeholderCount = parseInt(document.getElementById('slider-stakeholder-count').value);
+      const strictnessVal = parseInt(document.getElementById('slider-strictness').value);
+
+      const scopeTexts = currentLang === 'it' ? [
+        "Stabile (Requisiti bloccati)",
+        "Basso (Modifiche concordate)",
+        "Modesto (Qualche richiesta)",
+        "Frequente (Volatilità alta)",
+        "Critico (Nessun freeze)"
+      ] : [
+        "Stable (Scope locked)",
+        "Low (Agreed adjustments)",
+        "Moderate (Minor additions)",
+        "Frequent (High volatility)",
+        "Critical (Continuous scope creep)"
+      ];
+      document.getElementById('label-scope-changes').innerText = scopeTexts[scopeVal - 1];
+
+      document.getElementById('label-approval-days').innerText = currentLang === 'it' 
+        ? `${approvalDays} giorni lavorativi` 
+        : `${approvalDays} business days`;
+
+      document.getElementById('label-stakeholder-count').innerText = currentLang === 'it'
+        ? `${stakeholderCount} ${stakeholderCount === 1 ? 'responsabile' : 'responsabili'}`
+        : `${stakeholderCount} ${stakeholderCount === 1 ? 'stakeholder' : 'stakeholders'}`;
+
+      const strictTexts = currentLang === 'it'
+        ? ["Flessibile", "Significativa", "Improrogabile (Penali)"]
+        : ["Flexible", "Significant", "Rigid (Contractual fines)"];
+      document.getElementById('label-strictness').innerText = strictTexts[strictnessVal - 1];
+
+      // Formule di ritardo ponderate
+      const stakeholderDrag = 1 + ((stakeholderCount - 1) * 0.12);
+      const scopeRework = (scopeVal - 1) * 5.5;
+      const approvalSlack = Math.max(0, approvalDays - 3) * 1.65;
+      const strictnessFactor = strictnessVal === 3 ? 1.15 : (strictnessVal === 1 ? 0.9 : 1.0);
+
+      const totalDelayDays = Math.max(0, Math.round((scopeRework + approvalSlack) * stakeholderDrag * strictnessFactor));
+      const delayWeeks = (totalDelayDays / 7).toFixed(1);
+
+      // Data di completamento ricalcolata
+      const today = new Date();
+      const finishDate = new Date(today);
+      finishDate.setDate(finishDate.getDate() + (projectMonths * 30) + totalDelayDays);
+      const dateOptions = { day: '2-digit', month: 'short', year: 'numeric' };
+      const formattedDate = finishDate.toLocaleDateString(currentLang === 'it' ? 'it-IT' : 'en-US', dateOptions);
+
+      // Costo Diretto Attesa
+      const directWasteCost = Math.round(totalDelayDays * dailyBurnRate);
+      const budgetPct = ((directWasteCost / totalBudget) * 100).toFixed(1);
+
+      // Indice di Paralisi (0 - 100)
+      const paralysisScore = Math.min(100, Math.round(
+        ((scopeVal / 5) * 30) +
+        ((approvalDays / 30) * 40) +
+        ((stakeholderCount / 8) * 30)
+      ));
+
+      // Aggiornamento KPI Cards
+      document.getElementById('kpi-delay-days').innerText = `+${totalDelayDays} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('kpi-delay-weeks').innerText = `(+${delayWeeks} ${currentLang === 'it' ? 'sett.' : 'wks'})`;
+      document.getElementById('kpi-finish-date').innerText = formattedDate;
+
+      document.getElementById('kpi-cost-waste').innerText = '€ ' + directWasteCost.toLocaleString('it-IT');
+      document.getElementById('kpi-budget-percentage').innerText = `${budgetPct}% ${currentLang === 'it' ? 'del budget' : 'of budget'}`;
+      document.getElementById('kpi-paralysis-index').innerText = `${paralysisScore}%`;
+
+      // Barra singola di avanzamento percentuale
+      const paralysisBar = document.getElementById('kpi-paralysis-bar');
+      if (paralysisBar) {
+        paralysisBar.style.width = `${paralysisScore}%`;
+      }
+
+      // Badge severità ritardo
+      const badgeDelay = document.getElementById('badge-delay-severity');
+      if (totalDelayDays <= 8) {
+        badgeDelay.className = "badge-transition px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900";
+        badgeDelay.innerText = currentLang === 'it' ? "Sotto Controllo" : "Under Control";
+      } else if (totalDelayDays <= 22) {
+        badgeDelay.className = "badge-transition px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900";
+        badgeDelay.innerText = currentLang === 'it' ? "Attenzione Richiesta" : "Action Required";
+      } else {
+        badgeDelay.className = "badge-transition px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-900";
+        badgeDelay.innerText = currentLang === 'it' ? "Criticità Alta" : "Critical Delay";
+      }
+
+      // Livello Governance e colore barra singola (Fasce 0-39, 40-69, 70-100)
+      const paralysisLevel = document.getElementById('kpi-paralysis-level');
+      const govLabel = document.getElementById('kpi-governance-label');
+      if (paralysisScore < 40) {
+        paralysisLevel.innerText = currentLang === 'it' ? "Fluido" : "Fluid";
+        paralysisLevel.className = "text-3xl font-bold text-emerald-700";
+        govLabel.innerText = currentLang === 'it' ? "Decisioni Rapide (Fascia 0-39%)" : "High Agility (0-39% band)";
+        if (paralysisBar) paralysisBar.className = "bg-emerald-600 h-full rounded-full transition-all duration-300";
+      } else if (paralysisScore < 70) {
+        paralysisLevel.innerText = currentLang === 'it' ? "Tensionato" : "Strained";
+        paralysisLevel.className = "text-3xl font-bold text-amber-700";
+        govLabel.innerText = currentLang === 'it' ? "Latenza Media (Fascia 40-69%)" : "Moderate Friction (40-69% band)";
+        if (paralysisBar) paralysisBar.className = "bg-amber-600 h-full rounded-full transition-all duration-300";
+      } else {
+        paralysisLevel.innerText = currentLang === 'it' ? "Paralisi" : "Paralysis";
+        paralysisLevel.className = "text-3xl font-bold text-rose-700";
+        govLabel.innerText = currentLang === 'it' ? "Veti Incrociati (Fascia 70-100%)" : "Gridlock Vetoes (70-100% band)";
+        if (paralysisBar) paralysisBar.className = "bg-rose-600 h-full rounded-full transition-all duration-300";
+      }
+
+      // Attribuzione dipartimentale dinamica
+      let weights = customScenarioActive 
+        ? [0.25, 0.35, 0.25, 0.15]
+        : [...scenarioPresets[activeScenarioId].weights];
+
+      if (scopeVal >= 4) { weights[1] += 0.10; weights[2] += 0.08; }
+      if (stakeholderCount >= 5) { weights[0] += 0.08; weights[3] += 0.06; }
+      if (approvalDays >= 14) { weights[0] += 0.12; weights[1] += 0.10; }
+
+      const sumW = weights.reduce((a, b) => a + b, 0);
+      const normW = weights.map(w => w / sumW);
+      const deptDays = normW.map(w => Math.round(totalDelayDays * w));
+
+      const deptNames = currentLang === 'it' 
+        ? ['Ufficio Legale', 'Direzione / C-Level', 'IT / Architettura', 'Acquisti & Vendor']
+        : ['Legal & Compliance', 'Executive / C-Level', 'IT / Architecture', 'Procurement & Vendors'];
+
+      document.getElementById('num-dept-legal').innerText = `+${deptDays[0]} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('num-dept-management').innerText = `+${deptDays[1]} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('num-dept-it').innerText = `+${deptDays[2]} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('num-dept-procurement').innerText = `+${deptDays[3]} ${currentLang === 'it' ? 'gg' : 'd'}`;
+
+      if (bottleneckChartInstance) {
+        bottleneckChartInstance.data.datasets[0].data = deptDays;
+        bottleneckChartInstance.update();
+      }
+
+      let maxIdx = 0;
+      for (let i = 1; i < deptDays.length; i++) {
+        if (deptDays[i] > deptDays[maxIdx]) maxIdx = i;
+      }
+      const topDept = deptNames[maxIdx];
+      document.getElementById('top-bottleneck-badge').innerText = `${topDept} (+${deptDays[maxIdx]} ${currentLang === 'it' ? 'gg' : 'd'})`;
+
+      // Schede Effetto Domino (Auto-Calibrate & Dinamiche)
+      let dominoOnlyLoss = 0;
+      let blockedCount = 0;
+
+      for (let i = 0; i < 3; i++) {
+        const tolDays = parseFloat(document.getElementById(`domino-input-tol-${i+1}`).value) || 10;
+        const lossPerDay = parseFloat(document.getElementById(`domino-input-rate-${i+1}`).value) || 2000;
+
+        const cardEl = document.getElementById(`domino-card-${i+1}`);
+        const badgeEl = document.getElementById(`domino-status-badge-${i+1}`);
+        const consequenceEl = document.getElementById(`domino-consequence-${i+1}`);
+        const lossEl = document.getElementById(`domino-loss-${i+1}`);
+
+        if (totalDelayDays <= tolDays) {
+          badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 badge-transition";
+          badgeEl.innerText = currentLang === 'it' ? "Regolare" : "On Track";
+          cardEl.className = "border border-slate-200 rounded-lg p-4 bg-slate-50/70 transition flex flex-col justify-between";
+          consequenceEl.innerText = currentLang === 'it' ? "Nessun impatto" : "No impact";
+          consequenceEl.className = "font-medium text-slate-700 text-right";
+          lossEl.innerText = "€ 0";
+          lossEl.className = "font-bold text-slate-800 font-mono-num";
+        } else if (totalDelayDays <= tolDays + 12) {
+          const daysOver = totalDelayDays - tolDays;
+          const loss = Math.round(daysOver * lossPerDay);
+          dominoOnlyLoss += loss;
+
+          badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 badge-transition";
+          badgeEl.innerText = currentLang === 'it' ? "In Allerta" : "At Risk";
+          cardEl.className = "border border-amber-200 rounded-lg p-4 bg-amber-50/40 transition flex flex-col justify-between";
+          consequenceEl.innerText = currentLang === 'it' ? "Latenza operativa e penali preliminari" : "Operational latency and early penalties";
+          consequenceEl.className = "font-medium text-amber-900 text-right";
+          lossEl.innerText = "+€ " + loss.toLocaleString('it-IT');
+          lossEl.className = "font-bold text-amber-800 font-mono-num";
+        } else {
+          blockedCount++;
+          const daysOver = totalDelayDays - tolDays;
+          const loss = Math.round(daysOver * lossPerDay);
+          dominoOnlyLoss += loss;
+
+          badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 badge-transition";
+          badgeEl.innerText = currentLang === 'it' ? "PARALISI CRITICA" : "BLOCKED / CRITICAL";
+          cardEl.className = "border border-rose-200 rounded-lg p-4 bg-rose-50/50 transition flex flex-col justify-between";
+          consequenceEl.innerText = currentLang === 'it' ? "Blocco roadmap e penali piene maturate" : "Roadmap freeze and full penalty breaches";
+          consequenceEl.className = "font-medium text-rose-900 text-right";
+          lossEl.innerText = "+€ " + loss.toLocaleString('it-IT');
+          lossEl.className = "font-bold text-rose-700 font-mono-num";
+        }
+      }
+
+      document.getElementById('kpi-domino-only-cost').innerText = '€ ' + dominoOnlyLoss.toLocaleString('it-IT');
+      document.getElementById('kpi-total-domino-cost').innerText = '€ ' + (directWasteCost + dominoOnlyLoss).toLocaleString('it-IT');
+      document.getElementById('kpi-domino-blocked-count').innerText = `${blockedCount} ${currentLang === 'it' ? 'su 3' : 'of 3'}`;
+
+      // Box Sintesi Rapida
+      const summaryEl = document.getElementById('executive-summary-text');
+      if (totalDelayDays > 25 || blockedCount >= 2) {
+        summaryEl.innerHTML = currentLang === 'it' ? `
+          <strong class="text-rose-700 font-semibold">Assetto Critico:</strong> Il programma <span class="font-bold text-slate-800">"${projectName}"</span> registra uno slittamento di <strong class="text-slate-900 font-mono-num">${totalDelayDays} giorni</strong>. Il collo di bottiglia risiede principalmente in <strong>${topDept}</strong>. L'effetto domino ha compromesso <strong class="text-rose-800">${blockedCount} iniziative dipendenti</strong>, con un'esposizione cumulativa stimata di <strong class="text-rose-700 font-mono-num">€ ${(directWasteCost + dominoOnlyLoss).toLocaleString('it-IT')}</strong>.
+        ` : `
+          <strong class="text-rose-700 font-semibold">Critical State:</strong> Program <span class="font-bold text-slate-800">"${projectName}"</span> is exhibiting an estimated delay of <strong class="text-slate-900 font-mono-num">${totalDelayDays} days</strong>. Primary friction is concentrated in <strong>${topDept}</strong>. Domino cascade has impaired <strong class="text-rose-800">${blockedCount} dependent initiatives</strong>, generating an aggregated exposure of <strong class="text-rose-700 font-mono-num">€ ${(directWasteCost + dominoOnlyLoss).toLocaleString('it-IT')}</strong>.
+        `;
+      } else if (totalDelayDays > 10) {
+        summaryEl.innerHTML = currentLang === 'it' ? `
+          <strong class="text-amber-700 font-semibold">Tensione sui Tempi:</strong> Slittamento stimato a <strong class="text-slate-900">${totalDelayDays} giorni</strong> con un costo diretto di latenza pari a € ${directWasteCost.toLocaleString('it-IT')}. Intervenire sulla compressione delle approvazioni in ${topDept} consente di preservare i progetti collegati prima del superamento delle tolleranze.
+        ` : `
+          <strong class="text-amber-700 font-semibold">Schedule Strain:</strong> Projected delay stands at <strong class="text-slate-900">${totalDelayDays} days</strong> with direct latency loss of € ${directWasteCost.toLocaleString('it-IT')}. Compressing sign-off cycles in ${topDept} will recover milestone alignment before downstream deliverables exceed buffer tolerances.
+        `;
+      } else {
+        summaryEl.innerHTML = currentLang === 'it' ? `
+          <strong class="text-emerald-700 font-semibold">Governance Efficace:</strong> Deviazione contenuta a <strong>${totalDelayDays} giorni</strong>. Tutte le iniziative dipendenti a valle procedono regolarmente senza extracosti indotti.
+        ` : `
+          <strong class="text-emerald-700 font-semibold">Optimal Governance:</strong> Schedule deviation contained within <strong>${totalDelayDays} days</strong>. All downstream dependencies remain on track without collateral financial drain.
+        `;
+      }
+
+      /* Auto-Diagnosi e Quantificazione Scenari di Mitigazione e Rientro */
+      const fastTrackDays = Math.min(totalDelayDays, Math.max(3, Math.round(totalDelayDays * 0.45)));
+      const fastTrackCost = Math.round(fastTrackDays * dailyBurnRate * 0.42);
+      const clawbackSavings = Math.round(fastTrackDays * dailyBurnRate);
+      const roi = fastTrackCost > 0 ? (clawbackSavings / fastTrackCost).toFixed(1) : "2.4";
+
+      document.getElementById('opt1-cost').innerText = '€ ' + fastTrackCost.toLocaleString('it-IT');
+      document.getElementById('opt1-days').innerText = `-${fastTrackDays} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('opt1-roi').innerText = `${roi}x ${currentLang === 'it' ? 'Ritorno' : 'Payback'}`;
+      document.getElementById('opt1-desc-dynamic').innerText = currentLang === 'it'
+        ? `Iniezione di contingency per raddoppiare temporaneamente risorse su ${topDept}, comprimendo ${fastTrackDays} giorni critici.`
+        : `Inject contingency to double capacity on ${topDept}, clawing back ${fastTrackDays} critical days.`;
+
+      const descopingDays = Math.min(totalDelayDays, Math.max(4, Math.round(totalDelayDays * 0.55)));
+      const estimatedTrimPct = Math.min(30, Math.max(10, Math.round((descopingDays / (projectMonths * 21)) * 100)));
+      document.getElementById('opt2-days').innerText = `-${descopingDays} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('opt2-pct').innerText = `${estimatedTrimPct}% ${currentLang === 'it' ? 'del Perimetro' : 'Scope'}`;
+      document.getElementById('opt2-desc-dynamic').innerText = currentLang === 'it'
+        ? `Congelamento e rinvio del ${estimatedTrimPct}% di feature secondarie a release 2 per rientrare nella milestone senza costi aggiuntivi.`
+        : `Scope freeze deferring ${estimatedTrimPct}% of secondary features to Phase 2 to meet target milestone at zero cash expense.`;
+
+      const slaDays = Math.min(totalDelayDays, Math.max(3, Math.round(totalDelayDays * 0.38)));
+      document.getElementById('opt3-days').innerText = `-${slaDays} ${currentLang === 'it' ? 'gg' : 'd'}`;
+      document.getElementById('opt3-friction').innerText = currentLang === 'it' ? "-45% Latenza" : "-45% Latency";
+      document.getElementById('opt3-desc-dynamic').innerText = currentLang === 'it'
+        ? `Protocollo Fast-Sign su ${topDept}: silenzio-assenso a 48 ore e firma unica per sbloccare i passaggi decisionali.`
+        : `Fast-Sign protocol for ${topDept}: 48h tacit approval rule with collapsed sign-off layers.`;
+
+      /* Diagnosi Algoritmica della Migliore Raccomandazione */
+      let bestFitOpt = 2; // Default De-Scoping
+      let bestFitName = currentLang === 'it' ? "Opzione B (De-Scoping)" : "Option B (De-Scoping)";
+
+      if (approvalDays >= 10 || stakeholderCount >= 5) {
+        bestFitOpt = 3;
+        bestFitName = currentLang === 'it' ? "Opzione C (Protocollo Fast-Sign)" : "Option C (Fast-Sign Protocol)";
+      } else if (scopeVal >= 4) {
+        bestFitOpt = 2;
+        bestFitName = currentLang === 'it' ? "Opzione B (De-Scoping Selettivo)" : "Option B (Selective De-Scoping)";
+      } else if (strictnessVal === 3 || totalBudget > 2000000) {
+        bestFitOpt = 1;
+        bestFitName = currentLang === 'it' ? "Opzione A (Fast-Tracking Budget)" : "Option A (Budget Fast-Tracking)";
+      }
+
+      document.getElementById('tradeoff-best-fit-name').innerText = bestFitName;
+      document.getElementById('badge-rec-opt1').classList.toggle('hidden', bestFitOpt !== 1);
+      document.getElementById('badge-rec-opt2').classList.toggle('hidden', bestFitOpt !== 2);
+      document.getElementById('badge-rec-opt3').classList.toggle('hidden', bestFitOpt !== 3);
+
+      updateBoardMemo(projectName, totalBudget, totalDelayDays, delayWeeks, directWasteCost, dominoOnlyLoss, topDept, deptDays[maxIdx], blockedCount, formattedDate, descopingDays, fastTrackCost, fastTrackDays);
+    }
+
+    function updateBoardMemo(projectName, budget, delayDays, delayWeeks, directWaste, dominoLoss, topDept, topDays, blockedCount, finishDate, descopingDays, fastTrackCost, fastTrackDays) {
+      const memoDateEl = document.getElementById('memo-date');
+      const memoContentEl = document.getElementById('board-memo-content');
+      const todayFormatted = new Date().toLocaleDateString(currentLang === 'it' ? 'it-IT' : 'en-US', { day: '2-digit', month: 'long', year: 'numeric' });
+      memoDateEl.innerText = `${currentLang === 'it' ? 'Data' : 'Date'}: ${todayFormatted}`;
+
+      const totalExposure = directWaste + dominoLoss;
+      const d1Title = document.getElementById('domino-input-title-1').value;
+      const d2Title = document.getElementById('domino-input-title-2').value;
+      const d3Title = document.getElementById('domino-input-title-3').value;
+
+      if (currentLang === 'it') {
+        memoContentEl.innerHTML = `
+<strong>OGGETTO: STATO DI AVANZAMENTO, VALUTAZIONE RISCHI E PIANO DI INTERVENTO &ndash; "${projectName.toUpperCase()}"</strong>
+
+<strong>1. EXECUTIVE SUMMARY & SINTESI PER IL BOARD</strong>
+A seguito dell'audit periodico sulla governance di progetto, si evidenzia uno scostamento cumulato pari a <strong>+${delayDays} giorni lavorativi (+${delayWeeks} settimane)</strong> rispetto alla baseline contrattuale. La nuova data stimata di rilascio &egrave; fissata per il <strong>${finishDate}</strong>.
+L'immobilizzo improduttivo delle risorse e dei fornitori ha generato un costo diretto di attesa pari a <strong>€ ${directWaste.toLocaleString('it-IT')}</strong>.
+
+<strong>2. ATTRIBUZIONE DEL COLLO DI BOTTIGLIA PRINCIPALE</strong>
+L'analisi quantitativa individua la principale fonte di attrito organizzativo presso l'area <strong>${topDept}</strong>, responsabile di <strong>+${topDays} giorni di latenza</strong> complessiva. I fattori determinanti risiedono nell'eccessiva frammentazione dei diritti di veto e nei tempi lunghi di validazione formale.
+
+<strong>3. EFFETTO DOMINO SUL PORTFOLIO AZIENDALE</strong>
+Lo slittamento dell'iniziativa pilota sta impattando la roadmap a valle (in particolare su <em>"${d1Title}"</em>, <em>"${d2Title}"</em> e <em>"${d3Title}"</em>): <strong>${blockedCount} su 3 iniziative dipendenti</strong> risultano attualmente in allerta o stallo operativo. Il danno indotto &egrave; stimato a <strong>€ ${dominoLoss.toLocaleString('it-IT')}</strong>, portando l'esposizione complessiva a <strong>€ ${totalExposure.toLocaleString('it-IT')}</strong>.
+
+<strong>4. AZIONI CORRETTIVE RACCOMANDATE AL COMITATO DI DIREZIONE</strong>
+Al fine di proteggere il conto economico e rientrare nella finestra di tolleranza, si sottopongono alla firma dell'Amministratore Delegato le seguenti opzioni operative:
+  &bull; <em>Delibera De-Scoping Immediato:</em> Posticipo selettivo di feature secondarie (recupero stimato: <strong>${descopingDays} giorni a costo zero</strong>).
+  &bull; <em>Protocollo di Governance Fast-Sign:</em> Introduzione della regola del silenzio-assenso a 48 ore per i pareri dell'area ${topDept}.
+  &bull; <em>Contingency Fast-Track:</em> Stanziamento di <strong>€ ${fastTrackCost.toLocaleString('it-IT')}</strong> per il raddoppio temporaneo della capacit&agrave; di delivery su ${topDept} (recupero stimato: <strong>${fastTrackDays} giorni</strong>).
+        `;
+      } else {
+        memoContentEl.innerHTML = `
+<strong>SUBJECT: EXECUTIVE DELIVERY HEALTH, GOVERNANCE RISK & REMEDIATION PLAN &ndash; "${projectName.toUpperCase()}"</strong>
+
+<strong>1. EXECUTIVE OVERVIEW & C-LEVEL BRIEFING</strong>
+Following the portfolio delivery governance review, project <strong>"${projectName}"</strong> is reporting a cumulative deviation of <strong>+${delayDays} business days (+${delayWeeks} weeks)</strong> against baseline commitments. The projected completion date has slipped to <strong>${finishDate}</strong>.
+Unproductive team carrying costs and partner idle fees currently total <strong>€ ${directWaste.toLocaleString('it-IT')}</strong> in direct decision latency loss.
+
+<strong>2. ROOT CAUSE FRICTION ATTRIBUTION</strong>
+Quantitative analysis pinpoints <strong>${topDept}</strong> as the primary systemic bottleneck, directly accounting for <strong>+${topDays} days of delay</strong>. The friction is driven by sign-off committee fragmentation and protracted formal validation cycles.
+
+<strong>3. CROSS-PORTFOLIO DOMINO IMPAIRMENT</strong>
+Pilot milestone slippage is compounding across downstream operations (specifically impacting <em>"${d1Title}"</em>, <em>"${d2Title}"</em> and <em>"${d3Title}"</em>): <strong>${blockedCount} of 3 linked initiatives</strong> are now compromised or halted. Downstream collateral damage is valued at <strong>€ ${dominoLoss.toLocaleString('it-IT')}</strong>, elevating total enterprise financial exposure to <strong>€ ${totalExposure.toLocaleString('it-IT')}</strong>.
+
+<strong>4. STEERING COMMITTEE ACTION DIRECTIVES</strong>
+To safeguard operating margin and prevent contractual breaches, the following mitigation decisions are submitted for Board sign-off:
+  &bull; <em>Selective Scope Freeze:</em> Immediately defer non-critical functional requirements to Phase 2 (recovery: <strong>${descopingDays} days at zero cash expense</strong>).
+  &bull; <em>Fast-Sign Governance SLA:</em> Institute a mandatory 48-hour tacit consent protocol for sign-offs in ${topDept}.
+  &bull; <em>Fast-Tracking Injection:</em> Authorize a contingency buffer of <strong>€ ${fastTrackCost.toLocaleString('it-IT')}</strong> to expand delivery throughput (estimated recovery: <strong>${fastTrackDays} days</strong>).
+        `;
+      }
+    }
+
+    function copyBoardMemo() {
+      const content = document.getElementById('board-memo-content').innerText;
+      const textarea = document.createElement('textarea');
+      textarea.value = content;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(currentLang === 'it' ? "Dossier copiato negli appunti!" : "Board memo copied to clipboard!");
+      } catch (err) {
+        showToast(currentLang === 'it' ? "Errore durante la copia" : "Copy failed");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function exportComprehensiveCSV() {
+      const projectName = document.getElementById('input-project-name').value;
+      const scenarioLabel = document.getElementById('current-scenario-label').innerText;
+      const budget = document.getElementById('input-total-budget').value;
+      const months = document.getElementById('input-project-months').value;
+      const dailyRate = document.getElementById('input-daily-cost').value;
+      
+      const delayDays = document.getElementById('kpi-delay-days').innerText;
+      const delayWeeks = document.getElementById('kpi-delay-weeks').innerText;
+      const finishDate = document.getElementById('kpi-finish-date').innerText;
+      const directWaste = document.getElementById('kpi-cost-waste').innerText;
+      const budgetWastePct = document.getElementById('kpi-budget-percentage').innerText;
+      const dominoCost = document.getElementById('kpi-domino-only-cost').innerText;
+      const totalExposure = document.getElementById('kpi-total-domino-cost').innerText;
+      const paralysisScore = document.getElementById('kpi-paralysis-index').innerText;
+      const paralysisLabel = document.getElementById('kpi-paralysis-level').innerText;
+
+      const scopeText = document.getElementById('label-scope-changes').innerText;
+      const approvalText = document.getElementById('label-approval-days').innerText;
+      const stakeholderText = document.getElementById('label-stakeholder-count').innerText;
+      const strictnessText = document.getElementById('label-strictness').innerText;
+
+      const legalDays = document.getElementById('num-dept-legal').innerText;
+      const mgmtDays = document.getElementById('num-dept-management').innerText;
+      const itDays = document.getElementById('num-dept-it').innerText;
+      const procDays = document.getElementById('num-dept-procurement').innerText;
+      const topBottleneck = document.getElementById('top-bottleneck-badge').innerText;
+
+      const d1Title = document.getElementById('domino-input-title-1').value;
+      const d1Status = document.getElementById('domino-status-badge-1').innerText;
+      const d1Loss = document.getElementById('domino-loss-1').innerText;
+      const d1Tol = document.getElementById('domino-input-tol-1').value;
+      const d1Rate = document.getElementById('domino-input-rate-1').value;
+      const d1Consequence = document.getElementById('domino-consequence-1').innerText;
+
+      const d2Title = document.getElementById('domino-input-title-2').value;
+      const d2Status = document.getElementById('domino-status-badge-2').innerText;
+      const d2Loss = document.getElementById('domino-loss-2').innerText;
+      const d2Tol = document.getElementById('domino-input-tol-2').value;
+      const d2Rate = document.getElementById('domino-input-rate-2').value;
+      const d2Consequence = document.getElementById('domino-consequence-2').innerText;
+
+      const d3Title = document.getElementById('domino-input-title-3').value;
+      const d3Status = document.getElementById('domino-status-badge-3').innerText;
+      const d3Loss = document.getElementById('domino-loss-3').innerText;
+      const d3Tol = document.getElementById('domino-input-tol-3').value;
+      const d3Rate = document.getElementById('domino-input-rate-3').value;
+      const d3Consequence = document.getElementById('domino-consequence-3').innerText;
+
+      const opt1Cost = document.getElementById('opt1-cost').innerText;
+      const opt1Days = document.getElementById('opt1-days').innerText;
+      const opt1Roi = document.getElementById('opt1-roi').innerText;
+
+      const opt2Days = document.getElementById('opt2-days').innerText;
+      const opt3Days = document.getElementById('opt3-days').innerText;
+      const bestFitRecommendation = document.getElementById('tradeoff-best-fit-name').innerText;
+
+      const memoText = document.getElementById('board-memo-content').innerText.replace(/"/g, '""');
+
+      let csvContent = "\uFEFF";
+
+      if (currentLang === 'it') {
+        csvContent += "REPORT DI AUDIT E GOVERNANCE STRATEGICA;VALORE;NOTE\r\n";
+        csvContent += `Data Estrazione;${new Date().toLocaleDateString('it-IT')};Generato automaticamente da Strat-Gov Enterprise\r\n`;
+        csvContent += `Nome Programma / Iniziativa;"${projectName}";\r\n`;
+        csvContent += `Scenario di Riferimento;"${scenarioLabel}";\r\n`;
+        csvContent += `Budget Totale Stanziato (€);${budget};Fondo complessivo autorizzato\r\n`;
+        csvContent += `Durata Contrattuale Baseline (Mesi);${months};Pianificazione di progetto iniziale\r\n`;
+        csvContent += `Costo Medio Giornaliero Team (€);${dailyRate};Tariffa calcolata su giorni lavorativi\r\n`;
+        csvContent += "\r\n";
+        csvContent += "METRICHE CHIAVE DI DEVIAZIONE TEMPI E COSTI;VALORE;IMPATTO ECONOMICO\r\n";
+        csvContent += `Ritardo Cumulato Stimato;${delayDays};${delayWeeks}\r\n`;
+        csvContent += `Nuova Data Stimata di Rilascio;${finishDate};Deviazione rispetto alla milestone baseline\r\n`;
+        csvContent += `Costo Diretto Latenza (Team Fermo);"${directWaste}";${budgetWastePct}\r\n`;
+        csvContent += `Danno Economico Progetti a Valle (Effetto Domino);"${dominoCost}";Penali, canoni e mancate vendite\r\n`;
+        csvContent += `Esposizione Totale Aziendale;"${totalExposure}";Somma diretta + indotto a catena\r\n`;
+        csvContent += `Indice di Paralisi Decisionale;${paralysisScore};Stato: ${paralysisLabel} (Ponderazione: 30% Perimetro, 40% Approvazioni, 30% Stakeholder)\r\n`;
+        csvContent += "\r\n";
+        csvContent += "PARAMETRI DI ATTRITO ORGANIZZATIVO;CONFIGURAZIONE;LIVELLO DI RISCHIO\r\n";
+        csvContent += `Frequenza Modifiche Perimetro (Scope Creep);"${scopeText}";Fattore di rilavorazione\r\n`;
+        csvContent += `Tempo Medio Approvazione / Firma;"${approvalText}";Latenza decisionale\r\n`;
+        csvContent += `Entità con Diritto di Veto / Firma;"${stakeholderText}";Frammentazione stakeholder\r\n`;
+        csvContent += `Rigidità Milestone / Penali Normative;"${strictnessText}";Sensibilità a sforamenti\r\n`;
+        csvContent += "\r\n";
+        csvContent += "SCOMPOSIZIONE GIORNI DI RITARDO PER DIPARTIMENTO;GIORNI ATTRIBUITI;CRITICITÀ\r\n";
+        csvContent += `Ufficio Legale & Contratti;${legalDays};Validazione clausole e conformità\r\n`;
+        csvContent += `Direzione / Steering Committee;${mgmtDays};Allineamento priorità strategiche\r\n`;
+        csvContent += `IT & Architettura Tecnica;${itDays};Capacità realizzativa e dipendenze\r\n`;
+        csvContent += `Acquisti & Gestione Vendor;${procDays};Approvazione contratti e fornitori\r\n`;
+        csvContent += `Collo di Bottiglia Primario;"${topBottleneck}";Reparto prioritario di intervento\r\n`;
+        csvContent += "\r\n";
+        csvContent += "REGISTRO RISCHIO EFFETTO DOMINO (AUTO-DIMENSIONATO);STATO OPERATIVO;TOLLERANZA (GG);TARIFFA (€/GG);DANNO STIMATO (€);CONSEGUENZA\r\n";
+        csvContent += `"${d1Title}";${d1Status};+${d1Tol} gg;€ ${d1Rate};"${d1Loss}";"${d1Consequence}"\r\n`;
+        csvContent += `"${d2Title}";${d2Status};+${d2Tol} gg;€ ${d2Rate};"${d2Loss}";"${d2Consequence}"\r\n`;
+        csvContent += `"${d3Title}";${d3Status};+${d3Tol} gg;€ ${d3Rate};"${d3Loss}";"${d3Consequence}"\r\n`;
+        csvContent += "\r\n";
+        csvContent += "SCENARI DI RECUPERO E MITIGAZIONE;COSTO RICHIESTO;GIORNI RECUPERATI;BENEFICIO\r\n";
+        csvContent += `Raccomandazione Ottimale Algoritmica;"${bestFitRecommendation}";Diagnosi basata su collo di bottiglia\r\n`;
+        csvContent += `Opzione A: Fast-Tracking Budget;"${opt1Cost}";${opt1Days};ROI: ${opt1Roi}\r\n`;
+        csvContent += `Opzione B: De-Scoping Selettivo;€ 0;${opt2Days};Massima Efficienza\r\n`;
+        csvContent += `Opzione C: Protocollo Fast-Sign 48h;Policy Interna (€ 0);${opt3Days};Riduzione frizione -45%\r\n`;
+        csvContent += "\r\n";
+        csvContent += "SINTESI TESTUALE PER IL COMITATO DI DIREZIONE;;\r\n";
+        csvContent += `"${memoText}";;\r\n`;
+      } else {
+        csvContent += "STRATEGIC GOVERNANCE AUDIT REPORT;VALUE;NOTES\r\n";
+        csvContent += `Extraction Date;${new Date().toLocaleDateString('en-US')};Generated by Strat-Gov Enterprise\r\n`;
+        csvContent += `Program / Initiative Name;"${projectName}";\r\n`;
+        csvContent += `Active Scenario;"${scenarioLabel}";\r\n`;
+        csvContent += `Total Budget Allocated (€);${budget};Authorized program commitment\r\n`;
+        csvContent += `Contracted Baseline Duration (Months);${months};Baseline schedule timeline\r\n`;
+        csvContent += `Average Daily Burn Rate (€);${dailyRate};Calculated on business workdays\r\n`;
+        csvContent += "\r\n";
+        csvContent += "SCHEDULE & FINANCIAL DEVIATION METRICS;VALUE;FINANCIAL IMPACT\r\n";
+        csvContent += `Projected Cumulative Delay;${delayDays};${delayWeeks}\r\n`;
+        csvContent += `Recalculated Completion Date;${finishDate};Baseline milestone slip\r\n`;
+        csvContent += `Direct Decision Latency Cost;"${directWaste}";${budgetWastePct}\r\n`;
+        csvContent += `Downstream Collateral Domino Loss;"${dominoCost}";Penalties, idle licenses & lost pipeline\r\n`;
+        csvContent += `Total Enterprise Financial Exposure;"${totalExposure}";Direct carrying waste + downstream\r\n`;
+        csvContent += `Decision Paralysis Score;${paralysisScore};Status: ${paralysisLabel} (Weighting: 30% Scope, 40% Approvals, 30% Stakeholders)\r\n`;
+        csvContent += "\r\n";
+        csvContent += "ORGANIZATIONAL FRICTION LEVERS;CALIBRATION;RISK LEVEL\r\n";
+        csvContent += `Scope Creep Frequency;"${scopeText}";Rework volatility factor\r\n`;
+        csvContent += `Average Sign-off Cycle Time;"${approvalText}";Latency duration\r\n`;
+        csvContent += `Veto & Signature Authority Entities;"${stakeholderText}";Stakeholder fragmentation\r\n`;
+        csvContent += `Milestone Rigidity / Penalty Fines;"${strictnessText}";Slippage penalty exposure\r\n`;
+        csvContent += "\r\n";
+        csvContent += "DEPARTMENTAL DELAY ATTRIBUTION BREAKDOWN;DAYS ATTRIBUTED;OPERATIONAL FOCUS\r\n";
+        csvContent += `Legal & Compliance;${legalDays};Contractual sign-offs\r\n`;
+        csvContent += `Executive Steering Committee;${mgmtDays};Strategic priorities alignment\r\n`;
+        csvContent += `IT & Architecture;${itDays};Technical delivery throughput\r\n`;
+        csvContent += `Procurement & Vendors;${procDays};Vendor contracting SLA\r\n`;
+        csvContent += `Primary Bottleneck Entity;"${topBottleneck}";Target area for governance action\r\n`;
+        csvContent += "\r\n";
+        csvContent += "DOMINO EFFECT RISK LEDGER (AUTO-SCALED);STATUS;TOLERANCE (DAYS);DAILY RATE (€/D);INDUCED LOSS (€);CONSEQUENCE\r\n";
+        csvContent += `"${d1Title}";${d1Status};+${d1Tol} d;€ ${d1Rate};"${d1Loss}";"${d1Consequence}"\r\n`;
+        csvContent += `"${d2Title}";${d2Status};+${d2Tol} d;€ ${d2Rate};"${d2Loss}";"${d2Consequence}"\r\n`;
+        csvContent += `"${d3Title}";${d3Status};+${d3Tol} d;€ ${d3Rate};"${d3Loss}";"${d3Consequence}"\r\n`;
+        csvContent += "\r\n";
+        csvContent += "RECOVERY & CLAWBACK SCENARIOS;INVESTMENT REQUIRED;DAYS RECOVERED;BENEFIT\r\n";
+        csvContent += `Optimal Algorithmic Recommendation;"${bestFitRecommendation}";Based on primary bottleneck\r\n`;
+        csvContent += `Option A: Budget Fast-Tracking;"${opt1Cost}";${opt1Days};ROI: ${opt1Roi}\r\n`;
+        csvContent += `Option B: Selective De-Scoping;€ 0;${opt2Days};Maximum Efficiency\r\n`;
+        csvContent += `Option C: Fast-Sign 48h SLA Protocol;Internal Policy (€ 0);${opt3Days};Friction reduction -45%\r\n`;
+        csvContent += "\r\n";
+        csvContent += "EXECUTIVE STEERING COMMITTEE MEMO TEXT;;\r\n";
+        csvContent += `"${memoText}";;\r\n`;
+      }
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      const fileDate = new Date().toISOString().slice(0, 10);
+      link.setAttribute("download", `StratGov_Governance_Audit_Ledger_${fileDate}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast(currentLang === 'it' ? "Registro Excel/CSV scaricato con successo" : "Excel/CSV ledger downloaded successfully");
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initChart();
+
+      // Binding input del programma per auto-adattamento
+      document.getElementById('input-project-name').addEventListener('input', (e) => {
+        activateCustomScenario();
+        autoAdaptDominoSemantic(e.target.value);
+        runEngine();
+      });
+
+      document.getElementById('input-project-months').addEventListener('input', () => {
+        activateCustomScenario();
+        autoScaleDominoNumerics();
+        runEngine();
+      });
+
+      document.getElementById('input-daily-cost').addEventListener('input', () => {
+        activateCustomScenario();
+        autoScaleDominoNumerics();
+        runEngine();
+      });
+
+      document.getElementById('input-total-budget').addEventListener('input', () => {
+        activateCustomScenario();
+        runEngine();
+      });
+
+      // Binding slider
+      ['slider-scope-changes', 'slider-approval-days', 'slider-stakeholder-count', 'slider-strictness'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input', () => {
+            runEngine();
+          });
+        }
+      });
+
+      applyScenarioPreset(1);
+    });
+  </script>
+</body>
+</html>
