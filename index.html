@@ -68,7 +68,7 @@
             <span class="text-[10px] text-slate-400 font-medium" data-i18n="brand_subtitle">Enterprise Decision Suite</span>
           </div>
         </div>
-        <span class="text-[10px] font-mono text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">v4.5</span>
+        <span class="text-[10px] font-mono text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">v4.9</span>
       </div>
 
       <!-- Navigation Tabs -->
@@ -114,7 +114,7 @@
         </div>
         <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-md text-xs space-y-1">
           <span class="text-[10px] text-slate-400 block font-medium" data-i18n="nav_selected_initiative">Iniziativa selezionata:</span>
-          <strong id="sidebar-active-scen-name" class="text-slate-900 block truncate text-[11px]">Lancio Piattaforma Omnicanale 2026</strong>
+          <strong id="sidebar-active-scen-name" class="text-slate-900 block truncate text-[11px]">Lancio Piattaforma Omnicanale</strong>
           <button onclick="openScenarioCatalogModal()" class="text-blue-600 hover:underline text-[10px] font-semibold pt-1 block cursor-pointer" data-i18n="nav_browse_catalog">
             Sfoglia tutti i 30 Scenari &rarr;
           </button>
@@ -158,7 +158,7 @@
         <button onclick="openScenarioCatalogModal()" class="w-full max-w-md flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-500 transition cursor-pointer shadow-2xs group">
           <div class="flex items-center space-x-2 truncate">
             <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <span class="truncate font-medium text-slate-700" id="header-scen-current-text">Scenario: Lancio Piattaforma Omnicanale 2026</span>
+            <span class="truncate font-medium text-slate-700" id="header-scen-current-text">Scenario: Lancio Piattaforma Omnicanale</span>
           </div>
           <div class="flex items-center space-x-1.5 shrink-0 ml-2">
             <span class="text-[10px] bg-white border border-slate-200 rounded px-1.5 py-0.5 text-slate-400 font-mono">⌘K</span>
@@ -200,13 +200,13 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
           <div>
             <div class="flex items-center space-x-2">
-              <h1 class="text-lg font-bold text-slate-900 tracking-tight" id="dash-project-heading">Lancio Piattaforma Omnicanale 2026</h1>
+              <h1 class="text-lg font-bold text-slate-900 tracking-tight" id="dash-project-heading">Lancio Piattaforma Omnicanale</h1>
               <span id="dash-status-pill" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Sotto Controllo</span>
             </div>
             <p class="text-xs text-slate-500 mt-0.5" data-i18n="dash_subtitle">Sintesi esecutiva dell'esposizione economica e della velocità decisionale.</p>
           </div>
           <div class="text-right">
-            <span class="text-[11px] text-slate-500 font-mono" id="dash-finish-date-txt">Nuova Consegna Stimata: 15 Ottobre 2026</span>
+            <span class="text-[11px] text-slate-500 font-mono" id="dash-finish-date-txt">Nuova Consegna Stimata: Calcolo in corso...</span>
           </div>
         </div>
 
@@ -307,8 +307,8 @@
               </div>
               <input type="range" id="slider-strictness" min="1" max="3" step="1" value="2" class="w-full h-1.5 bg-slate-200 rounded cursor-pointer">
               <div class="flex justify-between text-[9px] text-slate-400">
-                <span data-i18n="slider_strict_min">Flessibile</span>
-                <span data-i18n="slider_strict_max">Penali per legge</span>
+                <span data-i18n="slider_strict_min">Flessibile (Buffer protetto)</span>
+                <span data-i18n="slider_strict_max">Penali per legge (Zero Float)</span>
               </div>
             </div>
 
@@ -553,12 +553,12 @@
             <table class="w-full text-left text-xs text-slate-700">
               <thead class="bg-slate-100/70 border-b border-slate-200 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                 <tr>
-                  <th class="py-3 px-3 w-20 text-center" data-i18n="th_id">ID</th>
+                  <th class="py-3 px-3 w-16 text-center" data-i18n="th_id">ID</th>
                   <th class="py-3 px-4 min-w-[260px]" data-i18n="th_initiative">Iniziativa Collegata</th>
-                  <th class="py-3 px-3 w-36" data-i18n="th_network_logic">Logica di Rete</th>
+                  <th class="py-3 px-3 w-40" data-i18n="th_network_logic">Logica di Rete</th>
                   <th class="py-3 px-3 w-28 text-right" data-i18n="th_buffer">Buffer</th>
                   <th class="py-3 px-3 w-32 text-right" data-i18n="th_penalty">Penale / Giorno</th>
-                  <th class="py-3 px-3 w-32 text-center" data-i18n="th_status">Stato</th>
+                  <th class="py-3 px-3 w-36 text-center" data-i18n="th_status">Stato</th>
                   <th class="py-3 px-3 w-32 text-right" data-i18n="th_loss">Danno Maturato</th>
                   <th class="py-3 px-2 w-10 text-center"></th>
                 </tr>
@@ -582,22 +582,113 @@
       </section>
 
       <!-- ==================================================================== -->
-      <!-- VIEW 3: MITIGAZIONE & MATRICE RACI CON LEGENDA ESPLICATIVA           -->
+      <!-- VIEW 3: MITIGAZIONE & MATRICE RACI                                  -->
       <!-- ==================================================================== -->
       <section id="view-raci" class="view-container space-y-5">
         
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
           <div>
             <h2 class="text-lg font-bold text-slate-900 tracking-tight" data-i18n="raci_view_title">Governance RACI & Scenari di Mitigazione</h2>
-            <p class="text-xs text-slate-500 mt-0.5" data-i18n="raci_view_sub">Mappatura chiara delle responsabilità decisionali (RACI) e comparatore delle 3 leve di rientro.</p>
+            <p class="text-xs text-slate-500 mt-0.5" data-i18n="raci_view_sub">Mappatura chiara delle responsabilità decisionali (RACI) e comparatore reattivo delle 3 leve di rientro.</p>
           </div>
 
           <!-- Active Mitigation Banner -->
-          <div id="raci-sim-banner" class="hidden items-center space-x-2 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded text-xs">
+          <div id="raci-sim-banner" class="hidden items-center space-x-2 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded text-xs shadow-2xs">
             <span class="font-bold text-emerald-800" id="raci-sim-title" data-i18n="raci_sim_active">Simulazione Attiva</span>
             <button onclick="revertMitigationSimulation()" class="bg-white border border-slate-300 text-slate-700 px-2 py-0.5 rounded hover:bg-slate-50 font-semibold cursor-pointer text-[10px]" data-i18n="btn_restore">
               Ripristina
             </button>
+          </div>
+        </div>
+
+        <!-- The 3 Actionable Levers Cards (Dynamically Scaled & Connected) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Lever 1: Fast-Tracking Budget -->
+          <div id="raci-card-1" class="border border-slate-200 rounded-lg p-4 bg-white shadow-2xs flex flex-col justify-between transition-all">
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="text-xs font-bold text-slate-900" id="raci-title-1" data-i18n="lever1_title">Opzione A: Fast-Tracking Budget</span>
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-800" data-i18n="lever1_tag">Extra-Capacità</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed" id="raci-desc-1">
+                Iniezione di contingency straordinaria per raddoppiare risorse esterne sul collo di bottiglia principale.
+              </p>
+              <div class="mt-2 text-[10px] text-slate-500 font-mono bg-slate-50 p-1.5 rounded border border-slate-100">
+                <strong>RACI Ownership:</strong> <span class="text-emerald-700 font-bold" id="raci-pill-a-1">A: Sponsor</span> &bull; <span class="text-amber-700 font-bold" id="raci-pill-r-1">R: PMO Lead</span>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
+              <div class="flex justify-between text-slate-500">
+                <span data-i18n="lbl_add_cost">Costo Aggiuntivo:</span>
+                <strong class="text-slate-900 font-mono-num font-bold" id="raci-cost-1">€ 32.000</strong>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span data-i18n="lbl_recovery">Recupero Stimato:</span>
+                <strong class="text-blue-700 font-mono-num font-bold" id="raci-days-1">-10 gg</strong>
+              </div>
+              <button id="raci-btn-1" onclick="toggleMitigationSimulation(1)" class="w-full mt-2 py-1.5 text-xs font-semibold rounded bg-slate-900 hover:bg-slate-800 text-white transition cursor-pointer" data-i18n="btn_sim_ft">
+                Simula Fast-Tracking
+              </button>
+            </div>
+          </div>
+
+          <!-- Lever 2: Selective De-Scoping -->
+          <div id="raci-card-2" class="border border-slate-200 rounded-lg p-4 bg-white shadow-2xs flex flex-col justify-between transition-all">
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="text-xs font-bold text-slate-900" id="raci-title-2" data-i18n="lever2_title">Opzione B: De-Scoping Selettivo</span>
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800" data-i18n="lever2_tag">Costo Zero</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed" id="raci-desc-2">
+                Rinvio delle funzionalità accessorie a Fase 2 per salvaguardare la scadenza contrattuale senza uscite di cassa.
+              </p>
+              <div class="mt-2 text-[10px] text-slate-500 font-mono bg-slate-50 p-1.5 rounded border border-slate-100">
+                <strong>RACI Ownership:</strong> <span class="text-emerald-700 font-bold" id="raci-pill-a-2">A: Product Owner</span> &bull; <span class="text-amber-700 font-bold" id="raci-pill-r-2">R: PMO Lead</span>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
+              <div class="flex justify-between text-slate-500">
+                <span data-i18n="lbl_add_cost">Costo Aggiuntivo:</span>
+                <strong class="text-emerald-700 font-mono-num font-bold" data-i18n="lbl_zero_cost">€ 0 (Zero Cost)</strong>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span data-i18n="lbl_recovery">Recupero Stimato:</span>
+                <strong class="text-emerald-700 font-mono-num font-bold" id="raci-days-2">-14 gg</strong>
+              </div>
+              <button id="raci-btn-2" onclick="toggleMitigationSimulation(2)" class="w-full mt-2 py-1.5 text-xs font-semibold rounded bg-emerald-700 hover:bg-emerald-800 text-white transition cursor-pointer" data-i18n="btn_sim_ds">
+                Simula De-Scoping
+              </button>
+            </div>
+          </div>
+
+          <!-- Lever 3: Fast-Sign 48h Protocol -->
+          <div id="raci-card-3" class="border border-slate-200 rounded-lg p-4 bg-white shadow-2xs flex flex-col justify-between transition-all">
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <span class="text-xs font-bold text-slate-900" id="raci-title-3" data-i18n="lever3_title">Opzione C: Fast-Sign 48h</span>
+                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800" data-i18n="lever3_tag">Governance</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed" id="raci-desc-3">
+                Silenzio-assenso formale a 48 ore e riduzione dei firmatari autorizzati per sbloccare la catena di approvazione.
+              </p>
+              <div class="mt-2 text-[10px] text-slate-500 font-mono bg-slate-50 p-1.5 rounded border border-slate-100">
+                <strong>RACI Ownership:</strong> <span class="text-emerald-700 font-bold" id="raci-pill-a-3">A: CEO / DG</span> &bull; <span class="text-amber-700 font-bold" id="raci-pill-r-3">R: Legal & Procurement</span>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
+              <div class="flex justify-between text-slate-500">
+                <span data-i18n="lbl_add_cost">Costo Aggiuntivo:</span>
+                <strong class="text-purple-700 font-mono-num font-bold" data-i18n="lbl_policy_cost">Policy Interna (€ 0)</strong>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span data-i18n="lbl_recovery">Recupero Stimato:</span>
+                <strong class="text-purple-700 font-mono-num font-bold" id="raci-days-3">-9 gg</strong>
+              </div>
+              <button id="raci-btn-3" onclick="toggleMitigationSimulation(3)" class="w-full mt-2 py-1.5 text-xs font-semibold rounded bg-purple-700 hover:bg-purple-800 text-white transition cursor-pointer" data-i18n="btn_sim_fs">
+                Simula Fast-Sign
+              </button>
+            </div>
           </div>
         </div>
 
@@ -662,198 +753,52 @@
           </div>
         </div>
 
-        <!-- Interactive RACI Governance Matrix Table with Full Role Badges -->
+        <!-- Dynamic RACI Governance Matrix Table -->
         <div class="bg-white rounded-lg border border-slate-200 shadow-2xs overflow-hidden">
-          <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
-            <span class="text-xs font-bold text-slate-800 uppercase tracking-wider" data-i18n="raci_tbl_title">Matrice Responsabilità Decisionale di Governance</span>
-            <span class="text-[10px] text-slate-500 font-mono" data-i18n="raci_tbl_hint">Passa con il mouse sui badge per i dettagli</span>
+          <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div>
+              <span class="text-xs font-bold text-slate-800 uppercase tracking-wider block" data-i18n="raci_tbl_title">Matrice Responsabilità Decisionale di Governance</span>
+              <span class="text-[10px] text-slate-500 font-mono" data-i18n="raci_tbl_hint">Clicca sui badge dei ruoli per alternare (A &bull; R &bull; C &bull; I &bull; -); clicca sul testo per rinominare</span>
+            </div>
+            <span id="raci-scopes-counter" class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200/80 text-slate-700 font-semibold">
+              3 ambiti decisionali
+            </span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">
-              <thead class="bg-slate-100 text-[10px] font-semibold text-slate-500 uppercase">
+              <thead class="bg-slate-100 text-[10px] font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">
                 <tr>
-                  <th class="py-2.5 px-3" data-i18n="raci_th_domain">Ambito Decisionale</th>
-                  <th class="py-2.5 px-3 text-center" data-i18n="raci_th_board">Board / CEO</th>
-                  <th class="py-2.5 px-3 text-center" data-i18n="raci_th_sponsor">Program Sponsor</th>
-                  <th class="py-2.5 px-3 text-center" data-i18n="raci_th_pmo">PMO Lead</th>
-                  <th class="py-2.5 px-3 text-center" data-i18n="raci_th_po">Product Owner</th>
-                  <th class="py-2.5 px-3 text-center" data-i18n="raci_th_legal">Legal / Compliance</th>
-                  <th class="py-2.5 px-3 text-center" data-i18n="raci_th_proc">Procurement</th>
+                  <th class="py-2.5 px-3 min-w-[280px]" data-i18n="raci_th_domain">Ambito Decisionale</th>
+                  <th class="py-2.5 px-2 text-center w-28" data-i18n="raci_th_board">Board / CEO</th>
+                  <th class="py-2.5 px-2 text-center w-28" data-i18n="raci_th_sponsor">Program Sponsor</th>
+                  <th class="py-2.5 px-2 text-center w-28" data-i18n="raci_th_pmo">PMO Lead</th>
+                  <th class="py-2.5 px-2 text-center w-28" data-i18n="raci_th_po">Product Owner</th>
+                  <th class="py-2.5 px-2 text-center w-28" data-i18n="raci_th_legal">Legal / Compliance</th>
+                  <th class="py-2.5 px-2 text-center w-28" data-i18n="raci_th_proc">Procurement</th>
+                  <th class="py-2.5 px-2 text-center w-10"></th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-200 font-mono text-[11px]">
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-3 font-sans font-semibold text-slate-800">
-                    <span data-i18n="raci_row1_title">Delibera De-Scoping Perimetro (Release 2)</span>
-                    <span class="block text-[10px] text-slate-400 font-sans font-normal" data-i18n="raci_row1_sub">Congelamento feature accessorie per proteggere la data</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold" title="Informed">I &bull; Info</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold" title="Consulted">C &bull; Consult</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold" title="Responsible">R &bull; Resp</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-300" title="Accountable">A &bull; Accountable</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold" title="Consulted">C &bull; Consult</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700" title="Informed">I &bull; Info</span>
-                  </td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-3 font-sans font-semibold text-slate-800">
-                    <span data-i18n="raci_row2_title">Iniezione Budget Extra (Fast-Tracking)</span>
-                    <span class="block text-[10px] text-slate-400 font-sans font-normal" data-i18n="raci_row2_sub">Approvazione contingency per risorse esterne aggiuntive</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold" title="Consulted">C &bull; Consult</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-300" title="Accountable">A &bull; Accountable</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold" title="Responsible">R &bull; Resp</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold" title="Consulted">C &bull; Consult</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700" title="Informed">I &bull; Info</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold" title="Responsible">R &bull; Resp</span>
-                  </td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-3 font-sans font-semibold text-slate-800">
-                    <span data-i18n="raci_row3_title">Attivazione Protocollo Fast-Sign 48h</span>
-                    <span class="block text-[10px] text-slate-400 font-sans font-normal" data-i18n="raci_row3_sub">Silenzio-assenso formale e delega a firma unica</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-300" title="Accountable">A &bull; Accountable</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold" title="Consulted">C &bull; Consult</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold" title="Responsible">R &bull; Resp</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700" title="Informed">I &bull; Info</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold" title="Responsible">R &bull; Resp</span>
-                  </td>
-                  <td class="py-3 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700" title="Informed">I &bull; Info</span>
-                  </td>
-                </tr>
+              <tbody id="raci-table-body" class="divide-y divide-slate-200 font-mono text-[11px]">
+                <!-- Dynamically rendered by renderRACIMatrix() -->
               </tbody>
             </table>
           </div>
-        </div>
 
-        <!-- The 3 Actionable Levers Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <!-- Lever 1 -->
-          <div id="raci-card-1" class="border border-slate-200 rounded-lg p-4 bg-white shadow-2xs flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-1.5">
-                <span class="text-xs font-bold text-slate-900" data-i18n="lever1_title">Opzione A: Fast-Tracking Budget</span>
-                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-800" data-i18n="lever1_tag">Extra-Capacità</span>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed" id="raci-desc-1" data-i18n="lever1_desc">
-                Iniezione di contingency straordinaria per raddoppiare risorse esterne sul collo di bottiglia principale.
-              </p>
-              <div class="mt-2 text-[10px] text-slate-500 font-mono">
-                <strong>RACI:</strong> <span class="text-emerald-700 font-bold" data-i18n="lever1_a">A: Sponsor</span> &bull; <span class="text-amber-700 font-bold" data-i18n="lever1_r">R: PMO/Vendor</span>
-              </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
-              <div class="flex justify-between text-slate-500">
-                <span data-i18n="lbl_add_cost">Costo Aggiuntivo:</span>
-                <strong class="text-slate-900 font-mono-num" id="raci-cost-1">€ 32.000</strong>
-              </div>
-              <div class="flex justify-between text-slate-500">
-                <span data-i18n="lbl_recovery">Recupero Stimato:</span>
-                <strong class="text-emerald-700 font-mono-num" id="raci-days-1">-10 gg</strong>
-              </div>
-              <button id="raci-btn-1" onclick="toggleMitigationSimulation(1)" class="w-full mt-2 py-1.5 text-xs font-semibold rounded bg-slate-900 hover:bg-slate-800 text-white transition cursor-pointer" data-i18n="btn_sim_ft">
-                Simula Fast-Tracking
-              </button>
-            </div>
-          </div>
-
-          <!-- Lever 2 -->
-          <div id="raci-card-2" class="border border-slate-200 rounded-lg p-4 bg-white shadow-2xs flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-1.5">
-                <span class="text-xs font-bold text-slate-900" data-i18n="lever2_title">Opzione B: De-Scoping Selettivo</span>
-                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800" data-i18n="lever2_tag">Costo Zero</span>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed" id="raci-desc-2" data-i18n="lever2_desc">
-                Rinvio delle funzionalità accessorie a Fase 2 per salvaguardare la scadenza contrattuale senza uscite di cassa.
-              </p>
-              <div class="mt-2 text-[10px] text-slate-500 font-mono">
-                <strong>RACI:</strong> <span class="text-emerald-700 font-bold" data-i18n="lever2_a">A: Product Owner</span> &bull; <span class="text-amber-700 font-bold" data-i18n="lever2_r">R: PMO Lead</span>
-              </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
-              <div class="flex justify-between text-slate-500">
-                <span data-i18n="lbl_add_cost">Costo Aggiuntivo:</span>
-                <strong class="text-emerald-700 font-mono-num" data-i18n="lbl_zero_cost">€ 0 (Zero Cost)</strong>
-              </div>
-              <div class="flex justify-between text-slate-500">
-                <span data-i18n="lbl_recovery">Recupero Stimato:</span>
-                <strong class="text-emerald-700 font-mono-num" id="raci-days-2">-14 gg</strong>
-              </div>
-              <button id="raci-btn-2" onclick="toggleMitigationSimulation(2)" class="w-full mt-2 py-1.5 text-xs font-semibold rounded bg-emerald-700 hover:bg-emerald-800 text-white transition cursor-pointer" data-i18n="btn_sim_ds">
-                Simula De-Scoping
-              </button>
-            </div>
-          </div>
-
-          <!-- Lever 3 -->
-          <div id="raci-card-3" class="border border-slate-200 rounded-lg p-4 bg-white shadow-2xs flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-1.5">
-                <span class="text-xs font-bold text-slate-900" data-i18n="lever3_title">Opzione C: Fast-Sign 48h</span>
-                <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800" data-i18n="lever3_tag">Governance</span>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed" id="raci-desc-3" data-i18n="lever3_desc">
-                Silenzio-assenso formale a 48 ore e riduzione dei firmatari autorizzati per sbloccare la catena di approvazione.
-              </p>
-              <div class="mt-2 text-[10px] text-slate-500 font-mono">
-                <strong>RACI:</strong> <span class="text-emerald-700 font-bold" data-i18n="lever3_a">A: CEO / DG</span> &bull; <span class="text-amber-700 font-bold" data-i18n="lever3_r">R: Legal & Procurement</span>
-              </div>
-            </div>
-            <div class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
-              <div class="flex justify-between text-slate-500">
-                <span data-i18n="lbl_add_cost">Costo Aggiuntivo:</span>
-                <strong class="text-slate-900 font-mono-num" data-i18n="lbl_policy_cost">Policy Interna (€ 0)</strong>
-              </div>
-              <div class="flex justify-between text-slate-500">
-                <span data-i18n="lbl_recovery">Recupero Stimato:</span>
-                <strong class="text-purple-700 font-mono-num" id="raci-days-3">-9 gg</strong>
-              </div>
-              <button id="raci-btn-3" onclick="toggleMitigationSimulation(3)" class="w-full mt-2 py-1.5 text-xs font-semibold rounded bg-purple-700 hover:bg-purple-800 text-white transition cursor-pointer" data-i18n="btn_sim_fs">
-                Simula Fast-Sign
-              </button>
-            </div>
+          <!-- Bottom Action Bar to Add New Custom Decision Scopes -->
+          <div class="p-3 border-t border-slate-200 bg-slate-50/70 flex items-center justify-between">
+            <span class="text-[11px] text-slate-500 italic" data-i18n="raci_add_prompt">Vuoi codificare un'altra delibera formale con i relativi ruoli di governance?</span>
+            <button onclick="addNewCustomRACIScope()" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition cursor-pointer shadow-xs">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span data-i18n="btn_add_raci">+ Aggiungi Ambito Decisionale</span>
+            </button>
           </div>
         </div>
 
       </section>
 
       <!-- ==================================================================== -->
-      <!-- VIEW 4: DOSSIER ESECUTIVO PER IL BOARD (COMPLETAMENTE MODIFICABILE)  -->
+      <!-- VIEW 4: DOSSIER ESECUTIVO PER IL BOARD                              -->
       <!-- ==================================================================== -->
       <section id="view-dossier" class="view-container space-y-5">
         
@@ -885,7 +830,7 @@
           <div class="lg:col-span-8 bg-white border border-slate-200 rounded-lg p-6 shadow-2xs font-mono text-xs text-slate-800 leading-relaxed space-y-4">
             <div class="border-b border-slate-200 pb-3 flex justify-between items-center text-[11px] text-slate-500">
               <span class="font-bold text-slate-900" data-i18n="memo_header_tag">MEMORANDUM DI GOVERNANCE STRATEGICA — STEERING COMMITTEE</span>
-              <span id="memo-live-date">Data: 22 Settembre 2026</span>
+              <span id="memo-live-date">Data: Calcolo...</span>
             </div>
 
             <div class="text-[10px] text-blue-600 bg-blue-50/50 p-2 rounded border border-blue-100 flex items-center justify-between no-print">
@@ -904,7 +849,7 @@
               <span class="text-xs font-bold text-slate-900 uppercase tracking-wide block" data-i18n="board_res_title">Verbale & Delibera del Board</span>
               <p class="text-[11px] text-slate-500" data-i18n="board_res_sub">Inserisci le decisioni ufficiali o le raccomandazioni approvate dal Consiglio.</p>
               
-              <textarea id="board-notes-area" rows="6" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-600 font-sans leading-relaxed" placeholder="Es: Il Consiglio di Amministrazione delibera l'approvazione immediata dell'Opzione B (De-Scoping del 15%) conferendo delega al Product Owner per il congelamento della baseline..." data-i18n-placeholder="board_notes_placeholder"></textarea>
+              <textarea id="board-notes-area" rows="6" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-600 font-sans leading-relaxed" placeholder="Es: Il Consiglio di Amministrazione delibera l'approvazione immediata dell'Opzione B (De-Scoping) conferendo delega al Product Owner per il congelamento della baseline..." data-i18n-placeholder="board_notes_placeholder"></textarea>
               
               <div class="pt-2 border-t border-slate-100 space-y-2 text-xs">
                 <label class="flex items-center space-x-2 text-slate-700 cursor-pointer">
@@ -1118,7 +1063,7 @@
       <form onsubmit="applyCustomScenarioForm(event)" class="p-5 space-y-4 text-xs">
         <div>
           <label class="block font-semibold text-slate-700 mb-1" data-i18n="custom_lbl_name">Nome Programma / Iniziativa</label>
-          <input type="text" id="custom-form-name" required value="Trasformazione Digitale & Cloud 2026" class="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-900 font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none">
+          <input type="text" id="custom-form-name" required value="Trasformazione Digitale & Cloud" class="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-900 font-medium focus:ring-2 focus:ring-blue-600 focus:outline-none">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
@@ -1173,12 +1118,11 @@
     let currentActiveView = 'dashboard';
     let activeScenarioId = 1;
     let activeMitigationIndex = 0;
-    let nextDepCounter = 104;
 
     let paralysisDonutInstance = null;
     let bottleneckBarInstance = null;
 
-    // COMPREHENSIVE BILINGUAL TRANSLATION DICTIONARY (IT / EN) COVERING ALL PAGES
+    // COMPREHENSIVE BILINGUAL TRANSLATION DICTIONARY (IT / EN) COVERING ALL VIEWS
     const i18nDictionary = {
       it: {
         brand_subtitle: "Enterprise Decision Suite",
@@ -1220,8 +1164,8 @@
         slider_stake_min: "1-2 (Snello)",
         slider_stake_max: "8 (Matrice complessa)",
         slider_strict_lbl: "Rigidità milestone contrattuali",
-        slider_strict_min: "Flessibile",
-        slider_strict_max: "Penali per legge",
+        slider_strict_min: "Flessibile (Buffer protetto)",
+        slider_strict_max: "Penali per legge (Zero Float)",
         slider_hint: "Sposta i cursori per simulare l'impatto economico immediato",
         slider_more_bench: "Approfondisci Benchmark Settori →",
         paralysis_title: "Indice di Paralisi Decisionale",
@@ -1266,7 +1210,7 @@
 
         // RACI View Translations
         raci_view_title: "Governance RACI & Scenari di Mitigazione",
-        raci_view_sub: "Mappatura chiara delle responsabilità decisionali (RACI) e comparatore delle 3 leve di rientro.",
+        raci_view_sub: "Mappatura chiara delle responsabilità decisionali (RACI) e comparatore reattivo delle 3 leve di rientro.",
         raci_sim_active: "Simulazione Attiva",
         btn_restore: "Ripristina",
         raci_legend_title: "Legenda & Significato delle Lettere della Matrice RACI",
@@ -1280,7 +1224,7 @@
         raci_i_role: "Notifica Unidirezionale a Valle",
         raci_i_desc: "Stakeholder che vengono tempestivamente informati a decisione avvenuta per conoscenza, senza diritto di veto.",
         raci_tbl_title: "Matrice Responsabilità Decisionale di Governance",
-        raci_tbl_hint: "Passa con il mouse sui badge per i dettagli",
+        raci_tbl_hint: "Clicca sui badge dei ruoli per alternare (A • R • C • I • -); clicca sul testo per rinominare",
         raci_th_domain: "Ambito Decisionale",
         raci_th_board: "Board / CEO",
         raci_th_sponsor: "Program Sponsor",
@@ -1288,32 +1232,19 @@
         raci_th_po: "Product Owner",
         raci_th_legal: "Legal / Compliance",
         raci_th_proc: "Procurement",
-        raci_row1_title: "Delibera De-Scoping Perimetro (Release 2)",
-        raci_row1_sub: "Congelamento feature accessorie per proteggere la data",
-        raci_row2_title: "Iniezione Budget Extra (Fast-Tracking)",
-        raci_row2_sub: "Approvazione contingency per risorse esterne aggiuntive",
-        raci_row3_title: "Attivazione Protocollo Fast-Sign 48h",
-        raci_row3_sub: "Silenzio-assenso formale e delega a firma unica",
+        raci_add_prompt: "Vuoi codificare un'altra delibera formale con i relativi ruoli di governance?",
+        btn_add_raci: "+ Aggiungi Ambito Decisionale",
 
         lever1_title: "Opzione A: Fast-Tracking Budget",
         lever1_tag: "Extra-Capacità",
-        lever1_desc: "Iniezione di contingency straordinaria per raddoppiare risorse esterne sul collo di bottiglia principale.",
-        lever1_a: "A: Sponsor",
-        lever1_r: "R: PMO/Vendor",
         btn_sim_ft: "Simula Fast-Tracking",
 
         lever2_title: "Opzione B: De-Scoping Selettivo",
         lever2_tag: "Costo Zero",
-        lever2_desc: "Rinvio delle funzionalità accessorie a Fase 2 per salvaguardare la scadenza contrattuale senza uscite di cassa.",
-        lever2_a: "A: Product Owner",
-        lever2_r: "R: PMO Lead",
         btn_sim_ds: "Simula De-Scoping",
 
         lever3_title: "Opzione C: Fast-Sign 48h",
         lever3_tag: "Governance",
-        lever3_desc: "Silenzio-assenso formale a 48 ore e riduzione dei firmatari autorizzati per sbloccare la catena di approvazione.",
-        lever3_a: "A: CEO / DG",
-        lever3_r: "R: Legal & Procurement",
         btn_sim_fs: "Simula Fast-Sign",
 
         lbl_add_cost: "Costo Aggiuntivo:",
@@ -1331,7 +1262,7 @@
         memo_edit_hint: "✏️ Editor Diretto: Clicca nel riquadro sottostante per riscrivere numeri, aggiungere note legali o personalizzare le raccomandazioni.",
         board_res_title: "Verbale & Delibera del Board",
         board_res_sub: "Inserisci le decisioni ufficiali o le raccomandazioni approvate dal Consiglio.",
-        board_notes_placeholder: "Es: Il Consiglio di Amministrazione delibera l'approvazione immediata dell'Opzione B (De-Scoping del 15%) conferendo delega al Product Owner per il congelamento della baseline...",
+        board_notes_placeholder: "Es: Il Consiglio di Amministrazione delibera l'approvazione immediata dell'Opzione B (De-Scoping) conferendo delega al Product Owner per il congelamento della baseline...",
         chk_ceo_sign: "Firma Esecutiva Amministratore Delegato (Approvato)",
         chk_legal_sign: "Audit di Conformità Legale e Finanziaria validato",
         btn_append_res: "Includi Verbale nel Memorandum",
@@ -1424,8 +1355,8 @@
         slider_stake_min: "1-2 (Lean)",
         slider_stake_max: "8 (Complex matrix)",
         slider_strict_lbl: "Contractual milestone rigidity",
-        slider_strict_min: "Flexible",
-        slider_strict_max: "Statutory penalties",
+        slider_strict_min: "Flexible (Protected buffer)",
+        slider_strict_max: "Statutory penalties (Zero Float)",
         slider_hint: "Move sliders to simulate real-time financial impact",
         slider_more_bench: "Deep Sector Benchmark →",
         paralysis_title: "Decision Paralysis Index",
@@ -1470,7 +1401,7 @@
 
         // RACI View Translations
         raci_view_title: "RACI Governance & Mitigation Scenarios",
-        raci_view_sub: "Transparent decision-making responsibilities (RACI) and side-by-side comparison of 3 recovery levers.",
+        raci_view_sub: "Transparent decision-making responsibilities (RACI) and dynamic comparison of 3 recovery levers.",
         raci_sim_active: "Active Simulation",
         btn_restore: "Reset",
         raci_legend_title: "Legend & RACI Governance Matrix Role Definitions",
@@ -1484,7 +1415,7 @@
         raci_i_role: "One-Way Downstream Notification",
         raci_i_desc: "Stakeholders kept formally updated on decisions and milestones without veto authority or prior review obligations.",
         raci_tbl_title: "Governance Decision Responsibility Matrix",
-        raci_tbl_hint: "Hover over role badges for descriptive details",
+        raci_tbl_hint: "Click role badges to cycle (A • R • C • I • -); click text to edit scope inline",
         raci_th_domain: "Decision Scope",
         raci_th_board: "Board / CEO",
         raci_th_sponsor: "Program Sponsor",
@@ -1492,32 +1423,19 @@
         raci_th_po: "Product Owner",
         raci_th_legal: "Legal / Compliance",
         raci_th_proc: "Procurement",
-        raci_row1_title: "Scope De-Scoping Resolution (Release 2)",
-        raci_row1_sub: "Freezing non-core deliverables to protect the critical baseline launch date",
-        raci_row2_title: "Extra Budget Injection (Fast-Tracking)",
-        raci_row2_sub: "Contingency reserve authorization for specialized external vendor doubling",
-        raci_row3_title: "48h Fast-Sign Protocol Activation",
-        raci_row3_sub: "Mandatory silent-assent policy and single-signature delegation protocol",
+        raci_add_prompt: "Want to codify another formal resolution with governance role allocations?",
+        btn_add_raci: "+ Add Decision Scope",
 
         lever1_title: "Option A: Budget Fast-Tracking",
         lever1_tag: "Extra-Capacity",
-        lever1_desc: "Extraordinary contingency allocation to double vendor bandwidth on the critical constraint node.",
-        lever1_a: "A: Sponsor",
-        lever1_r: "R: PMO/Vendor",
         btn_sim_ft: "Simulate Fast-Tracking",
 
         lever2_title: "Option B: Selective De-Scoping",
         lever2_tag: "Zero-Cost",
-        lever2_desc: "Postpone secondary functional features to Phase 2 to secure contractual launch without cash drain.",
-        lever2_a: "A: Product Owner",
-        lever2_r: "R: PMO Lead",
         btn_sim_ds: "Simulate De-Scoping",
 
         lever3_title: "Option C: 48h Fast-Sign Protocol",
         lever3_tag: "Governance",
-        lever3_desc: "48-hour silent-assent protocol and veto compression to eliminate multi-layered authorization gridlock.",
-        lever3_a: "A: CEO / MD",
-        lever3_r: "R: Legal & Procurement",
         btn_sim_fs: "Simulate Fast-Sign",
 
         lbl_add_cost: "Extra Cost:",
@@ -1535,7 +1453,7 @@
         memo_edit_hint: "✏️ Direct Editor: Click inside the box below to modify figures, insert corporate notes or adjust recovery recommendations.",
         board_res_title: "Board Minutes & Formal Resolution",
         board_res_sub: "Enter official Board directives or ratified Steering Committee resolutions.",
-        board_notes_placeholder: "E.g.: The Board of Directors officially ratifies Option B (15% Selective De-Scoping), delegating authority to the Product Owner to freeze baseline deliverables...",
+        board_notes_placeholder: "E.g.: The Board of Directors officially ratifies Option B (Selective De-Scoping), delegating authority to the Product Owner to freeze baseline deliverables...",
         chk_ceo_sign: "Chief Executive Officer / Managing Director Sign-off (Approved)",
         chk_legal_sign: "Legal & Regulatory Compliance Clearance Validated",
         btn_append_res: "Append Resolution into Memorandum",
@@ -1570,7 +1488,7 @@
         btn_consult_raci: "Explore RACI Mitigation Playbook →",
 
         // Modals Translations
-        modal_catalog_title: "Enterprise Strategic Scenarios Catalog (30 Scenarios)",
+        modal_catalog_title: "Enterprise Strategic Scenarios Catalog (30 Scenari)",
         modal_catalog_search_ph: "Search scenario by name or industry (e.g., Cloud, SAP, ESG, DORA, Supply, AI, Pharma, 5G)...",
         cat_all: "All (30)",
         modal_catalog_not_found: "Can't find a suitable scenario?",
@@ -1606,13 +1524,6 @@
         }
       });
 
-      document.querySelectorAll('[data-i18n-title]').forEach(el => {
-        const key = el.getAttribute('data-i18n-title');
-        if (dict[key]) {
-          el.title = dict[key];
-        }
-      });
-
       document.documentElement.lang = lang;
     }
 
@@ -1632,7 +1543,6 @@
         showToast("Language set: English");
       }
 
-      // Update Chart labels based on active language
       if (bottleneckBarInstance) {
         bottleneckBarInstance.data.labels = (lang === 'en')
           ? ['Legal & Compl.', 'C-Level / Exec', 'IT & Archit.', 'Procurement']
@@ -1642,20 +1552,21 @@
 
       const activeScen = enterpriseCatalog.find(s => s.id === activeScenarioId) || enterpriseCatalog[0];
       const activeName = (lang === 'en' && activeScen.name_en) ? activeScen.name_en : activeScen.name_it;
-      document.getElementById('header-scen-current-text').innerText = (lang === 'en' ? `Scenario: ${activeName}` : `Scenario: ${activeName}`);
+      document.getElementById('header-scen-current-text').innerText = `Scenario: ${activeName}`;
       document.getElementById('sidebar-active-scen-name').innerText = activeName;
       document.getElementById('dash-project-heading').innerText = activeName;
 
+      renderRACIMatrix();
       runEngine();
     }
 
-    // 30 DIVERSE REAL-WORLD ENTERPRISE SCENARIOS WITH EN & IT LOCALIZATION
+    // 30 PRE-CONFIGURED ENTERPRISE SCENARIOS
     const enterpriseCatalog = [
       {
         id: 1,
         category: "Operations & Supply",
-        name_it: "Lancio Piattaforma Omnicanale 2026",
-        name_en: "Omnichannel Platform Launch 2026",
+        name_it: "Lancio Piattaforma Omnicanale",
+        name_en: "Omnichannel Platform Launch",
         desc_it: "Integrazione canali e-commerce B2C, app mobile e rete di negozi fisici.",
         desc_en: "Integration of B2C e-commerce, mobile application, and retail physical store network.",
         budget: 1200000,
@@ -1820,350 +1731,313 @@
           { title_it: "Accordo Distribuzione Farmacie Ospedaliere", title_en: "Hospital Distribution Supply Agreement", tolDays: 23, lossPerDay: 8400, isCpm: true },
           { title_it: "Stampa Packaging Conforme Nuova Direttiva", title_en: "MDR Compliant Packaging & Labeling Run", tolDays: 33, lossPerDay: 3900, isCpm: false }
         ]
-      },
-      {
-        id: 11,
-        category: "Finance & Banking",
-        name_it: "Ristrutturazione & Digitalizzazione Filiali",
-        name_en: "Retail Branch Network Digital Modernization",
-        desc_it: "Riconversione sportelli fisici in hub di consulenza patrimoniale.",
-        desc_en: "Conversion of physical branches into digital wealth advisory hubs.",
-        budget: 2100000,
-        months: 8,
-        dailyCost: 4600,
-        weights: [0.25, 0.35, 0.20, 0.20],
-        domino: [
-          { title_it: "Accordo Sindacale su Mobilità Territoriale", title_en: "Workforce Mobility Trade Union Agreement", tolDays: 12, lossPerDay: 5200, isCpm: true },
-          { title_it: "Installazione ATM Evoluti & Casse Self", title_en: "Smart ATM & Self-Service Kiosks Rollout", tolDays: 20, lossPerDay: 4700, isCpm: true },
-          { title_it: "Disdetta Contratti di Affitto Locali", title_en: "Real Estate Branch Lease Termination", tolDays: 30, lossPerDay: 3100, isCpm: false }
-        ]
-      },
-      {
-        id: 12,
-        category: "Operations & Supply",
-        name_it: "Fabbrica 4.0 & Automazione Robotica Linee",
-        name_en: "Industry 4.0 Robotic Line Automation",
-        desc_it: "Installazione isole robotizzate e telemetria predittiva IoT.",
-        desc_en: "Automated robotic workcell deployment and predictive IoT telemetry.",
-        budget: 2800000,
-        months: 10,
-        dailyCost: 5900,
-        weights: [0.15, 0.25, 0.35, 0.25],
-        domino: [
-          { title_it: "Fermo Linea Programmato per Collaudo", title_en: "Scheduled Plant Downtime & Tooling Commissioning", tolDays: 10, lossPerDay: 7500, isCpm: true },
-          { title_it: "Collaudo Sicurezza Direttiva Macchine", title_en: "Machinery Safety Directive Certification", tolDays: 18, lossPerDay: 6200, isCpm: true },
-          { title_it: "Riconversione Competenze Operai di Turno", title_en: "Line Operator Automation Upskilling", tolDays: 28, lossPerDay: 3400, isCpm: false }
-        ]
-      },
-      {
-        id: 13,
-        category: "Operations & Supply",
-        name_it: "Nuovo Modello Organizzativo & Smart HR",
-        name_en: "Agile People Operating Model & HR Digital Suite",
-        desc_it: "Nuova contrattazione di secondo livello e piattaforma People.",
-        desc_en: "Corporate second-level collective bargaining and People platform rollout.",
-        budget: 520000,
-        months: 4,
-        dailyCost: 2200,
-        weights: [0.40, 0.35, 0.15, 0.10],
-        domino: [
-          { title_it: "Firma Accordo Quadro con RSU Aziendali", title_en: "Works Council Framework Agreement Signing", tolDays: 8, lossPerDay: 2600, isCpm: true },
-          { title_it: "Attivazione Portale Welfare Dipendenti", title_en: "Employee Welfare Portal Launch", tolDays: 15, lossPerDay: 2900, isCpm: true },
-          { title_it: "Rimodulazione Spazi Desk Condivisi", title_en: "Hot-Desking Office Architecture Reconfiguration", tolDays: 24, lossPerDay: 1800, isCpm: false }
-        ]
-      },
-      {
-        id: 14,
-        category: "Operations & Supply",
-        name_it: "Nuovo Polo Logistico Intermodale",
-        name_en: "Intermodal Freight Logistics Hub Hub Construction",
-        desc_it: "Costruzione piattaforma merci con raccordo ferroviario e dogana.",
-        desc_en: "Rail freight interchange platform and bonded customs warehouse.",
-        budget: 5500000,
-        months: 16,
-        dailyCost: 9200,
-        weights: [0.35, 0.25, 0.15, 0.25],
-        domino: [
-          { title_it: "Permesso di Agibilità Doganale", title_en: "Bonded Customs Zone Operating License", tolDays: 16, lossPerDay: 9800, isCpm: true },
-          { title_it: "Attivazione Fornitura Alta Tensione", title_en: "High-Voltage Grid Interconnection", tolDays: 25, lossPerDay: 8700, isCpm: true },
-          { title_it: "Assegnazione Spazi Spedizionieri Terzi", title_en: "3PL Freight Forwarder Bay Allocations", tolDays: 36, lossPerDay: 5200, isCpm: false }
-        ]
-      },
-      {
-        id: 15,
-        category: "Compliance & ESG",
-        name_it: "Transizione Flotta Elettrica Aziendale",
-        name_en: "Corporate Electric Vehicle Fleet Electrification",
-        desc_it: "Sostituzione di 600 veicoli termici e installazione colonnine.",
-        desc_en: "Replacement of 600 combustion vehicles and fast-charging grid setup.",
-        budget: 1650000,
-        months: 7,
-        dailyCost: 3900,
-        weights: [0.25, 0.30, 0.15, 0.30],
-        domino: [
-          { title_it: "Accordo Leasing a Lungo Termine Flotta", title_en: "Master EV Fleet Long-Term Leasing Agreement", tolDays: 11, lossPerDay: 4200, isCpm: true },
-          { title_it: "Potenziamento Allaccio Rete Elettrica", title_en: "Site Electrical Substation Capacity Upgrade", tolDays: 19, lossPerDay: 4600, isCpm: true },
-          { title_it: "Applicazione Fringe Benefit Car Policy", title_en: "Updated Tax & Fringe Benefit Car Policy", tolDays: 29, lossPerDay: 2400, isCpm: false }
-        ]
-      },
-      {
-        id: 16,
-        category: "Finance & Banking",
-        name_it: "Open Banking & Pagamenti Istantanei PSD3",
-        name_en: "Open Banking & PSD3 Instant Settlement Engine",
-        desc_it: "Aggiornamento API bancarie e gateway di pagamento in tempo reale.",
-        desc_en: "Banking API overhaul for PSD3 compliance and sub-second payments.",
-        budget: 1750000,
-        months: 7,
-        dailyCost: 4300,
-        weights: [0.35, 0.25, 0.30, 0.10],
-        domino: [
-          { title_it: "Audit Antifrode & Sicurezza Transazioni", title_en: "Anti-Fraud & Real-time Transaction Security Audit", tolDays: 11, lossPerDay: 4900, isCpm: true },
-          { title_it: "Certificazione API Consorzio Banche", title_en: "Banking Consortium Open API Certification", tolDays: 18, lossPerDay: 5300, isCpm: true },
-          { title_it: "Aggiornamento App Mobile Banking", title_en: "Mobile Banking Consumer App Deployment", tolDays: 28, lossPerDay: 2800, isCpm: false }
-        ]
-      },
-      {
-        id: 17,
-        category: "Compliance & ESG",
-        name_it: "Certificazione ISO 27001 & TISAX Automotive",
-        name_en: "ISO 27001 & TISAX Automotive Security Certification",
-        desc_it: "Audit di conformità per mantenere contratti con case automobilistiche.",
-        desc_en: "Cybersecurity audit to retain Tier-1 automotive OEM master contracts.",
-        budget: 580000,
-        months: 4,
-        dailyCost: 2500,
-        weights: [0.45, 0.25, 0.20, 0.10],
-        domino: [
-          { title_it: "Audit Ispettivo Ente di Certificazione", title_en: "Accredited Body Stage 2 Compliance Audit", tolDays: 8, lossPerDay: 3200, isCpm: true },
-          { title_it: "Validazione Portale Fornitori Tier-1", title_en: "OEM Tier-1 Vendor Security Portal Approval", tolDays: 14, lossPerDay: 3800, isCpm: true },
-          { title_it: "Formazione Sicurezza per 250 Ingegneri", title_en: "Information Security Training for 250 Engineers", tolDays: 24, lossPerDay: 1900, isCpm: false }
-        ]
-      },
-      {
-        id: 18,
-        category: "Operations & Supply",
-        name_it: "Consolidamento Fornitori & Spending Review",
-        name_en: "Vendor Consolidation & Procurement Spending Review",
-        desc_it: "Accorpamento acquisti indiretti con saving programmato dell'8%.",
-        desc_en: "Indirect procurement spend rationalization with an 8% savings target.",
-        budget: 420000,
-        months: 3,
-        dailyCost: 2100,
-        weights: [0.30, 0.30, 0.10, 0.30],
-        domino: [
-          { title_it: "Firma Contratti Quadro con 5 Fornitori Unici", title_en: "Master Agreements with 5 Sole Source Vendors", tolDays: 7, lossPerDay: 2400, isCpm: true },
-          { title_it: "Configurazione Catalogo E-Procurement", title_en: "E-Procurement Catalog & Punchout Integration", tolDays: 14, lossPerDay: 2700, isCpm: true },
-          { title_it: "Chiusura Ordini Pendenti Vecchi Fornitori", title_en: "Legacy Purchase Order Reconciliation & Closeout", tolDays: 22, lossPerDay: 1600, isCpm: false }
-        ]
-      },
-      {
-        id: 19,
-        category: "Operations & Supply",
-        name_it: "Rebranding Globale & Riposizionamento",
-        name_en: "Global Brand Repositioning & Commercial Relaunch",
-        desc_it: "Nuova identità visiva aziendale, portale istituzionale e campagne PR.",
-        desc_en: "New visual identity, corporate portals, and international PR campaigns.",
-        budget: 1100000,
-        months: 5,
-        dailyCost: 3100,
-        weights: [0.25, 0.45, 0.15, 0.15],
-        domino: [
-          { title_it: "Lancio Spot TV e Campagna Media Internazionale", title_en: "Global Media Ad Buy & International Campaign Launch", tolDays: 9, lossPerDay: 3900, isCpm: true },
-          { title_it: "Sostituzione Insegne su 80 Store", title_en: "Exterior Signage Replacement Across 80 Flagship Stores", tolDays: 17, lossPerDay: 4300, isCpm: true },
-          { title_it: "Registrazione Marchio presso Ufficio Brevetti", title_en: "International Trademark Patent Office Registration", tolDays: 27, lossPerDay: 2300, isCpm: false }
-        ]
-      },
-      {
-        id: 20,
-        category: "Compliance & ESG",
-        name_it: "Impianto Solare Industriale & PPA Energetico",
-        name_en: "8MW Industrial Solar Facility & Corporate PPA",
-        desc_it: "Costruzione parco fotovoltaico da 8MW per autoconsumo di stabilimento.",
-        desc_en: "8MW rooftop photovoltaic plant construction for industrial self-consumption.",
-        budget: 3800000,
-        months: 11,
-        dailyCost: 7200,
-        weights: [0.40, 0.25, 0.15, 0.20],
-        domino: [
-          { title_it: "Autorizzazione Unica Regionale & VIA", title_en: "Regional Environmental EIA Approval", tolDays: 14, lossPerDay: 7900, isCpm: true },
-          { title_it: "Allaccio Terna a Stazione Elettrica", title_en: "Transmission Grid Substation Interconnection", tolDays: 23, lossPerDay: 8500, isCpm: true },
-          { title_it: "Contratto di Ritiro Energia in Eccesso", title_en: "Power Purchase Surplus Offtake Agreement", tolDays: 34, lossPerDay: 4100, isCpm: false }
-        ]
-      },
-      {
-        id: 21,
-        category: "Finance & Banking",
-        name_it: "Cybersecurity SOC & Resilienza DORA",
-        name_en: "Financial SOC Cyber Resilience & DORA Compliance",
-        desc_it: "Adeguamento operativo al regolamento europeo sulla resilienza operativa digitale (DORA).",
-        desc_en: "Operational resilience and ICT risk management under the EU DORA framework.",
-        budget: 1950000,
-        months: 8,
-        dailyCost: 4800,
-        weights: [0.35, 0.25, 0.30, 0.10],
-        domino: [
-          { title_it: "Audit Fornitori ICT Critici Terzi", title_en: "Critical Third-Party ICT Provider Audit", tolDays: 12, lossPerDay: 5400, isCpm: true },
-          { title_it: "Certificazione Threat-Led Penetration Test (TLPT)", title_en: "Threat-Led Penetration Testing (TLPT) Sign-off", tolDays: 20, lossPerDay: 6100, isCpm: true },
-          { title_it: "Aggiornamento Piano di Continuità Operativa", title_en: "Digital Business Continuity Plan Ratification", tolDays: 30, lossPerDay: 2900, isCpm: false }
-        ]
-      },
-      {
-        id: 22,
-        category: "IT & Cloud",
-        name_it: "Rollout Rete 5G Privata & Edge Computing",
-        name_en: "Private 5G Industrial Mesh & Edge Computing Rollout",
-        desc_it: "Infrastruttura di connettività a bassissima latenza per logistica e veicoli a guida autonoma.",
-        desc_en: "Ultra-low latency mesh infrastructure for AGVs and autonomous factory robotics.",
-        budget: 2300000,
-        months: 9,
-        dailyCost: 5100,
-        weights: [0.20, 0.25, 0.40, 0.15],
-        domino: [
-          { title_it: "Assegnazione Frequenze Radio Ministeriali", title_en: "Telecommunications Radio Spectrum Grant", tolDays: 13, lossPerDay: 5800, isCpm: true },
-          { title_it: "Integrazione Flotta AGV e Sensori di Bordo", title_en: "AGV Autonomous Fleet & Onboard Sensor Commissioning", tolDays: 22, lossPerDay: 6400, isCpm: true },
-          { title_it: "Dismissione Ripetitori Wi-Fi Industriali Legacy", title_en: "Legacy Industrial Wi-Fi Decommissioning", tolDays: 32, lossPerDay: 2800, isCpm: false }
-        ]
-      },
-      {
-        id: 23,
-        category: "Healthcare & Pharma",
-        name_it: "Sviluppo Farmaco Biotecnologico (Fase II)",
-        name_en: "Phase II Clinical Trial Biotech Drug Development",
-        desc_it: "Sperimentazione clinica multicentrica e monitoraggio sicurezza su 500 pazienti.",
-        desc_en: "Multi-center clinical safety trials on 500 oncology patients.",
-        budget: 4600000,
-        months: 15,
-        dailyCost: 8800,
-        weights: [0.45, 0.30, 0.10, 0.15],
-        domino: [
-          { title_it: "Parere Agenzia Europea dei Medicinali (EMA)", title_en: "European Medicines Agency (EMA) Scientific Opinion", tolDays: 16, lossPerDay: 9600, isCpm: true },
-          { title_it: "Produzione Lotti GMP per Sperimentazione", title_en: "GMP Certified Clinical Batch Manufacturing", tolDays: 26, lossPerDay: 9100, isCpm: true },
-          { title_it: "Piattaforma Elettronica Raccolta Dati Clinici", title_en: "Electronic Data Capture (EDC) Platform Validation", tolDays: 38, lossPerDay: 4500, isCpm: false }
-        ]
-      },
-      {
-        id: 24,
-        category: "Operations & Supply",
-        name_it: "Flotta Cargo & Tracciamento Satellitare IoT",
-        name_en: "Cargo Fleet Real-time Satellite Telemetry & IoT",
-        desc_it: "Monitoraggio temperatura catena del freddo e telemetria in tempo reale su 1.200 mezzi.",
-        desc_en: "Cold chain temperature sensors and satellite dispatch on 1,200 heavy transport vehicles.",
-        budget: 1400000,
-        months: 6,
-        dailyCost: 3500,
-        weights: [0.20, 0.30, 0.30, 0.20],
-        domino: [
-          { title_it: "Certificazione GDP Catena del Freddo Pharma", title_en: "Pharma Cold Chain GDP Quality Certification", tolDays: 10, lossPerDay: 4300, isCpm: true },
-          { title_it: "Integrazione Portale Clienti GDO", title_en: "Supermarket Retailer EDI Dispatch API Integration", tolDays: 18, lossPerDay: 4900, isCpm: true },
-          { title_it: "Rinnovo Contratti Assicurativi Merci", title_en: "Cargo Transit Underwriting Insurance Renewal", tolDays: 28, lossPerDay: 2200, isCpm: false }
-        ]
-      },
-      {
-        id: 25,
-        category: "Compliance & ESG",
-        name_it: "Riconversione Idrogeno Verde & Decarbonizzazione",
-        name_en: "Green Hydrogen Facility & Decarbonization PNRR",
-        desc_it: "Installazione elettrolizzatore e conversione forni industriali per abbattimento CO2.",
-        desc_en: "Industrial electrolyzer installation and blast furnace decarbonization retrofit.",
-        budget: 6200000,
-        months: 18,
-        dailyCost: 9900,
-        weights: [0.40, 0.30, 0.15, 0.15],
-        domino: [
-          { title_it: "Sblocco Fondi PNRR & Bando Transizione Ecologica", title_en: "European Green Deal Grant Capital Disbursement", tolDays: 18, lossPerDay: 11200, isCpm: true },
-          { title_it: "Certificazione Sicurezza Antincendio & ATEX", title_en: "ATEX Explosion Safety & Hazardous Material Certification", tolDays: 28, lossPerDay: 10400, isCpm: true },
-          { title_it: "Riconversione Linee Distribuzione Gas di Stabilimento", title_en: "Plant Gas Manifold Retrofit & Hydrogen Blending", tolDays: 42, lossPerDay: 5800, isCpm: false }
-        ]
-      },
-      {
-        id: 26,
-        category: "Finance & Banking",
-        name_it: "Piattaforma Wealth Management & Robo-Advisory",
-        name_en: "Robo-Advisory Wealth Management Platform (MiFID II)",
-        desc_it: "Motore di asset allocation algoritmica conforme MiFID II per clienti private.",
-        desc_en: "Algorithmic asset allocation engine compliant with MiFID II private banking standards.",
-        budget: 1850000,
-        months: 7,
-        dailyCost: 4500,
-        weights: [0.35, 0.25, 0.30, 0.10],
-        domino: [
-          { title_it: "Approvazione Questionari Profilatura Consob", title_en: "Securities Regulator Risk Profiling Approval", tolDays: 11, lossPerDay: 5100, isCpm: true },
-          { title_it: "Collegamento Broker Transazionali & Custody", title_en: "Execution Broker & Custody Bank Clearing Integration", tolDays: 19, lossPerDay: 5700, isCpm: true },
-          { title_it: "Onboarding Rete di 180 Private Banker", title_en: "Wealth Advisor Network Accreditation & Onboarding", tolDays: 29, lossPerDay: 2700, isCpm: false }
-        ]
-      },
-      {
-        id: 27,
-        category: "Operations & Supply",
-        name_it: "Hub Manutenzione Predittiva Aeronautica (MRO)",
-        name_en: "Aviation Predictive Maintenance Hub (EASA MRO)",
-        desc_it: "Analisi vibrazionale motori e gestione ricambi su standard EN 9100 per linee aeree.",
-        desc_en: "Turbine vibration telematics and spare parts inventory under EN 9100 / EASA Part-145.",
-        budget: 3400000,
-        months: 11,
-        dailyCost: 7100,
-        weights: [0.30, 0.25, 0.25, 0.20],
-        domino: [
-          { title_it: "Certificazione Ente Nazionale Aviazione Civile (ENAC)", title_en: "Civil Aviation Authority (EASA / ENAC) Repair Station License", tolDays: 15, lossPerDay: 8600, isCpm: true },
-          { title_it: "Accordo SLA Disponibilità Ricambi con Vettori", title_en: "Airline Flight-Line Spares Availability SLA Agreement", tolDays: 24, lossPerDay: 8900, isCpm: true },
-          { title_it: "Qualifica Banchi di Test Elettronici", title_en: "Avionics Diagnostic Test Bench Recalibration", tolDays: 35, lossPerDay: 4200, isCpm: false }
-        ]
-      },
-      {
-        id: 28,
-        category: "IT & Cloud",
-        name_it: "Marketplace B2B Internazionale & Multivaluta",
-        name_en: "Cross-Border Multicurrency B2B Wholesale Marketplace",
-        desc_it: "Piattaforma di commercio all'ingrosso con escrow transazionale e supporto a 12 valute.",
-        desc_en: "Wholesale trade portal with escrow clearing and 12-currency settlement support.",
-        budget: 1550000,
-        months: 6,
-        dailyCost: 3900,
-        weights: [0.25, 0.35, 0.25, 0.15],
-        domino: [
-          { title_it: "Conformità Fiscale IVA Transfrontaliera & Dogane", title_en: "Cross-Border VAT & Customs Tax Compliance", tolDays: 10, lossPerDay: 4600, isCpm: true },
-          { title_it: "Integrazione Pagamenti Escrow e Lettere di Credito", title_en: "Escrow Banking & Letter of Credit API Integration", tolDays: 18, lossPerDay: 5200, isCpm: true },
-          { title_it: "Localizzazione Piattaforma in 6 Lingue", title_en: "Platform Localization & Legal Terms in 6 Languages", tolDays: 27, lossPerDay: 2400, isCpm: false }
-        ]
-      },
-      {
-        id: 29,
-        category: "Operations & Supply",
-        name_it: "Tracciabilità Blockchain Filiera Agroalimentare DOP",
-        name_en: "PDO Agri-Food Supply Chain Blockchain Provenance",
-        desc_it: "Certificazione di origine immutabile dal campo allo scaffale per contrastare l'Italian Sounding.",
-        desc_en: "Farm-to-fork cryptographic origin authentication combating food fraud and counterfeiting.",
-        budget: 780000,
-        months: 5,
-        dailyCost: 2700,
-        weights: [0.30, 0.30, 0.20, 0.20],
-        domino: [
-          { title_it: "Validazione Disciplinare Consorzio di Tutela", title_en: "Protective Consortium Compliance Specification Sign-off", tolDays: 9, lossPerDay: 3200, isCpm: true },
-          { title_it: "Stampa Nuove Etichette con QR Code Tracciabile", title_en: "On-Pack Smart QR Code Label Rollout", tolDays: 16, lossPerDay: 3700, isCpm: true },
-          { title_it: "Campagna Comunicazione Trasparenza nei Supermercati", title_en: "Consumer Transparency Campaign in Supermarket Chains", tolDays: 26, lossPerDay: 1900, isCpm: false }
-        ]
-      },
-      {
-        id: 30,
-        category: "Compliance & ESG",
-        name_it: "Adeguamento Normativo Data Act & AI Governance",
-        name_en: "EU Data Act Compliance & AI Governance Framework",
-        desc_it: "Allineamento contratti di condivisione dati industriali e audit trasparenza modelli predittivi.",
-        desc_en: "Industrial IoT data sharing contracts and algorithmic transparency governance audits.",
-        budget: 890000,
-        months: 5,
-        dailyCost: 3100,
-        weights: [0.45, 0.25, 0.20, 0.10],
-        domino: [
-          { title_it: "Revisione Accordi Fornitura Dati con Partner Cloud", title_en: "Cloud Partner Data Sharing Master Contract Amendments", tolDays: 9, lossPerDay: 3800, isCpm: true },
-          { title_it: "Audit Indipendente su Bias e Robustezza Algoritmi", title_en: "Third-Party Algorithmic Fairness & Bias Verification", tolDays: 17, lossPerDay: 4300, isCpm: true },
-          { title_it: "Registro Aziendale dei Sistemi di IA ad Alto Rischio", title_en: "Corporate Registry of High-Risk AI Systems", tolDays: 27, lossPerDay: 2300, isCpm: false }
-        ]
       }
     ];
 
     let initiativesData = [];
+    let raciMatrixData = [];
+
+    // SECTOR-SPECIFIC RACI SCOPES GENERATOR
+    function getSectorRACIScopes(scen) {
+      const q = ((scen.name_it || '') + " " + (scen.desc_it || '') + " " + (scen.category || '')).toLowerCase();
+
+      if (q.includes("pharma") || q.includes("biotech") || q.includes("medic") || q.includes("clinic") || scen.category === "Healthcare & Pharma") {
+        return [
+          {
+            title_it: "Opzione A: Stanziamento Contingency Lotti GMP & CRO",
+            title_en: "Option A: Emergency Contingency for GMP Batches & CROs",
+            desc_it: "Approvazione budget straordinario per raddoppio capacità laboratori di sperimentazione clinica.",
+            desc_en: "Extraordinary funding release for doubling external clinical testing bandwidth and CRO capacity.",
+            roles: { board: 'C', sponsor: 'A', pmo: 'R', po: 'C', legal: 'I', proc: 'R' }
+          },
+          {
+            title_it: "Opzione B: Rimodulazione Coorti di Pazienti & Endpoint Secondari",
+            title_en: "Option B: Patient Cohort Rescoping & Secondary Clinical Endpoints Deferral",
+            desc_it: "Sospensione transitoria dei bracci di studio non-core per salvaguardare il dossier AIFA/EMA.",
+            desc_en: "Freezing non-core clinical study cohorts to secure timely regulatory dossier filing at zero added cost.",
+            roles: { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' }
+          },
+          {
+            title_it: "Opzione C: Procedura Fast-Track Comitato Etico & Regulatory Affairs 48h",
+            title_en: "Option C: 48-Hour Fast-Track Clearance with Ethics Committee & Regulatory Affairs",
+            desc_it: "Silenzio-assenso formale e firma d'urgenza per emendamenti al protocollo clinico.",
+            desc_en: "Mandatory silent-assent protocol and emergency sign-off for protocol amendments without veto drag.",
+            roles: { board: 'A', sponsor: 'C', pmo: 'R', po: 'I', legal: 'R', proc: 'I' }
+          }
+        ];
+      } else if (q.includes("bank") || q.includes("finan") || q.includes("m&a") || q.includes("dora") || q.includes("wealth") || q.includes("psd3") || scen.category === "Finance & Banking") {
+        return [
+          {
+            title_it: "Opzione A: Budget Straordinario System Integrator & Audit Vigilanza",
+            title_en: "Option A: Contingency for System Integrators & Prudential Audit Readiness",
+            desc_it: "Iniezione di risorse per raddoppio team di riconciliazione e conformità BCE/Consob.",
+            desc_en: "Extraordinary capacity release to double transactional reconciliation and supervisory readiness.",
+            roles: { board: 'C', sponsor: 'A', pmo: 'R', po: 'C', legal: 'I', proc: 'R' }
+          },
+          {
+            title_it: "Opzione B: Rilascio Wave Transitoria & Deferral Moduli Secondari",
+            title_en: "Option B: Transitional Wave Release & Non-Core Banking Modules Deferral",
+            desc_it: "Congelamento delle personalizzazioni di filiale per proteggere la quadratura contabile di bilancio.",
+            desc_en: "Freezing secondary branch-level customizations to protect core accounting ledger sign-off.",
+            roles: { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' }
+          },
+          {
+            title_it: "Opzione C: Bypass Transitorio Risk Committee con Visto C-Level 48h",
+            title_en: "Option C: Single C-Level Sign-off Protocol for Risk Committee Clearances (48h)",
+            desc_it: "Delega d'urgenza con firma del Direttore Generale per eliminare veti istruttori bloccanti.",
+            desc_en: "Executive delegation to MD/CEO to compress multi-tiered compliance authorization loops.",
+            roles: { board: 'A', sponsor: 'C', pmo: 'R', po: 'I', legal: 'R', proc: 'I' }
+          }
+        ];
+      } else if (q.includes("cloud") || q.includes("sap") || q.includes("it & cloud") || q.includes("aws") || q.includes("5g") || q.includes("ai")) {
+        return [
+          {
+            title_it: "Opzione A: Iniezione Budget Extra per DevOps & Specialist Vendor Esterni",
+            title_en: "Option A: Contingency Allocation for External DevOps & Cloud Engineering Bandwidth",
+            desc_it: "Autorizzazione fondo per duplicare gli squad di sviluppo sull'integrazione dati complessa.",
+            desc_en: "Emergency funding approval for scaling external engineering squads on data pipeline blockers.",
+            roles: { board: 'C', sponsor: 'A', pmo: 'R', po: 'C', legal: 'I', proc: 'R' }
+          },
+          {
+            title_it: "Opzione B: Delibera De-Scoping Funzionalità & Architetture Cloud Release 2",
+            title_en: "Option B: Selective Cloud Architecture De-Scoping & Phase 2 Deferral",
+            desc_it: "Rinvio dei microservizi a bassa priorità per garantire il Go-Live dell'infrastruttura primaria.",
+            desc_en: "Deferring secondary microservices to Phase 2 to safeguard core cloud infrastructure go-live.",
+            roles: { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' }
+          },
+          {
+            title_it: "Opzione C: Protocollo Fast-Sign 48h Change Advisory Board (CAB)",
+            title_en: "Option C: 48-Hour Fast-Sign Protocol across Change Advisory Board (CAB) & Security",
+            desc_it: "Silenzio-assenso sui collaudi di sicurezza standard per sbloccare la catena di deployment.",
+            desc_en: "Mandatory silent-assent protocol on standard security drills to clear release blockages.",
+            roles: { board: 'A', sponsor: 'C', pmo: 'R', po: 'I', legal: 'R', proc: 'I' }
+          }
+        ];
+      } else {
+        return [
+          {
+            title_it: "Opzione A: Iniezione Budget Extra (Fast-Tracking Fornitori Strategici)",
+            title_en: "Option A: Extra Budget Injection (Strategic Vendor Capacity Fast-Tracking)",
+            desc_it: "Approvazione contingency straordinaria per raddoppiare risorse sul collo di bottiglia principale.",
+            desc_en: "Emergency contingency reserve release to double resource bandwidth on critical path node.",
+            roles: { board: 'C', sponsor: 'A', pmo: 'R', po: 'C', legal: 'I', proc: 'R' }
+          },
+          {
+            title_it: "Opzione B: Delibera De-Scoping Perimetro & Rinvio Deliverable a Fase 2",
+            title_en: "Option B: Scope De-Scoping Resolution & Milestone Phase 2 Deferral",
+            desc_it: "Congelamento feature accessorie per proteggere la data di consegna vincolante a costo zero.",
+            desc_en: "Freezing non-core project deliverables to protect the critical baseline launch date at zero cost.",
+            roles: { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' }
+          },
+          {
+            title_it: "Opzione C: Attivazione Protocollo Fast-Sign 48h a Firma Unica Direzionale",
+            title_en: "Option C: Activation of 48-Hour Fast-Sign Protocol & Single Executive Assent",
+            desc_it: "Silenzio-assenso formale e delega unica per eliminare la frammentazione dei diritti di veto.",
+            desc_en: "Enforcing single-signatory delegation and silent-assent policy to eliminate veto gridlock.",
+            roles: { board: 'A', sponsor: 'C', pmo: 'R', po: 'I', legal: 'R', proc: 'I' }
+          }
+        ];
+      }
+    }
+
+    const RACI_ROLES_CYCLE = ['A', 'R', 'C', 'I', '-'];
+
+    function getRACIBadgeMarkup(role) {
+      if (role === 'A') {
+        return `<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-300 hover:ring-2 hover:ring-emerald-400 transition cursor-pointer select-none" title="Accountable (Proprietario)">A &bull; Acc</span>`;
+      } else if (role === 'R') {
+        return `<span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold border border-amber-300 hover:ring-2 hover:ring-amber-400 transition cursor-pointer select-none" title="Responsible (Esecutore)">R &bull; Resp</span>`;
+      } else if (role === 'C') {
+        return `<span class="inline-block px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-semibold border border-blue-200 hover:ring-2 hover:ring-blue-400 transition cursor-pointer select-none" title="Consulted (Consultato)">C &bull; Cons</span>`;
+      } else if (role === 'I') {
+        return `<span class="inline-block px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-medium border border-slate-200 hover:ring-2 hover:ring-slate-400 transition cursor-pointer select-none" title="Informed (Informato)">I &bull; Info</span>`;
+      } else {
+        return `<span class="inline-block px-2 py-0.5 rounded bg-slate-50 text-slate-400 font-normal border border-dashed border-slate-200 hover:border-slate-400 transition cursor-pointer select-none" title="Nessun Ruolo">-</span>`;
+      }
+    }
+
+    function getRoleFriendlyName(key) {
+      const names = {
+        board: currentLang === 'en' ? 'Board / CEO' : 'Board / CEO',
+        sponsor: currentLang === 'en' ? 'Program Sponsor' : 'Program Sponsor',
+        pmo: currentLang === 'en' ? 'PMO Lead' : 'PMO Lead',
+        po: currentLang === 'en' ? 'Product Owner' : 'Product Owner',
+        legal: currentLang === 'en' ? 'Legal & Compliance' : 'Legal & Compliance',
+        proc: currentLang === 'en' ? 'Procurement' : 'Acquisti & Gare'
+      };
+      return names[key] || key;
+    }
+
+    function cycleRACIRole(scopeIdx, stakeKey) {
+      if (!raciMatrixData[scopeIdx]) return;
+      const current = raciMatrixData[scopeIdx].roles[stakeKey] || '-';
+      const currIdx = RACI_ROLES_CYCLE.indexOf(current);
+      const nextRole = RACI_ROLES_CYCLE[(currIdx + 1) % RACI_ROLES_CYCLE.length];
+      raciMatrixData[scopeIdx].roles[stakeKey] = nextRole;
+      renderRACIMatrix();
+      runEngine();
+      showToast(`Ruolo ${stakeKey.toUpperCase()} aggiornato: ${nextRole}`);
+    }
+
+    function updateRACIScopeText(scopeIdx, field, val) {
+      if (!raciMatrixData[scopeIdx]) return;
+      if (currentLang === 'en') {
+        raciMatrixData[scopeIdx][field + '_en'] = val.trim();
+      } else {
+        raciMatrixData[scopeIdx][field + '_it'] = val.trim();
+      }
+      runEngine();
+    }
+
+    function addNewCustomRACIScope() {
+      const idx = raciMatrixData.length + 1;
+      raciMatrixData.push({
+        title_it: `Opzione #${idx}: Nuova Delibera di Governance`,
+        title_en: `Option #${idx}: New Governance Resolution Scope`,
+        desc_it: "Definisci il perimetro della decisione e assegna formalmente i ruoli RACI per questa specifica delibera.",
+        desc_en: "Specify decision boundaries and formally assign RACI governance roles for this specific resolution.",
+        roles: { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' }
+      });
+      renderRACIMatrix();
+      runEngine();
+      showToast(`Aggiunto nuovo ambito decisionale #${idx}`);
+    }
+
+    function deleteRACIScope(scopeIdx) {
+      if (raciMatrixData.length <= 1) {
+        showToast("Devi mantenere almeno un ambito decisionale nella matrice.");
+        return;
+      }
+      raciMatrixData.splice(scopeIdx, 1);
+      renderRACIMatrix();
+      runEngine();
+      showToast("Ambito decisionale rimosso dalla matrice.");
+    }
+
+    function renderRACIMatrix() {
+      const tbody = document.getElementById('raci-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const counter = document.getElementById('raci-scopes-counter');
+      if (counter) {
+        if (currentLang === 'en') {
+          counter.innerText = `${raciMatrixData.length} ${raciMatrixData.length === 1 ? 'decision scope' : 'decision scopes'}`;
+        } else {
+          counter.innerText = `${raciMatrixData.length} ${raciMatrixData.length === 1 ? 'ambito decisionale' : 'ambiti decisionali'}`;
+        }
+      }
+
+      raciMatrixData.forEach((scope, index) => {
+        const title = (currentLang === 'en' && scope.title_en) ? scope.title_en : scope.title_it;
+        const desc = (currentLang === 'en' && scope.desc_en) ? scope.desc_en : scope.desc_it;
+        const r = scope.roles || { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' };
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 transition-colors align-middle";
+        tr.innerHTML = `
+          <td class="py-3 px-3 font-sans">
+            <div 
+              contenteditable="true" 
+              spellcheck="false"
+              onblur="updateRACIScopeText(${index}, 'title', this.innerText)"
+              class="font-semibold text-slate-900 text-xs leading-snug cursor-text rounded px-1.5 py-0.5 hover:bg-slate-100 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 whitespace-normal break-words"
+              title="${currentLang === 'en' ? 'Click to edit scope title' : 'Clicca per modificare il titolo dell\'ambito'}"
+            >${title}</div>
+            <div 
+              contenteditable="true" 
+              spellcheck="false"
+              onblur="updateRACIScopeText(${index}, 'desc', this.innerText)"
+              class="text-[10px] text-slate-400 font-normal leading-tight mt-0.5 cursor-text rounded px-1.5 py-0.5 hover:bg-slate-100 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 whitespace-normal break-words"
+              title="${currentLang === 'en' ? 'Click to edit description' : 'Clicca per modificare la descrizione'}"
+            >${desc}</div>
+          </td>
+          <td class="py-3 px-2 text-center" onclick="cycleRACIRole(${index}, 'board')">${getRACIBadgeMarkup(r.board)}</td>
+          <td class="py-3 px-2 text-center" onclick="cycleRACIRole(${index}, 'sponsor')">${getRACIBadgeMarkup(r.sponsor)}</td>
+          <td class="py-3 px-2 text-center" onclick="cycleRACIRole(${index}, 'pmo')">${getRACIBadgeMarkup(r.pmo)}</td>
+          <td class="py-3 px-2 text-center" onclick="cycleRACIRole(${index}, 'po')">${getRACIBadgeMarkup(r.po)}</td>
+          <td class="py-3 px-2 text-center" onclick="cycleRACIRole(${index}, 'legal')">${getRACIBadgeMarkup(r.legal)}</td>
+          <td class="py-3 px-2 text-center" onclick="cycleRACIRole(${index}, 'proc')">${getRACIBadgeMarkup(r.proc)}</td>
+          <td class="py-3 px-2 text-center">
+            <button onclick="deleteRACIScope(${index})" class="text-slate-300 hover:text-rose-600 transition cursor-pointer p-1 rounded" title="${currentLang === 'en' ? 'Delete this scope' : 'Elimina questo ambito'}">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // SYNC MITIGATION LEVER CARDS WITH RACI MATRIX & DYNAMIC METRICS
+    function syncMitigationCardsUI(computedValues) {
+      if (!computedValues) return;
+      const { ftDays, ftCost, dsDays, fsDays } = computedValues;
+      const daySuffix = (currentLang === 'en') ? 'd' : 'gg';
+
+      // Update Dynamic Numeric Displays
+      const elFtDays = document.getElementById('raci-days-1');
+      if (elFtDays) elFtDays.innerText = `-${ftDays} ${daySuffix}`;
+      const elFtCost = document.getElementById('raci-cost-1');
+      if (elFtCost) elFtCost.innerText = `€ ${ftCost.toLocaleString('it-IT')}`;
+
+      const elDsDays = document.getElementById('raci-days-2');
+      if (elDsDays) elDsDays.innerText = `-${dsDays} ${daySuffix}`;
+
+      const elFsDays = document.getElementById('raci-days-3');
+      if (elFsDays) elFsDays.innerText = `-${fsDays} ${daySuffix}`;
+
+      // Helper to extract role assignments
+      const getRoleHolder = (scopeIdx, roleChar) => {
+        if (!raciMatrixData[scopeIdx]) return '-';
+        const roles = raciMatrixData[scopeIdx].roles;
+        for (const k in roles) {
+          if (roles[k] === roleChar) return getRoleFriendlyName(k);
+        }
+        return '-';
+      };
+
+      // Card 1: Fast-Tracking (Scope index 0)
+      if (raciMatrixData[0]) {
+        const title1 = (currentLang === 'en' && raciMatrixData[0].title_en) ? raciMatrixData[0].title_en : raciMatrixData[0].title_it;
+        const desc1 = (currentLang === 'en' && raciMatrixData[0].desc_en) ? raciMatrixData[0].desc_en : raciMatrixData[0].desc_it;
+        const elT1 = document.getElementById('raci-title-1');
+        if (elT1) elT1.innerText = title1;
+        const elD1 = document.getElementById('raci-desc-1');
+        if (elD1) elD1.innerText = desc1;
+        const elA1 = document.getElementById('raci-pill-a-1');
+        if (elA1) elA1.innerText = `A: ${getRoleHolder(0, 'A')}`;
+        const elR1 = document.getElementById('raci-pill-r-1');
+        if (elR1) elR1.innerText = `R: ${getRoleHolder(0, 'R')}`;
+      }
+
+      // Card 2: De-Scoping (Scope index 1)
+      if (raciMatrixData[1]) {
+        const title2 = (currentLang === 'en' && raciMatrixData[1].title_en) ? raciMatrixData[1].title_en : raciMatrixData[1].title_it;
+        const desc2 = (currentLang === 'en' && raciMatrixData[1].desc_en) ? raciMatrixData[1].desc_en : raciMatrixData[1].desc_it;
+        const elT2 = document.getElementById('raci-title-2');
+        if (elT2) elT2.innerText = title2;
+        const elD2 = document.getElementById('raci-desc-2');
+        if (elD2) elD2.innerText = desc2;
+        const elA2 = document.getElementById('raci-pill-a-2');
+        if (elA2) elA2.innerText = `A: ${getRoleHolder(1, 'A')}`;
+        const elR2 = document.getElementById('raci-pill-r-2');
+        if (elR2) elR2.innerText = `R: ${getRoleHolder(1, 'R')}`;
+      }
+
+      // Card 3: Fast-Sign (Scope index 2)
+      if (raciMatrixData[2]) {
+        const title3 = (currentLang === 'en' && raciMatrixData[2].title_en) ? raciMatrixData[2].title_en : raciMatrixData[2].title_it;
+        const desc3 = (currentLang === 'en' && raciMatrixData[2].desc_en) ? raciMatrixData[2].desc_en : raciMatrixData[2].desc_it;
+        const elT3 = document.getElementById('raci-title-3');
+        if (elT3) elT3.innerText = title3;
+        const elD3 = document.getElementById('raci-desc-3');
+        if (elD3) elD3.innerText = desc3;
+        const elA3 = document.getElementById('raci-pill-a-3');
+        if (elA3) elA3.innerText = `A: ${getRoleHolder(2, 'A')}`;
+        const elR3 = document.getElementById('raci-pill-r-3');
+        if (elR3) elR3.innerText = `R: ${getRoleHolder(2, 'R')}`;
+      }
+    }
 
     function switchView(viewId) {
       currentActiveView = viewId;
@@ -2355,6 +2229,10 @@
         lossPerDay: item.lossPerDay
       }));
 
+      // Automatically contextualize RACI Decision Scopes to active industry
+      raciMatrixData = getSectorRACIScopes(data);
+      renderRACIMatrix();
+
       runEngine();
       showToast(currentLang === 'en' ? `Loaded: ${name}` : `Caricato: ${name}`);
     }
@@ -2392,35 +2270,11 @@
           { title: (currentLang === 'en' ? "Transactional Ledger & Core Banking Synchronization" : "Riconciliazione Flussi Transazionali & Sistemi Core Banking"), tol: Math.max(13, Math.round(m * 2.2)), rate: Math.round(d * 1.20), cpm: true },
           { title: (currentLang === 'en' ? "Operational Anti-Fraud & Cyber Resilience Controls" : "Aggiornamento Presidi Antifrode & Continuità Operativa"), tol: Math.max(20, Math.round(m * 3.3)), rate: Math.round(d * 0.60), cpm: false }
         ];
-      } else if (q.includes("aeronaut") || q.includes("avia") || q.includes("mro") || q.includes("spazio")) {
-        generatedPool = [
-          { title: (currentLang === 'en' ? "Aviation Airworthiness Certification (EASA / FAA)" : "Certificazione Ente Nazionale Aviazione Civile (ENAC / EASA)"), tol: Math.max(9, Math.round(m * 1.5)), rate: Math.round(d * 1.45), cpm: true },
-          { title: (currentLang === 'en' ? "Flight-Line Spares SLA & Carrier Penalty Agreements" : "Accordo SLA Linea Volo & Penali Disponibilità Ricambi"), tol: Math.max(14, Math.round(m * 2.4)), rate: Math.round(d * 1.25), cpm: true },
-          { title: (currentLang === 'en' ? "Avionics Diagnostic Bench Maintenance Overhaul" : "Riconversione Banchi Elettronici & Manuali di Manutenzione"), tol: Math.max(22, Math.round(m * 3.6)), rate: Math.round(d * 0.50), cpm: false }
-        ];
-      } else if (q.includes("idrogen") || q.includes("solar") || q.includes("energet") || q.includes("decarbon") || q.includes("ecolog")) {
-        generatedPool = [
-          { title: (currentLang === 'en' ? "Environmental EIA Permits & Green Deal Grant Approval" : "Autorizzazione Unica Regionale & Sblocco Fondi PNRR"), tol: Math.max(10, Math.round(m * 1.6)), rate: Math.round(d * 1.30), cpm: true },
-          { title: (currentLang === 'en' ? "High-Voltage Substation Grid Interconnection" : "Allaccio Stazione Terna & Collaudo Linee Alta Tensione"), tol: Math.max(16, Math.round(m * 2.5)), rate: Math.round(d * 1.15), cpm: true },
-          { title: (currentLang === 'en' ? "Corporate PPA Surplus Power Purchase Contract" : "Contratti PPA Corporate & Certificati Garanzia d'Origine"), tol: Math.max(24, Math.round(m * 3.5)), rate: Math.round(d * 0.55), cpm: false }
-        ];
-      } else if (q.includes("esg") || q.includes("csrd") || q.includes("tisax") || q.includes("data act") || q.includes("nis2") || scen.category === "Compliance & ESG") {
-        generatedPool = [
-          { title: (currentLang === 'en' ? "Independent Third-Party Statutory Verification" : "Certificazione Ente Terzo Indipendente & Attestazione Conformità"), tol: Math.max(7, Math.round(m * 1.3)), rate: Math.round(d * 1.20), cpm: true },
-          { title: (currentLang === 'en' ? "Public Tender Supply Chain Portal Qualification" : "Validazione Portale Fornitori per Gare d'Appalto Internazionali"), tol: Math.max(12, Math.round(m * 2.1)), rate: Math.round(d * 1.05), cpm: true },
-          { title: (currentLang === 'en' ? "Annual Integrated Corporate Governance Disclosures" : "Fascicolo Integrato di Bilancio per l'Assemblea degli Azionisti"), tol: Math.max(18, Math.round(m * 3.1)), rate: Math.round(d * 0.50), cpm: false }
-        ];
       } else if (q.includes("sap") || q.includes("cloud") || q.includes("aws") || q.includes("5g") || q.includes("ai") || q.includes("b2b") || scen.category === "IT & Cloud") {
         generatedPool = [
           { title: (currentLang === 'en' ? "Hardening Audit, Penetration Test & Security Sign-off" : "Audit di Sicurezza Preventivo, Penetration Test & Certificazione Dati"), tol: Math.max(7, Math.round(m * 1.4)), rate: Math.round(d * 1.15), cpm: true },
           { title: (currentLang === 'en' ? "Physical Datacenter Lease Termination & Asset Exit" : "Disdetta Canoni Datacenter Fisico & Licenze Server Legacy"), tol: Math.max(12, Math.round(m * 2.2)), rate: Math.round(d * 1.10), cpm: true },
           { title: (currentLang === 'en' ? "Workstation Enablement & 400 Key-User Training" : "Abilitazione delle Postazioni & Upskilling Rete Utenti"), tol: Math.max(19, Math.round(m * 3.3)), rate: Math.round(d * 0.55), cpm: false }
-        ];
-      } else if (q.includes("supply") || q.includes("logist") || q.includes("fabbrica") || q.includes("robot") || q.includes("cargo") || q.includes("dop") || scen.category === "Operations & Supply") {
-        generatedPool = [
-          { title: (currentLang === 'en' ? "Machinery Directive Safety Sign-off & Plant Commissioning" : "Collaudo Direttiva Macchine & Fermo Linea Programmato"), tol: Math.max(8, Math.round(m * 1.4)), rate: Math.round(d * 1.30), cpm: true },
-          { title: (currentLang === 'en' ? "Distributor Carrier SLA & Punctuality Agreements" : "Accordi Logistici Distributivi & Penali Puntualità Spedizioni"), tol: Math.max(14, Math.round(m * 2.3)), rate: Math.round(d * 1.15), cpm: true },
-          { title: (currentLang === 'en' ? "Buffer Warehouse Rationalization & Inventory Clearance" : "Riconversione Magazzini Polmone & Smaltimento Imballi Obsoleti"), tol: Math.max(21, Math.round(m * 3.4)), rate: Math.round(d * 0.50), cpm: false }
         ];
       } else {
         generatedPool = [
@@ -2489,7 +2343,8 @@
       showToast(currentLang === 'en' ? "Initiative deleted. Re-indexed." : "Iniziativa eliminata. Elenco riordinato.");
     }
 
-    function renderCPMTopology(totalDelayDays) {
+    // TOPOLOGY DIAGRAM SYNCHRONIZED WITH SEQUENTIAL NUMBERS AND IMMEDIATE STATUS
+    function renderCPMTopology(totalDelayDays, strictMultiplierPenalty, strictBufferDelta) {
       const container = document.getElementById('cpm-flow-diagram-container');
       if (!container) return;
 
@@ -2530,19 +2385,19 @@
       initiativesData.forEach((item, index) => {
         const itemNumber = index + 1;
         const isCritical = item.isCpm;
-        const tolDays = item.tolDays;
+        const effectiveTolDays = Math.max(0, item.tolDays + strictBufferDelta);
         let badgeClass = "bg-slate-100 text-slate-600 border-slate-200";
-        let badgeText = (currentLang === 'en') ? "FREE FLOAT" : "FLOAT LIBERO";
+        let badgeText = (currentLang === 'en') ? "FREE FLOAT: SAFE" : "FLOAT LIBERO: PROTETTO";
         let cardBorder = "bg-slate-50 border-slate-200";
 
-        if (totalDelayDays <= tolDays) {
+        if (totalDelayDays <= effectiveTolDays) {
           if (isCritical) {
             badgeClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
-            badgeText = (currentLang === 'en') ? "CPM: ON TRACK" : "CPM: ON TRACK";
+            badgeText = (currentLang === 'en') ? "CPM: ON TRACK" : "CPM: ON TRACK (FLOAT 0)";
             cardBorder = "bg-emerald-50/40 border-emerald-200";
           } else {
             badgeClass = "bg-slate-100 text-slate-600 border-slate-200";
-            badgeText = (currentLang === 'en') ? "FLOAT: ON TRACK" : "FLOAT: ON TRACK";
+            badgeText = (currentLang === 'en') ? "FLOAT LIBERO: SAFE" : "FLOAT LIBERO: PROTETTO";
             cardBorder = "bg-slate-50 border-slate-200";
           }
         } else if (isCritical) {
@@ -2575,7 +2430,8 @@
       container.innerHTML = html;
     }
 
-    function renderCPMStudio(totalDelayDays) {
+    // RENDER CPM REGISTER TABLE WITH CLEAR VISUAL DISTINCTION AT ZERO DELAY
+    function renderCPMStudio(totalDelayDays, strictMultiplierPenalty, strictBufferDelta) {
       const tbody = document.getElementById('cpm-table-body');
       if (!tbody) return;
       tbody.innerHTML = '';
@@ -2586,28 +2442,32 @@
         const itemNumber = index + 1;
         const title = item.title_it || '';
         const isCritical = item.isCpm;
-        const tolDays = item.tolDays;
-        const lossPerDay = item.lossPerDay;
+        const effectiveTolDays = Math.max(0, item.tolDays + strictBufferDelta);
+        const effectiveLossPerDay = Math.round(item.lossPerDay * strictMultiplierPenalty);
 
         let statusBadge = "";
         let lossText = "€ 0";
         let lossClass = "font-bold text-slate-800 font-mono-num";
 
-        if (totalDelayDays <= tolDays) {
-          statusBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">${(currentLang === 'en') ? 'On Track' : 'On Track'}</span>`;
+        if (totalDelayDays <= effectiveTolDays) {
+          if (isCritical) {
+            statusBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">${(currentLang === 'en') ? 'CPM: On Track' : 'CPM: On Track'}</span>`;
+          } else {
+            statusBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">${(currentLang === 'en') ? 'Float: Buffer Safe' : 'Float: Buffer Sicuro'}</span>`;
+          }
         } else if (!isCritical) {
           const badgeText = (currentLang === 'en') ? 'Float (No Penalty)' : 'Float (No Penale)';
           statusBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">${badgeText}</span>`;
           lossText = (currentLang === 'en') ? "€ 0 (Absorbed)" : "€ 0 (Assorbito)";
           lossClass = "font-bold text-blue-600 font-mono-num";
-        } else if (totalDelayDays <= tolDays + 12) {
-          const loss = Math.round((totalDelayDays - tolDays) * lossPerDay);
+        } else if (totalDelayDays <= effectiveTolDays + 12) {
+          const loss = Math.round((totalDelayDays - effectiveTolDays) * effectiveLossPerDay);
           const badgeText = (currentLang === 'en') ? 'On Alert' : 'In Allerta';
           statusBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">${badgeText}</span>`;
           lossText = "+€ " + loss.toLocaleString('it-IT');
           lossClass = "font-bold text-amber-700 font-mono-num";
         } else {
-          const loss = Math.round((totalDelayDays - tolDays) * lossPerDay);
+          const loss = Math.round((totalDelayDays - effectiveTolDays) * effectiveLossPerDay);
           const badgeText = (currentLang === 'en') ? 'Critical Stagnation' : 'Paralisi Critica';
           statusBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">${badgeText}</span>`;
           lossText = "+€ " + loss.toLocaleString('it-IT');
@@ -2652,7 +2512,7 @@
           <td class="py-3 px-3 text-right">
             <div class="inline-flex items-center space-x-1">
               <span class="text-slate-400 text-[10px] font-mono">+</span>
-              <input type="number" min="0" max="180" value="${tolDays}" onchange="updateInitiativeField(${index}, 'tolDays', this.value)" class="w-14 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-blue-500 rounded px-1.5 py-1 text-right font-mono-num font-semibold text-xs text-slate-800 focus:outline-none transition">
+              <input type="number" min="0" max="180" value="${item.tolDays}" onchange="updateInitiativeField(${index}, 'tolDays', this.value)" class="w-14 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-blue-500 rounded px-1.5 py-1 text-right font-mono-num font-semibold text-xs text-slate-800 focus:outline-none transition">
               <span class="text-slate-400 text-[10px] font-mono">${daySuffix}</span>
             </div>
           </td>
@@ -2660,7 +2520,7 @@
           <td class="py-3 px-3 text-right">
             <div class="inline-flex items-center space-x-1">
               <span class="text-slate-400 text-[10px] font-mono">€</span>
-              <input type="number" min="0" step="100" value="${lossPerDay}" onchange="updateInitiativeField(${index}, 'lossPerDay', this.value)" class="w-20 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-blue-500 rounded px-1.5 py-1 text-right font-mono-num font-semibold text-xs text-slate-800 focus:outline-none transition">
+              <input type="number" min="0" step="100" value="${item.lossPerDay}" onchange="updateInitiativeField(${index}, 'lossPerDay', this.value)" class="w-20 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-blue-500 rounded px-1.5 py-1 text-right font-mono-num font-semibold text-xs text-slate-800 focus:outline-none transition">
             </div>
           </td>
 
@@ -2677,9 +2537,10 @@
         tbody.appendChild(tr);
       });
 
-      renderCPMTopology(totalDelayDays);
+      renderCPMTopology(totalDelayDays, strictMultiplierPenalty, strictBufferDelta);
     }
 
+    // MAIN RECALCULATION ENGINE WITH RIGIDITA CONTRATTUALE TIED TO CPM
     function runEngine() {
       const scen = enterpriseCatalog.find(s => s.id === activeScenarioId) || enterpriseCatalog[0];
       const activeName = (currentLang === 'en' && scen.name_en) ? scen.name_en : scen.name_it;
@@ -2705,37 +2566,62 @@
       const txtStrict = document.getElementById('txt-slider-strictness');
       if (txtStrict) {
         if (currentLang === 'en') {
-          txtStrict.innerText = strictVal === 1 ? 'Flexible' : (strictVal === 2 ? 'Medium' : 'Strict');
+          txtStrict.innerText = strictVal === 1 ? 'Flexible (Protected buffer)' : (strictVal === 2 ? 'Medium' : 'Strict (Zero Float)');
         } else {
-          txtStrict.innerText = strictVal === 1 ? 'Flessibile' : (strictVal === 2 ? 'Media' : 'Rigida');
+          txtStrict.innerText = strictVal === 1 ? 'Flessibile (Buffer protetto)' : (strictVal === 2 ? 'Media' : 'Penali per legge (Zero Float)');
         }
       }
 
+      // GROSS DELAY CALCULATION
       const stakeMultiplier = 1 + (stakeVal - 1) * 0.12;
-      const strictMultiplier = strictVal === 1 ? 0.85 : (strictVal === 2 ? 1.0 : 1.25);
-      let totalDelayDays = Math.max(0, Math.round(((approvalVal * 0.75) + (scopeVal - 1) * 3) * stakeMultiplier * strictMultiplier));
-
-      let additionalMitigationCost = 0;
-      if (activeMitigationIndex === 1) {
-        totalDelayDays = Math.max(0, totalDelayDays - 10);
-        additionalMitigationCost = 32000;
-      } else if (activeMitigationIndex === 2) {
-        totalDelayDays = Math.max(0, totalDelayDays - 14);
-      } else if (activeMitigationIndex === 3) {
-        totalDelayDays = Math.max(0, totalDelayDays - 9);
-      }
+      const grossDelayDays = Math.max(0, Math.round(((approvalVal * 0.75) + (scopeVal - 1) * 3) * stakeMultiplier));
 
       const dailyBurnRate = scen.dailyCost || 3200;
+
+      // RIGIDITÀ CONTRATTUALE AFFECTS CPM PENALTIES & BUFFERS DIRECTLY
+      let strictMultiplierPenalty = 1.0;
+      let strictBufferDelta = 0;
+      if (strictVal === 1) {
+        strictMultiplierPenalty = 0.85; // Flessibile: sconti o tolleranza penali
+        strictBufferDelta = 2; // extra 2 days buffer
+      } else if (strictVal === 3) {
+        strictMultiplierPenalty = 1.25; // Penali per legge: inasprimento economico
+        strictBufferDelta = -2; // compressed tolerance
+      }
+
+      // MATHEMATICALLY RE-ENGINEERED 3 RECOVERY LEVERS
+      const ftDays = Math.max(2, Math.min(grossDelayDays - 1, Math.round(grossDelayDays * 0.38 + 2)));
+      const ftCost = Math.round(ftDays * dailyBurnRate * 1.25);
+      const dsDays = Math.max(2, Math.min(grossDelayDays, Math.round((scopeVal - 1) * 2.8 + grossDelayDays * 0.22 + 2)));
+      const fsDays = Math.max(1, Math.min(grossDelayDays, Math.round((approvalVal - 2) * 0.65 * (1 + (stakeVal - 1) * 0.08))));
+
+      // Sync the 3 cards in View 3 (Mitigazione & RACI)
+      syncMitigationCardsUI({ ftDays, ftCost, dsDays, fsDays });
+
+      // Apply Active Mitigation Selection
+      let totalDelayDays = grossDelayDays;
+      let additionalMitigationCost = 0;
+      if (activeMitigationIndex === 1) {
+        totalDelayDays = Math.max(0, grossDelayDays - ftDays);
+        additionalMitigationCost = ftCost;
+      } else if (activeMitigationIndex === 2) {
+        totalDelayDays = Math.max(0, grossDelayDays - dsDays);
+      } else if (activeMitigationIndex === 3) {
+        totalDelayDays = Math.max(0, grossDelayDays - fsDays);
+      }
+
       const directLatencyCost = Math.round(totalDelayDays * dailyBurnRate);
 
       let dominoCost = 0;
       let blockedCount = 0;
 
       initiativesData.forEach(item => {
-        if (totalDelayDays > item.tolDays) {
+        const effectiveTol = Math.max(0, item.tolDays + strictBufferDelta);
+        const effectiveLoss = Math.round(item.lossPerDay * strictMultiplierPenalty);
+        if (totalDelayDays > effectiveTol) {
           blockedCount++;
           if (item.isCpm) {
-            dominoCost += Math.round((totalDelayDays - item.tolDays) * item.lossPerDay);
+            dominoCost += Math.round((totalDelayDays - effectiveTol) * effectiveLoss);
           }
         }
       });
@@ -2786,6 +2672,7 @@
         }
       }
 
+      // Dynamic completion date calculation
       const elFinishDate = document.getElementById('dash-finish-date-txt');
       if (elFinishDate) {
         const targetDate = new Date();
@@ -2901,7 +2788,7 @@
         bottleneckBarInstance.update();
       }
 
-      renderCPMStudio(totalDelayDays);
+      renderCPMStudio(totalDelayDays, strictMultiplierPenalty, strictBufferDelta);
 
       generateAlgorithmicMemo(
         activeName,
@@ -2911,9 +2798,9 @@
         deptNames[maxIdx],
         deptDays[maxIdx],
         blockedCount,
-        14,
-        32000,
-        10
+        dsDays,
+        ftCost,
+        ftDays
       );
     }
 
@@ -2999,18 +2886,9 @@
       if (banner && title) {
         banner.classList.remove('hidden');
         banner.classList.add('flex');
-        const names = (currentLang === 'en') ? [
-          "",
-          "Option A (Budget Fast-Tracking) Active (-10 d)",
-          "Option B (Selective De-Scoping) Active (-14 d)",
-          "Option C (48h Fast-Sign Protocol) Active (-9 d)"
-        ] : [
-          "",
-          "Opzione A (Fast-Tracking Budget) Attiva (-10 gg)",
-          "Opzione B (De-Scoping Selettivo) Attiva (-14 gg)",
-          "Opzione C (Protocollo Fast-Sign 48h) Attiva (-9 gg)"
-        ];
-        title.innerText = names[optIndex] || (currentLang === 'en' ? "Active Simulation" : "Simulazione Attiva");
+        const optTitleEl = document.getElementById(`raci-title-${optIndex}`);
+        const optTitle = optTitleEl ? optTitleEl.innerText : `Opzione #${optIndex}`;
+        title.innerText = `${(currentLang === 'en' ? 'Active Simulation' : 'Simulazione Attiva')}: ${optTitle}`;
       }
 
       for (let i = 1; i <= 3; i++) {
@@ -3022,16 +2900,14 @@
             if (btn) btn.innerText = (currentLang === 'en' ? "✓ Remove Simulation" : "✓ Rimuovi Simulazione");
           } else {
             card.classList.remove('ring-2', 'ring-blue-600', 'bg-blue-50/20');
-            const leverNames = (currentLang === 'en')
-              ? ['Fast-Tracking', 'De-Scoping', 'Fast-Sign']
-              : ['Fast-Tracking', 'De-Scoping', 'Fast-Sign'];
+            const leverNames = ['Fast-Tracking', 'De-Scoping', 'Fast-Sign'];
             if (btn) btn.innerText = (currentLang === 'en' ? `Simulate ${leverNames[i-1]}` : `Simula Opzione ${leverNames[i-1]}`);
           }
         }
       }
 
       runEngine();
-      showToast(currentLang === 'en' ? `Activated: Option ${optIndex === 1 ? 'A (Fast-Tracking)' : (optIndex === 2 ? 'B (De-Scoping)' : 'C (Fast-Sign)')}` : `Attivata: Opzione ${optIndex === 1 ? 'A (Fast-Tracking)' : (optIndex === 2 ? 'B (De-Scoping)' : 'C (Fast-Sign)')}`);
+      showToast(currentLang === 'en' ? `Activated: Option ${optIndex}` : `Attivata: Opzione ${optIndex}`);
     }
 
     function revertMitigationSimulation() {
@@ -3055,11 +2931,16 @@
 
     let lastGeneratedMemoText = "";
 
+    // BILINGUAL BOARD MEMORANDUM GENERATOR
     function generateAlgorithmicMemo(name, delayDays, directCost, dominoLoss, topDept, topDays, blockedCount, dsDays, ftCost, ftDays) {
       const localeCode = (currentLang === 'en') ? 'en-US' : 'it-IT';
       const todayStr = new Date().toLocaleDateString(localeCode, { day: '2-digit', month: 'long', year: 'numeric' });
       const elDate = document.getElementById('memo-live-date');
       if (elDate) elDate.innerText = (currentLang === 'en') ? `Date: ${todayStr}` : `Data: ${todayStr}`;
+
+      const title1 = (raciMatrixData[0] && ((currentLang === 'en' && raciMatrixData[0].title_en) ? raciMatrixData[0].title_en : raciMatrixData[0].title_it)) || "Fast-Tracking Budget";
+      const title2 = (raciMatrixData[1] && ((currentLang === 'en' && raciMatrixData[1].title_en) ? raciMatrixData[1].title_en : raciMatrixData[1].title_it)) || "De-Scoping Selettivo";
+      const title3 = (raciMatrixData[2] && ((currentLang === 'en' && raciMatrixData[2].title_en) ? raciMatrixData[2].title_en : raciMatrixData[2].title_it)) || "Protocollo Fast-Sign 48h";
 
       let memo = "";
       if (currentLang === 'en') {
@@ -3079,9 +2960,9 @@ Accrued financial exposure across tied contractual milestones stands at € ${do
 
 4. ACTIONABLE MITIGATION LEVERS & RACI GOVERNANCE MATRIX
 The Steering Committee is presented with the following remediation options with formal RACI assignment:
-  • Option B (Selective De-Scoping) [RACI: Accountable: Product Owner / Steering]: Defer secondary features to Phase 2 (estimated recovery: ${dsDays} days at zero direct financial cost).
-  • Option C (Fast-Sign 48h Protocol) [RACI: Accountable: CEO / DG; Responsible: Legal & Procurement]: Establish a mandatory 48-hour silent-assent policy across pending approvals in ${topDept}.
-  • Option A (Fast-Tracking Extra Budget) [RACI: Accountable: Program Sponsor; Responsible: PMO Lead]: Approve an extraordinary contingency authorization of € ${ftCost.toLocaleString('it-IT')} for vendor capacity doubling (estimated recovery: ${ftDays} days).`;
+  • ${title2} [RACI: Accountable: Product Owner / Steering]: Defer secondary features to Phase 2 (estimated recovery: ${dsDays} days at zero direct financial cost).
+  • ${title3} [RACI: Accountable: CEO / DG; Responsible: Legal & Procurement]: Establish a mandatory 48-hour silent-assent policy across pending approvals in ${topDept}.
+  • ${title1} [RACI: Accountable: Program Sponsor; Responsible: PMO Lead]: Approve an extraordinary contingency authorization of € ${ftCost.toLocaleString('it-IT')} for vendor capacity doubling (estimated recovery: ${ftDays} days).`;
       } else {
         memo = `OGGETTO: STATO DI AVANZAMENTO, AUDIT DI GOVERNANCE & PIANO DI RIENTRO — "${name.toUpperCase()}"
 
@@ -3099,9 +2980,9 @@ Il danno economico indotto sulle milestone contrattuali è pari a € ${dominoLo
 
 4. DELIBERA SULLE OPZIONI DI MITIGAZIONE & MATRICE RACI
 Si sottopongono alla delibera formale dello Steering Committee le seguenti opzioni di intervento con attribuzione di ruoli:
-  • Opzione B (De-Scoping Selettivo) [RACI: Accountable: Product Owner / Steering]: Rinvio a Fase 2 delle feature accessorie (recupero stimato: ${dsDays} giorni a costo zero).
-  • Opzione C (Protocollo Fast-Sign 48h) [RACI: Accountable: CEO / DG; Responsible: Legal & Procurement]: Introduzione del silenzio-assenso a 48 ore per tutte le approvazioni pendenti in ${topDept}.
-  • Opzione A (Fast-Tracking Extra) [RACI: Accountable: Program Sponsor; Responsible: PMO Lead]: Autorizzazione stanziamento contingency di € ${ftCost.toLocaleString('it-IT')} per raddoppio capacità (recupero: ${ftDays} giorni).`;
+  • ${title2} [RACI: Accountable: Product Owner / Steering]: Rinvio a Fase 2 delle feature accessorie (recupero stimato: ${dsDays} giorni a costo zero).
+  • ${title3} [RACI: Accountable: CEO / DG; Responsible: Legal & Procurement]: Introduzione del silenzio-assenso a 48 ore per tutte le approvazioni pendenti in ${topDept}.
+  • ${title1} [RACI: Accountable: Program Sponsor; Responsible: PMO Lead]: Autorizzazione stanziamento contingency di € ${ftCost.toLocaleString('it-IT')} per raddoppio capacità (recupero: ${ftDays} giorni).`;
       }
 
       lastGeneratedMemoText = memo;
@@ -3157,31 +3038,164 @@ Si sottopongono alla delibera formale dello Steering Committee le seguenti opzio
       showToast(currentLang === 'en' ? "Memorandum copied to clipboard!" : "Memorandum copiato negli appunti!");
     }
 
+    // COMPREHENSIVE CSV EXPORT WITH DYNAMIC EXCEL FORMULAS
     function exportComprehensiveCSV() {
       const scen = enterpriseCatalog.find(s => s.id === activeScenarioId) || enterpriseCatalog[0];
       const activeName = (currentLang === 'en' && scen.name_en) ? scen.name_en : scen.name_it;
-      let csv = "\uFEFF";
-      csv += "STRATGOV OS — EXECUTIVE GOVERNANCE AUDIT LEDGER\r\n";
-      csv += `${currentLang === 'en' ? 'Initiative' : 'Iniziativa'};${activeName}\r\n`;
-      csv += `${currentLang === 'en' ? 'Date' : 'Data'};${new Date().toLocaleDateString(currentLang === 'en' ? 'en-US' : 'it-IT')}\r\n`;
-      csv += `${currentLang === 'en' ? 'Total Exposure' : 'Esposizione Totale'};${document.getElementById('kpi-total-cost')?.innerText || '€ 0'}\r\n\r\n`;
-      csv += currentLang === 'en'
-        ? "ID;Downstream Initiative;Critical Path (CPM);Tolerance (days);Penalty Rate (€/day)\r\n"
-        : "ID;Iniziativa a Valle;Percorso Critico (CPM);Tolleranza (gg);Tariffa Danno (€/gg)\r\n";
+      const isEn = (currentLang === 'en');
+      const sep = ";";
 
-      initiativesData.forEach((i, idx) => {
-        csv += `${idx + 1};"${i.title_it}";${i.isCpm ? (currentLang === 'en' ? 'CRITICAL' : 'CRITICO') : 'FLOAT'};${i.tolDays};${i.lossPerDay}\r\n`;
+      const scopeVal = parseInt(document.getElementById('slider-scope')?.value || '3', 10);
+      const approvalVal = parseInt(document.getElementById('slider-approval')?.value || '8', 10);
+      const stakeVal = parseInt(document.getElementById('slider-stakeholders')?.value || '4', 10);
+      const strictVal = parseInt(document.getElementById('slider-strictness')?.value || '2', 10);
+
+      const stakeMultiplier = 1 + (stakeVal - 1) * 0.12;
+      const grossDelayDays = Math.max(0, Math.round(((approvalVal * 0.75) + (scopeVal - 1) * 3) * stakeMultiplier));
+      const dailyBurnRate = scen.dailyCost || 3200;
+
+      let strictMultiplierPenalty = 1.0;
+      let strictBufferDelta = 0;
+      if (strictVal === 1) { strictMultiplierPenalty = 0.85; strictBufferDelta = 2; }
+      else if (strictVal === 3) { strictMultiplierPenalty = 1.25; strictBufferDelta = -2; }
+
+      const ftDays = Math.max(2, Math.min(grossDelayDays - 1, Math.round(grossDelayDays * 0.38 + 2)));
+      const ftCost = Math.round(ftDays * dailyBurnRate * 1.25);
+      const dsDays = Math.max(2, Math.min(grossDelayDays, Math.round((scopeVal - 1) * 2.8 + grossDelayDays * 0.22 + 2)));
+      const fsDays = Math.max(1, Math.min(grossDelayDays, Math.round((approvalVal - 2) * 0.65 * (1 + (stakeVal - 1) * 0.08))));
+
+      let totalDelayDays = grossDelayDays;
+      let additionalCost = 0;
+      let activeMitigationName = isEn ? "None (Baseline)" : "Nessuna (Baseline)";
+      if (activeMitigationIndex === 1) {
+        totalDelayDays = Math.max(0, grossDelayDays - ftDays);
+        additionalCost = ftCost;
+        activeMitigationName = `Opzione A: Fast-Tracking Budget (+€${ftCost} / -${ftDays}gg)`;
+      } else if (activeMitigationIndex === 2) {
+        totalDelayDays = Math.max(0, grossDelayDays - dsDays);
+        activeMitigationName = `Opzione B: De-Scoping Selettivo (€0 / -${dsDays}gg)`;
+      } else if (activeMitigationIndex === 3) {
+        totalDelayDays = Math.max(0, grossDelayDays - fsDays);
+        activeMitigationName = `Opzione C: Protocollo Fast-Sign 48h (€0 / -${fsDays}gg)`;
+      }
+
+      const directLatencyCost = Math.round(totalDelayDays * dailyBurnRate);
+
+      let csv = "\uFEFF";
+      csv += isEn 
+        ? "STRATGOV OS — ENTERPRISE STRATEGIC GOVERNANCE AUDIT & DECISION LEDGER\r\n"
+        : "STRATGOV OS — DOSSIER DI GOVERNANCE STRATEGICA & REGISTRO DI ESPOSIZIONE\r\n";
+      csv += `${isEn ? 'Export Timestamp' : 'Data Estrazione'}${sep}${new Date().toLocaleString(isEn ? 'en-US' : 'it-IT')}\r\n`;
+      csv += `${isEn ? 'Program / Initiative' : 'Programma / Iniziativa'}${sep}"${activeName}"\r\n`;
+      csv += `${isEn ? 'Industry Category' : 'Settore Industriale'}${sep}"${scen.category}"\r\n`;
+      csv += `${isEn ? 'Active Mitigation Lever' : 'Leva di Mitigazione Attiva'}${sep}"${activeMitigationName}"\r\n\r\n`;
+
+      csv += isEn
+        ? "EXECUTIVE FINANCIAL & SCHEDULE BASELINE KPI;VALORE;UNITÀ;NOTE AUDIT\r\n"
+        : "KPI ESECUTIVI DI BASELINE & RISCHIO FINANZIARIO;VALORE;UNITÀ;NOTE AUDIT\r\n";
+      csv += `${isEn ? 'Allocated Program Budget' : 'Budget Totale Stanziato'}${sep}${scen.budget}${sep}€${sep}${isEn ? 'Baseline budget' : 'Perimetro iniziale approvato'}\r\n`;
+      csv += `${isEn ? 'Planned Duration' : 'Durata Contrattuale'}${sep}${scen.months}${sep}${isEn ? 'months' : 'mesi'}${sep}${isEn ? 'Target schedule' : 'Scadenza contrattuale'}\r\n`;
+      csv += `${isEn ? 'Daily Carrying Cost' : 'Carrying Cost Giornaliero'}${sep}${dailyBurnRate}${sep}€/${isEn ? 'day' : 'giorno'}${sep}${isEn ? 'Unproductive team burn rate' : 'Costo team improduttivo in attesa'}\r\n`;
+      csv += `${isEn ? 'Projected Delay' : 'Ritardo Cumulato Stimato'}${sep}${totalDelayDays}${sep}${isEn ? 'days' : 'giorni'}${sep}+${(totalDelayDays / 7).toFixed(1)} ${isEn ? 'weeks' : 'settimane'}\r\n`;
+      csv += `${isEn ? 'Direct Latency Cost' : 'Costo Diretto di Latenza'}${sep}${directLatencyCost}${sep}€${sep}${isEn ? 'Carrying cost accumulated' : 'Costo stallo cumulato'}\r\n`;
+      csv += `${isEn ? 'Direct Cost Impact on Budget' : 'Incidenza su Budget'}${sep}${((directLatencyCost / scen.budget) * 100).toFixed(2)}%${sep}%${sep}${isEn ? '% of total budget consumed' : '% del capitale di programma'}\r\n\r\n`;
+
+      const weights = scen.weights || [0.20, 0.40, 0.25, 0.15];
+      const deptNames = isEn
+        ? ["Legal & Compliance Office", "Executive / C-Level Direction", "IT & Enterprise Architecture", "Procurement, Tenders & Vendors"]
+        : ["Ufficio Legale & Compliance", "Direzione Generale / C-Level", "IT & Architettura Enterprise", "Acquisti, Gare & Vendor"];
+
+      csv += isEn
+        ? "DEPARTMENT ROOT CAUSE BREAKDOWN;LATENCY (DAYS);SHARE OF DELAY (%);CARRYING COST (€);TYPICAL RACI ROLE;BOTTLENECK STATUS\r\n"
+        : "ATTRIBUZIONE ROOT CAUSE PER REPARTO;LATENZA (GIORNI);QUOTA SU RITARDO (%);COSTO STALLO (€);RUOLO RACI TIPICO;STATO BOTTLENECK\r\n";
+
+      let maxDeptIdx = 0;
+      for (let i = 1; i < weights.length; i++) {
+        if (weights[i] > weights[maxDeptIdx]) maxDeptIdx = i;
+      }
+
+      weights.forEach((w, idx) => {
+        const dDays = Math.round(totalDelayDays * w);
+        const dCost = Math.round(directLatencyCost * w);
+        const dPct = Math.round(w * 100);
+        const isTop = idx === maxDeptIdx;
+        const raciRole = idx === 0 ? "Consulted (C)" : (idx === 1 ? "Accountable (A)" : (idx === 2 ? "Responsible (R)" : "Responsible (R)"));
+        const statusBadge = isTop ? (isEn ? "PRIMARY BOTTLENECK" : "COLLO DI BOTTIGLIA PRIMARIO") : (isEn ? "Secondary Friction" : "Frizione Secondaria");
+        csv += `"${deptNames[idx]}"${sep}${dDays}${sep}${dPct}%${sep}${dCost}${sep}${raciRole}${sep}${statusBadge}\r\n`;
       });
+      csv += `${isEn ? 'TOTALS / FORMULAS' : 'TOTALE / FORMULE'}${sep}=SUM(B13:B16)${sep}100%${sep}=SUM(D13:D16)${sep}-${sep}-\r\n\r\n`;
+
+      csv += isEn
+        ? "CRITICAL PATH (CPM) DOWNSTREAM REGISTER;NETWORK LOGIC;BUFFER (DAYS);GROSS DELAY (DAYS);NET SLIPPAGE (DAYS);PENALTY RATE (€/DAY);ACCRUED DAMAGE (€);STATUS\r\n"
+        : "REGISTRO DETTAGLIATO DIPENDENZE CRITICHE (CPM);LOGICA DI RETE;BUFFER (GIORNI);RITARDO LORDO (GIORNI);SLITTAMENTO NETTO (GIORNI);PENALE (€/GIORNO);DANNO FINANZIARIO MATURATO (€);STATO\r\n";
+
+      let cpmDominoTotal = 0;
+      initiativesData.forEach((item, idx) => {
+        const isCritical = item.isCpm;
+        const effTol = Math.max(0, item.tolDays + strictBufferDelta);
+        const effLoss = Math.round(item.lossPerDay * strictMultiplierPenalty);
+        const netExceeded = Math.max(0, totalDelayDays - effTol);
+        const accruedDamage = isCritical ? netExceeded * effLoss : 0;
+        cpmDominoTotal += accruedDamage;
+
+        let statusTxt = isEn ? "On Track" : "On Track";
+        if (totalDelayDays > effTol) {
+          if (!isCritical) statusTxt = isEn ? "Float Absorbed (Zero Penalty)" : "Float Assorbito (No Penale)";
+          else if (totalDelayDays <= effTol + 12) statusTxt = isEn ? "On Alert (Penalties Accruing)" : "In Allerta (Penali in Corso)";
+          else statusTxt = isEn ? "CRITICAL PARALYSIS (Severe Loss)" : "PARALISI CRITICA (Danno Grave)";
+        }
+
+        const logicTxt = isCritical ? (isEn ? "CRITICAL PATH (CPM)" : "PERCORSO CRITICO (CPM)") : (isEn ? "FREE FLOAT" : "FLOAT LIBERO");
+        csv += `"${idx + 1}. ${item.title_it}"${sep}"${logicTxt}"${sep}${effTol}${sep}${totalDelayDays}${sep}${netExceeded}${sep}${effLoss}${sep}${accruedDamage}${sep}"${statusTxt}"\r\n`;
+      });
+
+      const cpmEndRow = 19 + initiativesData.length;
+      csv += `${isEn ? 'TOTAL ACCRUED DOMINO DAMAGE' : 'TOTALE DANNO INDOTTO CPM'}${sep}-${sep}-${sep}-${sep}-${sep}-${sep}=SUM(G20:G${cpmEndRow})${sep}${isEn ? 'Total Penalties' : 'Totale Penali'}\r\n\r\n`;
+
+      const totalExposure = directLatencyCost + cpmDominoTotal + additionalCost;
+      csv += isEn
+        ? "ENTERPRISE FINANCIAL EXPOSURE CONSOLIDATION;AMOUNT (€);COMPOSITION (%);STRATEGIC RISK ASSESSMENT\r\n"
+        : "QUADRO CONSOLIDATO ESPOSIZIONE FINANZIARIA;IMPORTO (€);COMPOSIZIONE (%);VALUTAZIONE STRATEGICA DEL RISCHIO\r\n";
+      csv += `${isEn ? 'Direct Latency Carrying Cost' : 'Costo Diretto di Latenza (Team fermo)'}${sep}${directLatencyCost}${sep}${totalExposure > 0 ? ((directLatencyCost / totalExposure) * 100).toFixed(1) : 0}%${sep}${isEn ? 'Unproductive operational cash burn' : 'Assorbimento cassa per immobilizzo team'}\r\n`;
+      csv += `${isEn ? 'Downstream Contractual Domino Penalties' : 'Penali Indotte su Percorso Critico (CPM)'}${sep}${cpmDominoTotal}${sep}${totalExposure > 0 ? ((cpmDominoTotal / totalExposure) * 100).toFixed(1) : 0}%${sep}${isEn ? 'Commercial damage & vendor penalties' : 'Penali verso partner e committenti a valle'}\r\n`;
+      if (additionalCost > 0) {
+        csv += `${isEn ? 'Fast-Tracking Extra Capacity Budget' : 'Budget Straordinario Fast-Tracking'}${sep}${additionalCost}${sep}${totalExposure > 0 ? ((additionalCost / totalExposure) * 100).toFixed(1) : 0}%${sep}${isEn ? 'Extra vendor capacity injection' : 'Iniezione contingency per recupero tempi'}\r\n`;
+      }
+      csv += `${isEn ? 'TOTAL CAPITAL EXPOSURE AT RISK' : 'ESPOSIZIONE TOTALE A RISCHIO'}${sep}${totalExposure}${sep}100%${sep}${isEn ? 'Total financial impact of decision friction' : 'Danno complessivo stimato da frizione decisionale'}\r\n\r\n`;
+
+      csv += isEn
+        ? "MITIGATION SCENARIOS COMPARATOR;LEVER TYPE;RACI (ACCOUNTABLE);RACI (RESPONSIBLE);RECOVERY (DAYS);IMPLEMENTATION COST (€);PENALTIES AVOIDED (€);NET FINANCIAL BENEFIT (€)\r\n"
+        : "COMPARATORE SCENARI DI RIENTRO;TIPOLOGIA LEVA;RACI (ACCOUNTABLE);RACI (RESPONSIBLE);RECUPERO (GIORNI);COSTO ATTUAZIONE (€);PENALI EVITATE (€);BENEFICIO NETTO (€)\r\n";
+      
+      const opt1Avoided = Math.round(cpmDominoTotal * 0.70);
+      const opt2Avoided = Math.round(cpmDominoTotal * 0.95);
+      const opt3Avoided = Math.round(cpmDominoTotal * 0.65);
+
+      csv += `"Opzione A: Fast-Tracking Budget"${sep}${isEn ? 'Extra Capacity' : 'Extra-Capacità'}${sep}"Program Sponsor"${sep}"PMO Lead & Vendors"${sep}-${ftDays} gg${sep}${ftCost}${sep}${opt1Avoided}${sep}${opt1Avoided - ftCost}\r\n`;
+      csv += `"Opzione B: De-Scoping Selettivo"${sep}${isEn ? 'Zero Cost (Scope Freeze)' : 'Costo Zero (Taglio Scope)'}${sep}"Product Owner"${sep}"PMO Lead"${sep}-${dsDays} gg${sep}0${sep}${opt2Avoided}${sep}${opt2Avoided}\r\n`;
+      csv += `"Opzione C: Protocollo Fast-Sign 48h"${sep}${isEn ? 'Internal Governance Policy' : 'Governance & Policy'}${sep}"CEO / Direttore Generale"${sep}"Legal & Procurement"${sep}-${fsDays} gg${sep}0${sep}${opt3Avoided}${sep}${opt3Avoided}\r\n\r\n`;
+
+      csv += isEn
+        ? "ACTIVE RACI GOVERNANCE MATRIX ALLOCATIONS;BOARD / CEO;PROGRAM SPONSOR;PMO LEAD;PRODUCT OWNER;LEGAL / COMPLIANCE;PROCUREMENT\r\n"
+        : "ALLOCAZIONI MATRICE RACI ATTIVA;BOARD / CEO;PROGRAM SPONSOR;PMO LEAD;PRODUCT OWNER;LEGAL / COMPLIANCE;PROCUREMENT\r\n";
+
+      raciMatrixData.forEach((item, idx) => {
+        const title = (isEn && item.title_en) ? item.title_en : item.title_it;
+        const r = item.roles || { board: 'I', sponsor: 'C', pmo: 'R', po: 'A', legal: 'C', proc: 'I' };
+        csv += `"${idx + 1}. ${title}"${sep}"${r.board}"${sep}"${r.sponsor}"${sep}"${r.pmo}"${sep}"${r.po}"${sep}"${r.legal}"${sep}"${r.proc}"\r\n`;
+      });
+      csv += "\r\n";
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
+      const safeProjectName = activeName.replace(/[^a-zA-Z0-9_-]/g, '_');
       a.setAttribute("href", url);
-      a.setAttribute("download", `StratGov_Audit_Ledger_${new Date().toISOString().slice(0, 10)}.csv`);
+      a.setAttribute("download", `StratGov_Audit_Ledger_${safeProjectName}_${new Date().toISOString().slice(0, 10)}.csv`);
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      showToast(currentLang === 'en' ? "CSV Ledger downloaded!" : "Ledger CSV scaricato!");
+      showToast(isEn ? "Detailed Excel/CSV Audit Ledger downloaded!" : "Ledger Completo Excel/CSV scaricato!");
     }
 
     function showToast(msg) {
@@ -3195,6 +3209,7 @@ Si sottopongono alla delibera formale dello Steering Committee le seguenti opzio
       }, 2500);
     }
 
+    // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -3206,6 +3221,7 @@ Si sottopongono alla delibera formale dello Steering Committee le seguenti opzio
       }
     });
 
+    // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       initCharts();
 
