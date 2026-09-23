@@ -93,9 +93,7 @@
 
 <body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden antialiased selection:bg-brand-500 selection:text-white">
 
-  <!-- ========================================================================= -->
   <!-- SIDEBAR SINISTRA ENTERPRISE DARK -->
-  <!-- ========================================================================= -->
   <aside class="w-64 bg-surface-sidebar text-slate-300 flex flex-col flex-shrink-0 z-30 select-none border-r border-slate-800/80 no-print">
     
     <!-- Logo & Versione -->
@@ -123,7 +121,7 @@
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
         </span>
         <select id="scenarioSelectorDropdown" onchange="switchScenarioFromDropdown(this.value)" class="w-full appearance-none text-[11px] font-medium bg-slate-800/80 hover:bg-slate-800 text-slate-200 rounded-lg py-1.5 pl-8 pr-6 border border-slate-700/70 focus:ring-1 focus:ring-brand-500 focus:outline-none transition cursor-pointer truncate">
-          <!-- Generato dinamicamente via JS -->
+          <!-- Popolato via JS -->
         </select>
         <span class="pointer-events-none absolute right-2 text-slate-400">
           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -187,7 +185,7 @@
       </div>
     </nav>
 
-    <!-- Footer Sidebar con scorciatoia rapida -->
+    <!-- Footer Sidebar -->
     <div class="p-3 border-t border-slate-800">
       <button onclick="createNewScenarioModal()" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white py-2 px-3 rounded-lg text-xs font-bold transition shadow-md shadow-brand-900/40 cursor-pointer">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
@@ -196,9 +194,6 @@
     </div>
   </aside>
 
-  <!-- ========================================================================= -->
-  <!-- AREA CONTENUTO PRINCIPALE -->
-  <!-- ========================================================================= -->
   <main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-100">
     
     <!-- Top Header Bar -->
@@ -248,9 +243,7 @@
     <!-- Contenitore Scrollabile delle Viste -->
     <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 min-w-[760px]">
 
-      <!-- ===================================================================== -->
       <!-- VISTA 1: PANORAMICA PORTFOLIO -->
-      <!-- ===================================================================== -->
       <section id="view-portfolio" class="hidden space-y-5">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
@@ -342,9 +335,7 @@
         </div>
       </section>
 
-      <!-- ===================================================================== -->
       <!-- VISTA 2: EXECUTIVE DASHBOARD -->
-      <!-- ===================================================================== -->
       <section id="view-dashboard" class="space-y-6">
         <div class="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs relative overflow-hidden">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -510,8 +501,12 @@
                 <span id="txtParalysisStatus" class="text-xs font-bold text-amber-600">Rischio Moderato</span>
               </div>
               <div class="flex items-center space-x-2">
-                <div class="w-12 h-12 rounded-full border-4 border-amber-500/20 border-t-amber-500 flex items-center justify-center font-black text-xs text-slate-800" id="circleParalysis">
-                  52%
+                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+                    <path id="circleParalysisTrack" stroke="#fef3c7" stroke-width="3.5" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <path id="circleParalysisGauge" class="transition-all duration-300 ease-out" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="52, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                  </svg>
+                  <span id="circleParalysis" class="absolute font-black text-xs text-slate-800 font-mono-num">52%</span>
                 </div>
               </div>
             </div>
@@ -597,9 +592,7 @@
         </div>
       </section>
 
-      <!-- ===================================================================== -->
-      <!-- VISTA 3: PERCORSO CRITICO CPM -->
-      <!-- ===================================================================== -->
+      <!-- VISTA 3: PERCORSO CRITICO CPM (CON AUTO-ADATTA IA SETTORIALE) -->
       <section id="view-cpm" class="hidden space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2 border-b border-slate-200/80">
           <div class="flex items-center space-x-2">
@@ -617,9 +610,9 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span data-i18n="cpm_float_lbl">Float Libero</span>
               </span>
             </div>
-            <button onclick="openAIModal()" class="inline-flex items-center space-x-1.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-sm transition cursor-pointer active:scale-95">
+            <button id="btnAutoAdaptAI" onclick="openAIModal()" class="inline-flex items-center space-x-1.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-sm transition cursor-pointer active:scale-95">
               <svg class="w-4 h-4 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span data-i18n="cpm_ai_btn">✨ Auto-Adatta con IA & Profilo di Rischio</span>
+              <span id="btnAutoAdaptAIText" data-i18n="cpm_ai_btn">✨ Auto-Adatta con IA & Profilo di Rischio</span>
             </button>
           </div>
         </div>
@@ -634,13 +627,23 @@
               <span class="text-[10px] font-mono text-indigo-700 bg-indigo-100/90 border border-indigo-200 px-2 py-0.5 rounded font-bold" id="aiRationalProfileBadge">Analisi di Settore</span>
             </div>
             <p id="aiRationalText" class="text-indigo-950 leading-relaxed font-medium">
-              Clicca su "Auto-Adatta con IA & Profilo di Rischio" per generare all'istante i deliverable specifici del settore, le tolleranze di buffer e le penali proporzionali al burn rate.
+              Clicca su "Auto-Adatta con IA & Profilo di Rischio" per scegliere il profilo di stress-test e generare all'istante i deliverable specifici del settore, le tolleranze di buffer e le penali proporzionali.
             </p>
           </div>
         </div>
 
+        <!-- Card compatta e armonizzata per il Grafo Topologico CPM -->
         <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs">
-          <div id="cpmTopologyContainer" class="w-full bg-slate-50/70 rounded-xl p-3 border border-slate-200/70 overflow-x-auto"></div>
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100/80">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-2 h-2 rounded-full bg-indigo-600 ring-4 ring-indigo-50"></div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800" data-i18n="cpm_topo_title">Mappa dei Flussi & Nodi di Dipendenza</h3>
+            </div>
+            <div class="flex items-center space-x-3 text-xs font-mono">
+              <span id="cpmTopologyMeta" class="text-[11px] text-slate-500 font-semibold bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/80">4 Nodi • Max Slip: +0 gg</span>
+            </div>
+          </div>
+          <div id="cpmTopologyContainer" class="w-full bg-slate-50/50 rounded-xl p-3 sm:p-4 border border-slate-200/70 overflow-x-auto"></div>
         </div>
 
         <div class="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
@@ -666,9 +669,7 @@
         </div>
       </section>
 
-      <!-- ===================================================================== -->
       <!-- VISTA 4: MATRICE RISCHI & HEATMAP 5x5 (EMV) -->
-      <!-- ===================================================================== -->
       <section id="view-risks" class="hidden space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -728,9 +729,7 @@
         </div>
       </section>
 
-      <!-- ===================================================================== -->
       <!-- VISTA 5: FINANCIAL HEALTH & EARNED VALUE MANAGEMENT (EVM) -->
-      <!-- ===================================================================== -->
       <section id="view-evm" class="hidden space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -770,7 +769,7 @@
           <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs">
             <div class="flex items-center justify-between text-slate-500 mb-1">
               <span class="text-[10px] font-bold uppercase tracking-wider" data-i18n="evm_eac_lbl">Schedulato al Completamento (EAC)</span>
-              <span class="text-[10px] font-mono font-bold text-slate-400">AC + (BAC - EV)/(CPI × SPI)</span>
+              <span class="text-[10px] font-mono font-bold text-slate-400">BAC / CPI</span>
             </div>
             <div id="evmEAC" class="text-2xl font-black text-slate-900 font-mono-num">€ 1.279.848</div>
             <p class="text-[11px] text-slate-400 mt-1" data-i18n="evm_eac_sub">Costo finale stimato a finire</p>
@@ -863,9 +862,7 @@
         </div>
       </section>
 
-      <!-- ===================================================================== -->
       <!-- VISTA 6: GOVERNANCE RACI & SCENARI DI MITIGAZIONE -->
-      <!-- ===================================================================== -->
       <section id="view-raci" class="hidden space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -922,9 +919,7 @@
         </div>
       </section>
 
-      <!-- ===================================================================== -->
       <!-- VISTA 7: DOSSIER ESECUTIVO PER IL BOARD -->
-      <!-- ===================================================================== -->
       <section id="view-dossier" class="hidden space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
           <div>
@@ -1080,7 +1075,7 @@
     </div>
   </div>
 
-  <!-- MODALE CONFIGURAZIONE IA & PROFILO DI RISCHIO -->
+  <!-- MODALE AVANZATO: CONFIGURAZIONE IA & PROFILO DI RISCHIO + PROMPT LIBERO -->
   <div id="aiModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
       <div class="p-5 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
@@ -1103,28 +1098,28 @@
           <label class="block font-bold text-slate-700 mb-1.5" data-i18n="ai_mod_profile_lbl">Seleziona Profilo di Rischio IA:</label>
           <div class="grid grid-cols-3 gap-2">
             <button type="button" onclick="selectAIProfile('optimistic')" id="aiProf_optimistic" class="p-2.5 rounded-xl border text-center font-semibold transition cursor-pointer bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100">
-              <span class="block text-emerald-600 font-bold">🟢 Agile / Ottimista</span>
-              <span class="text-[10px] text-slate-400">Buffer ampi, penali basse</span>
+              <span class="block text-emerald-600 font-bold" data-i18n="ai_prof_opt">🟢 Agile / Ottimista</span>
+              <span class="text-[10px] text-slate-400" data-i18n="ai_prof_opt_sub">Buffer ampi, penali basse</span>
             </button>
             <button type="button" onclick="selectAIProfile('realistic')" id="aiProf_realistic" class="p-2.5 rounded-xl border text-center font-semibold transition cursor-pointer bg-brand-50 border-brand-500 text-brand-900 ring-1 ring-brand-500">
-              <span class="block text-brand-600 font-bold">🟡 Standard / Realistico</span>
-              <span class="text-[10px] text-slate-400">Benchmark di mercato</span>
+              <span class="block text-brand-600 font-bold" data-i18n="ai_prof_real">🟡 Standard / Realistico</span>
+              <span class="text-[10px] text-slate-400" data-i18n="ai_prof_real_sub">Benchmark di mercato</span>
             </button>
             <button type="button" onclick="selectAIProfile('worstcase')" id="aiProf_worstcase" class="p-2.5 rounded-xl border text-center font-semibold transition cursor-pointer bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100">
-              <span class="block text-rose-600 font-bold">🔴 Worst-Case / Stress</span>
-              <span class="text-[10px] text-slate-400">Zero buffer, audit rigido</span>
+              <span class="block text-rose-600 font-bold" data-i18n="ai_prof_worst">🔴 Worst-Case / Stress</span>
+              <span class="text-[10px] text-slate-400" data-i18n="ai_prof_worst_sub">Zero buffer, audit rigido</span>
             </button>
           </div>
         </div>
 
         <div>
           <label for="aiCustomPromptInput" class="block font-bold text-slate-700 mb-1.5" data-i18n="ai_mod_prompt_lbl">Prompt Personalizzato (Emergenza o Vincolo Straordinario):</label>
-          <textarea id="aiCustomPromptInput" rows="3" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium" placeholder="Es. Mancanza temporanea di sviluppatori senior backend e blocco acquisti esteri..."></textarea>
+          <textarea id="aiCustomPromptInput" rows="3" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium" data-i18n-placeholder="ai_mod_prompt_ph" placeholder="Es. Mancanza temporanea di sviluppatori senior backend e blocco acquisti esteri..."></textarea>
           <span class="text-[10px] text-slate-400 mt-1 block" data-i18n="ai_mod_prompt_hint">L'IA analizzerà il prompt per riadattare istantaneamente tolleranze e penali CPM.</span>
         </div>
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-end space-x-2">
-          <button onclick="closeAIModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold transition cursor-pointer">Annulla</button>
+          <button onclick="closeAIModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold transition cursor-pointer" data-i18n="btn_cancel">Annulla</button>
           <button onclick="executeAdvancedAIAdaptation()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold transition shadow-sm cursor-pointer" data-i18n="ai_mod_exec">Esegui Analisi & Adattamento IA</button>
         </div>
       </div>
@@ -1134,9 +1129,6 @@
   <!-- CONTENITORE REPORT DI STAMPA PDF OTTIMIZZATO -->
   <div id="printableExecutiveReport" class="hidden"></div>
 
-  <!-- ========================================================================= -->
-  <!-- JAVASCRIPT LOGIC -->
-  <!-- ========================================================================= -->
   <script>
     let currentLang = 'it';
     let selectedAIProfile = 'realistic';
@@ -1148,6 +1140,7 @@
         nav_portfolio: "Panoramica Portfolio",
         nav_dashboard: "Executive Dashboard",
         nav_cpm: "Percorso Critico (CPM)",
+        cpm_topo_title: "Mappa dei Flussi & Nodi di Dipendenza",
         grp_risk: "Controllo Rischi & Valore",
         nav_risks: "Matrice Rischi & EMV",
         nav_evm: "Financial Health & EVM",
@@ -1331,8 +1324,16 @@
         ai_mod_title: "Consulente Strategico IA & Stress Test",
         ai_mod_sub: "Seleziona il profilo di rischio e inserisci un prompt personalizzato.",
         ai_mod_profile_lbl: "Seleziona Profilo di Rischio IA:",
+        ai_prof_opt: "🟢 Agile / Ottimista",
+        ai_prof_opt_sub: "Buffer ampi, penali basse",
+        ai_prof_real: "🟡 Standard / Realistico",
+        ai_prof_real_sub: "Benchmark di mercato",
+        ai_prof_worst: "🔴 Worst-Case / Stress",
+        ai_prof_worst_sub: "Zero buffer, audit rigido",
         ai_mod_prompt_lbl: "Prompt Personalizzato (Emergenza o Vincolo Straordinario):",
+        ai_mod_prompt_ph: "Es. Mancanza temporanea di sviluppatori senior backend e blocco acquisti esteri...",
         ai_mod_prompt_hint: "L'IA analizzerà il prompt per riadattare istantaneamente tolleranze e penali CPM.",
+        btn_cancel: "Annulla",
         ai_mod_exec: "Esegui Analisi & Adattamento IA"
       },
       en: {
@@ -1341,6 +1342,7 @@
         nav_portfolio: "Portfolio Overview",
         nav_dashboard: "Executive Dashboard",
         nav_cpm: "Critical Path (CPM)",
+        cpm_topo_title: "Flow Map & Dependency Nodes",
         grp_risk: "Risk & Value Control",
         nav_risks: "Risk Matrix & EMV",
         nav_evm: "Financial Health & EVM",
@@ -1524,8 +1526,16 @@
         ai_mod_title: "AI Strategic Advisor & Stress Test",
         ai_mod_sub: "Select risk profile and input custom prompt.",
         ai_mod_profile_lbl: "Select AI Risk Profile:",
+        ai_prof_opt: "🟢 Agile / Optimistic",
+        ai_prof_opt_sub: "Wide buffers, low penalties",
+        ai_prof_real: "🟡 Standard / Realistic",
+        ai_prof_real_sub: "Market benchmark",
+        ai_prof_worst: "🔴 Worst-Case / Stress",
+        ai_prof_worst_sub: "Zero buffer, strict audit",
         ai_mod_prompt_lbl: "Custom Prompt (Emergency or Extraordinary Constraint):",
-        ai_mod_prompt_hint: "AI will analyze prompt to instantly readjust CPM tolerances and penalties.",
+        ai_mod_prompt_ph: "E.g. Temporary backend shortage and procurement standstill...",
+        ai_mod_prompt_hint: "AI analyzes this constraint to re-sequence CPM buffers and penalties.",
+        btn_cancel: "Cancel",
         ai_mod_exec: "Execute AI Analysis & Adaptation"
       }
     };
@@ -1544,12 +1554,23 @@
         if (dict[key]) el.setAttribute('placeholder', dict[key]);
       });
 
-      document.getElementById('langBtnIt').className = lang === 'it' 
-        ? "px-2.5 py-1 rounded bg-brand-600 text-white shadow-xs cursor-pointer"
-        : "px-2.5 py-1 text-slate-400 hover:text-slate-200 cursor-pointer";
-      document.getElementById('langBtnEn').className = lang === 'en' 
-        ? "px-2.5 py-1 rounded bg-brand-600 text-white shadow-xs cursor-pointer"
-        : "px-2.5 py-1 text-slate-400 hover:text-slate-200 cursor-pointer";
+      const itBtn = document.getElementById('langBtnIt');
+      const enBtn = document.getElementById('langBtnEn');
+      if (itBtn && enBtn) {
+        itBtn.className = lang === 'it' 
+          ? "px-2.5 py-1 rounded bg-brand-600 text-white shadow-xs cursor-pointer"
+          : "px-2.5 py-1 text-slate-400 hover:text-slate-200 cursor-pointer";
+        enBtn.className = lang === 'en' 
+          ? "px-2.5 py-1 rounded bg-brand-600 text-white shadow-xs cursor-pointer"
+          : "px-2.5 py-1 text-slate-400 hover:text-slate-200 cursor-pointer";
+      }
+
+      if (chartLatencyInstance) {
+        chartLatencyInstance.data.labels = lang === 'en'
+          ? ['Legal & Compliance', 'C-Level / Steering', 'IT & Architecture', 'Procurement & Vendor']
+          : ['Legale & Compliance', 'C-Level / Steering', 'IT & Architettura', 'Acquisti & Vendor'];
+        chartLatencyInstance.update();
+      }
 
       renderPortfolioOverview();
       renderMitigationCards();
@@ -1563,6 +1584,7 @@
     const state = {
       activeView: 'dashboard',
       activeProjectId: 'P01',
+      activeMitigation: null,
       projects: ALL_30_SCENARIOS.slice(0, 10),
       aiRationaleTextIt: "Il motore IA analizza settore, durata e burn rate del progetto attivo per calibrare deliverable, buffer e penali CPM.",
       aiRationaleTextEn: "AI engine inspects active sector, duration, and burn rate to calibrate deliverables, buffers, and CPM penalties.",
@@ -1608,36 +1630,36 @@
       ];
 
       const scenariosCatalog = [
-        { name: "Migrazione Core Banking & Resilienza DORA", dom: 0, b: 1850000, d: 18, r: 5200, s: 2, a: 14, st: 5, rig: 3 },
-        { name: "Lancio Piattaforma Omnicanale 2026", dom: 1, b: 650000, d: 12, r: 2600, s: 3, a: 18, st: 6, rig: 4 },
-        { name: "Modernizzazione ERP SAP S/4HANA Supply Chain", dom: 2, b: 2400000, d: 24, r: 6400, s: 4, a: 22, st: 7, rig: 5 },
-        { name: "Data Lakehouse & Enterprise AI Governance", dom: 3, b: 950000, d: 14, r: 3100, s: 2, a: 10, st: 3, rig: 2 },
-        { name: "Trial Clinico Fase III & Sottomissione EMA", dom: 4, b: 3400000, d: 24, r: 7800, s: 2, a: 18, st: 6, rig: 3 },
-        { name: "Parco Eolico Offshore & Connessione Rete Terna", dom: 5, b: 2800000, d: 18, r: 6100, s: 3, a: 22, st: 6, rig: 3 },
-        { name: "Certificazione Avionica & Test Strutturali DO-178C", dom: 6, b: 4200000, d: 30, r: 9500, s: 3, a: 20, st: 7, rig: 3 },
-        { name: "Digital Identity & Fascicolo Sanitario Elettronico PA", dom: 7, b: 1600000, d: 16, r: 4300, s: 4, a: 25, st: 8, rig: 4 },
-        { name: "Rollout Rete 5G Standalone & Edge Virtualization", dom: 8, b: 3100000, d: 20, r: 7200, s: 3, a: 16, st: 5, rig: 3 },
-        { name: "Motore Quotazione IFRS17 & Rischio Attuariale", dom: 9, b: 1250000, d: 15, r: 3800, s: 2, a: 12, st: 4, rig: 3 },
-        { name: "Transizione Pagamenti Istantanei EPC SEPA 2.0", dom: 0, b: 1450000, d: 14, r: 4200, s: 2, a: 11, st: 4, rig: 3 },
-        { name: "Sostituzione POS & Cashless Retail Hub", dom: 1, b: 780000, d: 10, r: 2400, s: 2, a: 8, st: 3, rig: 2 },
-        { name: "Automazione Magazzino Autonomo AGV", dom: 2, b: 1900000, d: 18, r: 5100, s: 3, a: 17, st: 5, rig: 4 },
-        { name: "Copilot Aziendale & LLM Sandbox Security", dom: 3, b: 540000, d: 8, r: 2200, s: 2, a: 9, st: 3, rig: 2 },
-        { name: "Liofilizzazione Farmaci Oncologici GMP Line", dom: 4, b: 2900000, d: 22, r: 6800, s: 3, a: 19, st: 6, rig: 4 },
-        { name: "Sistemi Smart Metering Gas & Telelettura IoT", dom: 5, b: 2100000, d: 16, r: 4900, s: 3, a: 15, st: 5, rig: 3 },
-        { name: "Scudo Elettronico Radionavigazione GNSS Resiliente", dom: 6, b: 3800000, d: 26, r: 8400, s: 3, a: 21, st: 7, rig: 4 },
-        { name: "Piattaforma Appalti Telematici MePA 2027", dom: 7, b: 1100000, d: 14, r: 3300, s: 4, a: 26, st: 8, rig: 5 },
-        { name: "Backbone Fibra Ottica FTTH Metropolitano", dom: 8, b: 2700000, d: 18, r: 5900, s: 2, a: 13, st: 4, rig: 3 },
-        { name: "Portale Broker B2B & Liquidazione Sinistri Auto", dom: 9, b: 890000, d: 11, r: 2900, s: 2, a: 10, st: 4, rig: 2 },
-        { name: "Piattaforma Antiriciclaggio AML & Graph Database", dom: 0, b: 1650000, d: 15, r: 4600, s: 3, a: 16, st: 5, rig: 4 },
-        { name: "Social Commerce & Live Shopping Microservizi", dom: 1, b: 420000, d: 7, r: 1900, s: 2, a: 7, st: 3, rig: 2 },
-        { name: "Tracciabilità Food Cold-Chain con RFID UHF", dom: 2, b: 820000, d: 12, r: 2700, s: 2, a: 12, st: 4, rig: 3 },
-        { name: "Agenti Conversazionali IA per Customer Service", dom: 3, b: 620000, d: 9, r: 2300, s: 2, a: 8, st: 3, rig: 2 },
-        { name: "Serializzazione & Anticontraffazione Farmaci FMD", dom: 4, b: 1750000, d: 14, r: 4400, s: 2, a: 14, st: 5, rig: 3 },
-        { name: "Storage Batterico BESS per Sottostazioni Alta Tensione", dom: 5, b: 3300000, d: 20, r: 7100, s: 3, a: 19, st: 6, rig: 3 },
-        { name: "Satellite CubeSat EO & Stazioni Riceventi Terra", dom: 6, b: 2950000, d: 22, r: 6600, s: 2, a: 16, st: 5, rig: 3 },
-        { name: "Piattaforma Notifiche Digitali Cittadino PagoPA", dom: 7, b: 1350000, d: 15, r: 3700, s: 4, a: 24, st: 7, rig: 4 },
-        { name: "Migrazione Cloud Telco Voicemail IMS", dom: 8, b: 1150000, d: 12, r: 3200, s: 2, a: 11, st: 4, rig: 2 },
-        { name: "Audit Modelli Solvency II & Validazione Risk Engine", dom: 9, b: 980000, d: 13, r: 3000, s: 2, a: 13, st: 5, rig: 3 }
+        { name: "Migrazione Core Banking & Resilienza DORA", dom: 0, b: 1850000, d: 18, r: 5200, s: 2, a: 14, st: 5, rig: 3, cpi: 0.91, spi: 0.73 },
+        { name: "Lancio Piattaforma Omnicanale 2026", dom: 1, b: 650000, d: 12, r: 2600, s: 3, a: 18, st: 6, rig: 4, cpi: 0.88, spi: 0.71 },
+        { name: "Modernizzazione ERP SAP S/4HANA Supply Chain", dom: 2, b: 2400000, d: 24, r: 6400, s: 4, a: 22, st: 7, rig: 5, cpi: 0.84, spi: 0.68 },
+        { name: "Data Lakehouse & Enterprise AI Governance", dom: 3, b: 950000, d: 14, r: 3100, s: 2, a: 10, st: 3, rig: 2, cpi: 0.96, spi: 0.89 },
+        { name: "Trial Clinico Fase III & Sottomissione EMA", dom: 4, b: 3400000, d: 24, r: 7800, s: 2, a: 18, st: 6, rig: 3, cpi: 0.93, spi: 0.81 },
+        { name: "Parco Eolico Offshore & Connessione Rete Terna", dom: 5, b: 2800000, d: 18, r: 6100, s: 3, a: 22, st: 6, rig: 3, cpi: 0.89, spi: 0.77 },
+        { name: "Certificazione Avionica & Test Strutturali DO-178C", dom: 6, b: 4200000, d: 30, r: 9500, s: 3, a: 20, st: 7, rig: 3, cpi: 0.85, spi: 0.72 },
+        { name: "Digital Identity & Fascicolo Sanitario Elettronico PA", dom: 7, b: 1600000, d: 16, r: 4300, s: 4, a: 25, st: 8, rig: 4, cpi: 0.78, spi: 0.62 },
+        { name: "Rollout Rete 5G Standalone & Edge Virtualization", dom: 8, b: 3100000, d: 20, r: 7200, s: 3, a: 16, st: 5, rig: 3, cpi: 0.92, spi: 0.85 },
+        { name: "Motore Quotazione IFRS17 & Rischio Attuariale", dom: 9, b: 1250000, d: 15, r: 3800, s: 2, a: 12, st: 4, rig: 3, cpi: 0.95, spi: 0.88 },
+        { name: "Transizione Pagamenti Istantanei EPC SEPA 2.0", dom: 0, b: 1450000, d: 14, r: 4200, s: 2, a: 11, st: 4, rig: 3, cpi: 0.94, spi: 0.84 },
+        { name: "Sostituzione POS & Cashless Retail Hub", dom: 1, b: 780000, d: 10, r: 2400, s: 2, a: 8, st: 3, rig: 2, cpi: 0.98, spi: 0.92 },
+        { name: "Automazione Magazzino Autonomo AGV", dom: 2, b: 1900000, d: 18, r: 5100, s: 3, a: 17, st: 5, rig: 4, cpi: 0.89, spi: 0.76 },
+        { name: "Copilot Aziendale & LLM Sandbox Security", dom: 3, b: 540000, d: 8, r: 2200, s: 2, a: 9, st: 3, rig: 2, cpi: 0.97, spi: 0.90 },
+        { name: "Liofilizzazione Farmaci Oncologici GMP Line", dom: 4, b: 2900000, d: 22, r: 6800, s: 3, a: 19, st: 6, rig: 4, cpi: 0.88, spi: 0.74 },
+        { name: "Sistemi Smart Metering Gas & Telelettura IoT", dom: 5, b: 2100000, d: 16, r: 4900, s: 3, a: 15, st: 5, rig: 3, cpi: 0.91, spi: 0.82 },
+        { name: "Scudo Elettronico Radionavigazione GNSS Resiliente", dom: 6, b: 3800000, d: 26, r: 8400, s: 3, a: 21, st: 7, rig: 4, cpi: 0.86, spi: 0.73 },
+        { name: "Piattaforma Appalti Telematici MePA 2027", dom: 7, b: 1100000, d: 14, r: 3300, s: 4, a: 26, st: 8, rig: 5, cpi: 0.76, spi: 0.59 },
+        { name: "Backbone Fibra Ottica FTTH Metropolitano", dom: 8, b: 2700000, d: 18, r: 5900, s: 2, a: 13, st: 4, rig: 3, cpi: 0.93, spi: 0.86 },
+        { name: "Portale Broker B2B & Liquidazione Sinistri Auto", dom: 9, b: 890000, d: 11, r: 2900, s: 2, a: 10, st: 4, rig: 2, cpi: 0.96, spi: 0.89 },
+        { name: "Piattaforma Antiriciclaggio AML & Graph Database", dom: 0, b: 1650000, d: 15, r: 4600, s: 3, a: 16, st: 5, rig: 4, cpi: 0.90, spi: 0.79 },
+        { name: "Social Commerce & Live Shopping Microservizi", dom: 1, b: 420000, d: 7, r: 1900, s: 2, a: 7, st: 3, rig: 2, cpi: 0.99, spi: 0.95 },
+        { name: "Tracciabilità Food Cold-Chain con RFID UHF", dom: 2, b: 820000, d: 12, r: 2700, s: 2, a: 12, st: 4, rig: 3, cpi: 0.93, spi: 0.83 },
+        { name: "Agenti Conversazionali IA per Customer Service", dom: 3, b: 620000, d: 9, r: 2300, s: 2, a: 8, st: 3, rig: 2, cpi: 0.97, spi: 0.91 },
+        { name: "Serializzazione & Anticontraffazione Farmaci FMD", dom: 4, b: 1750000, d: 14, r: 4400, s: 2, a: 14, st: 5, rig: 3, cpi: 0.92, spi: 0.82 },
+        { name: "Storage Batterico BESS per Sottostazioni Alta Tensione", dom: 5, b: 3300000, d: 20, r: 7100, s: 3, a: 19, st: 6, rig: 3, cpi: 0.87, spi: 0.75 },
+        { name: "Satellite CubeSat EO & Stazioni Riceventi Terra", dom: 6, b: 2950000, d: 22, r: 6600, s: 2, a: 16, st: 5, rig: 3, cpi: 0.90, spi: 0.80 },
+        { name: "Piattaforma Notifiche Digitali Cittadino PagoPA", dom: 7, b: 1350000, d: 15, r: 3700, s: 4, a: 24, st: 7, rig: 4, cpi: 0.80, spi: 0.65 },
+        { name: "Migrazione Cloud Telco Voicemail IMS", dom: 8, b: 1150000, d: 12, r: 3200, s: 2, a: 11, st: 4, rig: 2, cpi: 0.95, spi: 0.87 },
+        { name: "Audit Modelli Solvency II & Validazione Risk Engine", dom: 9, b: 980000, d: 13, r: 3000, s: 2, a: 13, st: 5, rig: 3, cpi: 0.94, spi: 0.84 }
       ];
 
       return scenariosCatalog.map((sc, i) => {
@@ -1655,8 +1677,8 @@
           approvalDays: sc.a,
           stakeholders: sc.st,
           rigidity: sc.rig,
-          activeMitigation: null,
-          currentMonth: Math.round(sc.d * 0.5),
+          cpi: sc.cpi,
+          spi: sc.spi,
           dependencies: [
             { id: 1, name: `Audit di Architettura & Cybersecurity Cloud`, type: 'CRITICAL', buffer: 0, penalty: Math.round(sc.r * 0.45) },
             { id: 2, name: `Cutover Tecnico in Produzione & Collaudo E2E`, type: 'CRITICAL', buffer: 1, penalty: Math.round(sc.r * 0.65) },
@@ -1686,7 +1708,6 @@
       p.budget = bVal;
       p.duration = dVal;
       p.burnRate = rVal;
-      p.currentMonth = Math.min(dVal, Math.max(1, p.currentMonth || Math.round(dVal * 0.5)));
 
       showSyncToast(currentLang === 'en' ? `Synchronized: Budget updated (€ ${bVal.toLocaleString('en-US')})` : `Sincronizzato: Budget aggiornato (€ ${bVal.toLocaleString('it-IT')})`);
       refreshAllViews();
@@ -1785,8 +1806,8 @@
             € ${m.totalExposure.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}
           </td>
           <td class="py-3 px-3 text-center">
-            <span class="font-mono text-[11px] px-2 py-0.5 rounded ${m.cpi < 0.9 ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
-              ${m.cpi.toFixed(2)} / ${m.spi.toFixed(2)}
+            <span class="font-mono text-[11px] px-2 py-0.5 rounded ${prj.cpi < 0.9 ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
+              ${prj.cpi.toFixed(2)} / ${prj.spi.toFixed(2)}
             </span>
           </td>
           <td class="py-3 px-4 text-center">
@@ -1843,9 +1864,6 @@
       showSyncToast(currentLang === 'en' ? `Project "${name}" removed from portfolio.` : `Progetto "${name}" rimosso dal Portfolio.`);
     }
 
-    // =========================================================================
-    // CALCOLO RIGOROSO FORMULE EVM (PMI STANDARD) & CPM PER SINGOLO PROGETTO
-    // =========================================================================
     function calculateProjectMetrics(p) {
       const baseDelay = Math.round(
         (p.approvalDays * 1.6) + 
@@ -1854,22 +1872,21 @@
         (p.rigidity * 2.2)
       );
 
-      // Risolto Bug: mitigazione isolata al singolo progetto
       let recovery = 0;
       let activeMitigationExtraCost = 0;
-      if (p.activeMitigation !== null && p.activeMitigation !== undefined && state.raciScopes[p.activeMitigation]) {
-        const activeScope = state.raciScopes[p.activeMitigation];
+      if (state.activeMitigation !== null && state.raciScopes[state.activeMitigation]) {
+        const activeScope = state.raciScopes[state.activeMitigation];
         recovery = Number(activeScope.recovery) || 0;
         activeMitigationExtraCost = Number(activeScope.cost) || 0;
       }
 
-      const projectedDelay = Math.max(0, baseDelay - recovery);
+      const projectedDelay = Math.max(2, baseDelay - recovery);
       const totalPlannedWorkDays = Math.max(22, p.duration * 22);
       const delayPercent = ((projectedDelay / totalPlannedWorkDays) * 100).toFixed(1);
 
       const directCost = (projectedDelay * p.burnRate) + activeMitigationExtraCost;
 
-      // Conteggio danno CPM solo su nodi CRITICAL
+      // CALCOLO DEL DANNO INDOTTO CPM ESCLUSIVAMENTE SULLE DIPENDENZE CRITICHE (FLOAT = 0)
       let cpmPenaltiesSum = 0;
       p.dependencies.forEach(d => {
         const isCritical = d.type === 'CRITICAL';
@@ -1893,29 +1910,21 @@
         ((p.scope / 5) * 25)
       ));
 
-      // Formule EVM rigorose secondo standard PMI:
       const BAC = p.budget;
-      const elapsedMonths = Math.min(p.duration, Math.max(1, p.currentMonth || Math.round(p.duration * 0.5)));
-      const plannedProgress = elapsedMonths / p.duration;
-      const PV = Math.round(BAC * plannedProgress);
-
-      // Earned Value calcolato oggettivamente decurtando il ritardo cumulato rispetto all'orizzonte temporale
-      const scheduleErosion = Math.min(0.65, projectedDelay / totalPlannedWorkDays);
-      const actualProgress = Math.max(0.05, plannedProgress * (1 - scheduleErosion));
-      const EV = Math.round(BAC * actualProgress);
-
-      // Actual Cost = Costo del lavoro svolto (EV) + Costo diretto di stallo (directCost) + penali contrattuali attive
-      const AC = Math.round(EV + directCost + indirectCost);
-
-      const dynamicCPI = AC > 0 ? (EV / AC) : 1.0;
-      const dynamicSPI = PV > 0 ? (EV / PV) : 1.0;
-
-      // EAC standard PMI "Schedule-Cost Constrained": AC + (BAC - EV) / (CPI * SPI)
-      const denominator = Math.max(0.15, dynamicCPI * dynamicSPI);
-      const EAC = dynamicCPI > 0 ? Math.round(AC + Math.max(0, BAC - EV) / denominator) : BAC;
-
+      const progressFactor = 0.50;
+      const PV = Math.round(BAC * progressFactor);
+      
+      const dynamicSPI = Math.max(0.35, Math.min(1.05, 1 - (projectedDelay / (totalPlannedWorkDays * 1.5))));
+      const EV = Math.round(PV * dynamicSPI);
+      
+      const AC = Math.round(PV + directCost + (indirectCost * 0.35));
+      const dynamicCPI = AC > 0 ? (EV / AC) : 1;
+      const EAC = dynamicCPI > 0 ? Math.round(BAC / dynamicCPI) : BAC;
       const SV = EV - PV;
       const CV = EV - AC;
+
+      p.cpi = parseFloat(dynamicCPI.toFixed(2));
+      p.spi = parseFloat(dynamicSPI.toFixed(2));
 
       let totalEMV = 0;
       p.risks.forEach(r => {
@@ -1937,8 +1946,6 @@
         PV,
         EV,
         AC,
-        cpi: dynamicCPI,
-        spi: dynamicSPI,
         EAC,
         SV,
         CV,
@@ -1946,9 +1953,6 @@
       };
     }
 
-    // =========================================================================
-    // MOTORE SARTORIALE ✨ AUTO-ADATTA CON IA
-    // =========================================================================
     const SECTOR_AI_CPM_CATALOG = {
       pharma: [
         { name: "Omologazione Fascicolo Clinico AIFA / EMA", type: "CRITICAL", bufMult: 0, penMult: 0.65 },
@@ -1999,6 +2003,7 @@
       if (modal) modal.classList.remove('hidden');
       const ta = document.getElementById('aiCustomPromptInput');
       if (ta) ta.value = '';
+      selectAIProfile(selectedAIProfile || 'realistic');
     }
 
     function closeAIModal() {
@@ -2026,83 +2031,116 @@
 
       const customPrompt = document.getElementById('aiCustomPromptInput')?.value?.trim() || '';
 
-      const dLower = (p.domain + ' ' + p.name).toLowerCase();
-      let sectorKey = 'tech';
-      let sectorLabel = 'IT & Cloud Architecture';
+      const btn = document.getElementById('btnAutoAdaptAI');
+      const btnText = document.getElementById('btnAutoAdaptAIText');
+      if (btn) btn.classList.add('animate-pulse', 'ring-4', 'ring-indigo-300');
+      if (btnText) btnText.innerText = currentLang === 'en' ? "✨ AI Optimizing..." : "✨ IA Elaborazione...";
 
-      if (dLower.includes('pharma') || dLower.includes('bio') || dLower.includes('farmac') || dLower.includes('clinic')) {
-        sectorKey = 'pharma';
-        sectorLabel = 'Healthcare & Pharma';
-      } else if (dLower.includes('bank') || dLower.includes('finan') || dLower.includes('dora') || dLower.includes('sepa') || dLower.includes('aml') || dLower.includes('insur') || dLower.includes('assicur') || dLower.includes('ifrs') || dLower.includes('solvency')) {
-        sectorKey = 'banking';
-        sectorLabel = 'Finance & Banking';
-      } else if (dLower.includes('aero') || dLower.includes('spaz') || dLower.includes('difes') || dLower.includes('volo') || dLower.includes('satellit')) {
-        sectorKey = 'aerospace';
-        sectorLabel = 'Aerospace & Defense';
-      } else if (dLower.includes('energ') || dLower.includes('eol') || dLower.includes('utilit') || dLower.includes('gas') || dLower.includes('bess') || dLower.includes('terna')) {
-        sectorKey = 'energy';
-        sectorLabel = 'Energy & Utilities';
-      } else if (dLower.includes('retail') || dLower.includes('omnic') || dLower.includes('e-com') || dLower.includes('pos') || dLower.includes('negoz') || dLower.includes('shop')) {
-        sectorKey = 'retail';
-        sectorLabel = 'Retail & Consumer Goods';
-      } else if (dLower.includes('public') || dLower.includes('gov') || dLower.includes('sanit') || dLower.includes('pagopa') || dLower.includes('mepa') || dLower.includes('amm')) {
-        sectorKey = 'public';
-        sectorLabel = 'Public Sector & Governance';
-      }
+      setTimeout(() => {
+        const dLower = (p.domain + ' ' + p.name).toLowerCase();
+        let sectorKey = 'tech';
+        let sectorLabel = 'IT & Cloud Architecture';
 
-      const template = SECTOR_AI_CPM_CATALOG[sectorKey] || SECTOR_AI_CPM_CATALOG.tech;
-      const durMonths = Math.max(6, Number(p.duration) || 12);
-      const burn = Math.max(1000, Number(p.burnRate) || 3000);
+        if (dLower.includes('pharma') || dLower.includes('bio') || dLower.includes('farmac') || dLower.includes('clinic')) {
+          sectorKey = 'pharma';
+          sectorLabel = 'Healthcare & Pharma';
+        } else if (dLower.includes('bank') || dLower.includes('finan') || dLower.includes('dora') || dLower.includes('sepa') || dLower.includes('aml') || dLower.includes('insur') || dLower.includes('assicur') || dLower.includes('ifrs') || dLower.includes('solvency')) {
+          sectorKey = 'banking';
+          sectorLabel = 'Finance & Banking';
+        } else if (dLower.includes('aero') || dLower.includes('spaz') || dLower.includes('difes') || dLower.includes('volo') || dLower.includes('satellit')) {
+          sectorKey = 'aerospace';
+          sectorLabel = 'Aerospace & Defense';
+        } else if (dLower.includes('energ') || dLower.includes('eol') || dLower.includes('utilit') || dLower.includes('gas') || dLower.includes('bess') || dLower.includes('terna')) {
+          sectorKey = 'energy';
+          sectorLabel = 'Energy & Utilities';
+        } else if (dLower.includes('retail') || dLower.includes('omnic') || dLower.includes('e-com') || dLower.includes('pos') || dLower.includes('negoz') || dLower.includes('shop')) {
+          sectorKey = 'retail';
+          sectorLabel = 'Retail & Consumer Goods';
+        } else if (dLower.includes('public') || dLower.includes('gov') || dLower.includes('sanit') || dLower.includes('pagopa') || dLower.includes('mepa') || dLower.includes('amm')) {
+          sectorKey = 'public';
+          sectorLabel = 'Public Sector & Governance';
+        }
 
-      let profilePenaltyFactor = 1.0;
-      let profileBufferFactor = 1.0;
-      let profileLatencyMult = 0.50;
+        const template = SECTOR_AI_CPM_CATALOG[sectorKey] || SECTOR_AI_CPM_CATALOG.tech;
+        const durMonths = Math.max(6, Number(p.duration) || 12);
+        const burn = Math.max(1000, Number(p.burnRate) || 3000);
 
-      if (selectedAIProfile === 'optimistic') {
-        profilePenaltyFactor = 0.70;
-        profileBufferFactor = 1.40;
-        profileLatencyMult = 0.35;
-      } else if (selectedAIProfile === 'worstcase') {
-        profilePenaltyFactor = 1.35;
-        profileBufferFactor = 0.50;
-        profileLatencyMult = 0.85;
-      }
+        let bufMultiplier = 1.0;
+        let penMultiplier = 1.0;
+        let profileLabelIt = 'Standard / Realistico';
+        let profileLabelEn = 'Standard / Realistic';
 
-      p.dependencies = template.map((item, idx) => {
-        let bufferDays = item.type === 'CRITICAL' ? (idx === 0 ? 0 : 1) : Math.round(durMonths * item.bufMult * profileBufferFactor);
-        let penaltyAmount = Math.round(burn * item.penMult * profilePenaltyFactor);
-        return {
-          id: idx + 1,
-          name: item.name,
-          type: item.type,
-          buffer: bufferDays,
-          penalty: penaltyAmount
-        };
-      });
+        if (selectedAIProfile === 'optimistic') {
+          bufMultiplier = 1.5;
+          penMultiplier = 0.70;
+          profileLabelIt = 'Agile / Ottimista';
+          profileLabelEn = 'Agile / Optimistic';
+          p.approvalDays = Math.max(2, Math.round(p.approvalDays * 0.35));
+          p.stakeholders = Math.max(2, p.stakeholders - 3);
+          p.scope = Math.max(1, p.scope - 1);
+          state.activeMitigation = 2;
+        } else if (selectedAIProfile === 'worstcase') {
+          bufMultiplier = 0.3;
+          penMultiplier = 1.40;
+          profileLabelIt = 'Worst-Case / Stress';
+          profileLabelEn = 'Worst-Case / Stress';
+          p.approvalDays = Math.max(8, Math.round(p.approvalDays * 1.2));
+          p.stakeholders = Math.min(8, p.stakeholders + 1);
+          p.scope = Math.min(5, p.scope + 1);
+          state.activeMitigation = null;
+        } else {
+          bufMultiplier = 1.0;
+          penMultiplier = 1.0;
+          profileLabelIt = 'Standard / Realistico';
+          profileLabelEn = 'Standard / Realistic';
+          p.approvalDays = Math.max(3, Math.round(p.approvalDays * 0.50));
+          p.stakeholders = Math.max(2, p.stakeholders - 2);
+          state.activeMitigation = 2;
+        }
 
-      if (customPrompt) {
-        p.dependencies.unshift({
-          id: p.dependencies.length + 1,
-          name: `[IA Custom Prompt]: ${customPrompt}`,
-          type: 'CRITICAL',
-          buffer: selectedAIProfile === 'worstcase' ? 0 : 2,
-          penalty: Math.round(burn * 1.1)
+        p.dependencies = template.map((item, idx) => {
+          let bufferDays = 0;
+          if (item.type === 'CRITICAL') {
+            bufferDays = selectedAIProfile === 'worstcase' ? 0 : (idx === 0 ? 0 : Math.round(1 * bufMultiplier));
+          } else {
+            bufferDays = Math.round(durMonths * item.bufMult * bufMultiplier);
+          }
+          const penaltyAmount = Math.round(burn * item.penMult * penMultiplier);
+
+          return {
+            id: idx + 1,
+            name: item.name,
+            type: item.type,
+            buffer: bufferDays,
+            penalty: penaltyAmount
+          };
         });
-      }
 
-      p.approvalDays = Math.max(2, Math.round(p.approvalDays * profileLatencyMult));
-      p.stakeholders = Math.max(1, selectedAIProfile === 'optimistic' ? p.stakeholders - 2 : (selectedAIProfile === 'worstcase' ? p.stakeholders + 1 : p.stakeholders - 1));
-      p.activeMitigation = 2; // Attiva Fast-Sign 48h sul progetto
+        if (customPrompt) {
+          p.dependencies.unshift({
+            id: p.dependencies.length + 1,
+            name: `[Vincolo Straordinario IA]: ${customPrompt}`,
+            type: 'CRITICAL',
+            buffer: selectedAIProfile === 'worstcase' ? 0 : 2,
+            penalty: Math.round(burn * (selectedAIProfile === 'worstcase' ? 1.2 : 0.75))
+          });
+        }
 
-      const profileName = selectedAIProfile === 'optimistic' ? 'Agile / Ottimista' : (selectedAIProfile === 'worstcase' ? 'Worst-Case / Stress' : 'Standard / Realistico');
+        state.aiRationalProfileBadge = `${p.domain || sectorLabel} • ${currentLang === 'en' ? profileLabelEn : profileLabelIt}`;
+        state.aiRationaleTextIt = `[Consulente IA - Settore: ${sectorLabel} | Profilo: ${profileLabelIt}] Il modello ha calibrato ${p.dependencies.length} deliverable su misura per ${p.name}. Penali critiche parametrizzate sul burn rate (€ ${burn.toLocaleString('it-IT')}/gg con fattore ${penMultiplier.toFixed(2)}x) e buffer su orizzonte ${durMonths} mesi. Latenza approvativa calibrata a ${p.approvalDays} gg.${customPrompt ? ` Vincolo straordinario integrato: "${customPrompt}".` : ''}`;
+        state.aiRationaleTextEn = `[AI Strategic Advisor - Sector: ${sectorLabel} | Profile: ${profileLabelEn}] Model generated ${p.dependencies.length} tailored deliverables for ${p.name}. Critical penalties mapped to daily burn rate (€ ${burn.toLocaleString('en-US')}/d at ${penMultiplier.toFixed(2)}x) and buffers aligned to ${durMonths} months. Sign-off latency calibrated to ${p.approvalDays} d.${customPrompt ? ` Custom emergency constraint integrated: "${customPrompt}".` : ''}`;
 
-      state.aiRationaleTextIt = `[Consulente IA - Profilo: ${profileName} • Settore: ${sectorLabel}] Il modello ha calibrato ${p.dependencies.length} dipendenze sartoriali. Penali commisurate al burn rate (€ ${burn.toLocaleString('it-IT')}/gg) e buffer modulati sul profilo ${profileName}. Latenza approvativa ricalibrata a ${p.approvalDays} gg con protocollo Fast-Sign 48h attivo.${customPrompt ? ` Vincolo iniettato: "${customPrompt}".` : ''}`;
-      state.aiRationaleTextEn = `[AI Strategic Advisor - Profile: ${profileName} • Sector: ${sectorLabel}] Calibrated ${p.dependencies.length} tailored dependencies. Penalties scaled to daily burn rate (€ ${burn.toLocaleString('en-US')}/d) with buffers mapped to profile ${profileName}. Approval latency compressed to ${p.approvalDays} d with Fast-Sign active.${customPrompt ? ` Constraint injected: "${customPrompt}".` : ''}`;
+        if (btn) btn.classList.remove('animate-pulse', 'ring-4', 'ring-indigo-300');
+        if (btnText) btnText.innerText = currentLang === 'en' ? "✨ AI Auto-Adapt & Risk Profile" : "✨ Auto-Adatta con IA & Profilo di Rischio";
 
-      loadActiveProjectIntoControls();
-      refreshAllViews();
+        loadActiveProjectIntoControls();
+        refreshAllViews();
 
-      showSyncToast(currentLang === 'en' ? `✨ AI: Analysis completed under profile [${profileName}]!` : `✨ IA: Analisi completata con profilo [${profileName}]!`);
+        const toastMsg = currentLang === 'en'
+          ? `✨ AI Stress-Test [${profileLabelEn}] completed for ${p.name} (${sectorLabel})`
+          : `✨ Stress-Test IA [${profileLabelIt}] completato per ${p.name} (${sectorLabel})`;
+        showSyncToast(toastMsg);
+      }, 350);
     }
 
     function getScopeOwnershipLabel(roles) {
@@ -2121,10 +2159,8 @@
       if (!container) return;
       container.innerHTML = '';
 
-      const p = getActiveProject();
-
       state.raciScopes.forEach((sc, sIdx) => {
-        const isSelected = p && p.activeMitigation === sIdx;
+        const isSelected = state.activeMitigation === sIdx;
         const ownership = getScopeOwnershipLabel(sc.roles);
         const badgeColorMap = {
           rose: 'text-rose-600 bg-rose-50 border-rose-200',
@@ -2267,13 +2303,11 @@
         showSyncToast(currentLang === 'en' ? "Cannot delete the last RACI scope." : "Impossibile eliminare l'ultimo ambito RACI.");
         return;
       }
-      state.projects.forEach(prj => {
-        if (prj.activeMitigation === sIdx) {
-          prj.activeMitigation = null;
-        } else if (prj.activeMitigation !== null && prj.activeMitigation > sIdx) {
-          prj.activeMitigation--;
-        }
-      });
+      if (state.activeMitigation === sIdx) {
+        state.activeMitigation = null;
+      } else if (state.activeMitigation !== null && state.activeMitigation > sIdx) {
+        state.activeMitigation--;
+      }
       state.raciScopes.splice(sIdx, 1);
       renderRACITable();
       renderMitigationCards();
@@ -2281,78 +2315,115 @@
       showSyncToast(currentLang === 'en' ? "Scope removed." : "Ambito RACI e relativa scheda rimossi.");
     }
 
-    // DIAGRAMMA TOPOLOGIA CPM MODERNO CON HTML/TAILWIND FLESSIBILE ED ELEGANTE
     function renderCPMTopology(p, m) {
       const container = document.getElementById('cpmTopologyContainer');
       if (!container) return;
 
       const depCount = Math.max(1, p.dependencies.length);
+      const isDelayed = m.projectedDelay > 0;
 
-      let html = `
-        <div class="flex flex-col md:flex-row items-stretch gap-4 text-xs select-none">
-          
-          <!-- NODO INIZIATIVA CORE -->
-          <div class="w-full md:w-56 bg-slate-900 text-white rounded-xl p-3.5 flex flex-col justify-between border border-slate-700 shadow-sm flex-shrink-0">
-            <div>
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="text-[9px] font-mono uppercase tracking-wider text-indigo-400 font-bold">${p.code}</span>
-                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
-              </div>
-              <h4 class="text-xs font-bold text-slate-100 leading-snug">${p.name}</h4>
-              <p class="text-[10px] text-slate-400 font-mono mt-0.5">${p.domain}</p>
-            </div>
-            
-            <div class="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono">
-              <span class="text-slate-400 text-[10px]">Scostamento Core</span>
-              <strong class="text-rose-400 font-bold">+${m.projectedDelay} gg</strong>
-            </div>
-          </div>
-
-          <!-- CONNETTORE CENTRALE FRECCIA FLUSSO -->
-          <div class="hidden md:flex flex-col items-center justify-center px-1 text-slate-400">
-            <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
-            </svg>
-          </div>
-
-          <!-- GRIGLIA / LISTA NODI DELIVERABLE -->
-          <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-      `;
-
+      // Modern flex-based diagram: Root Anchor on Left, dynamic flex column on Right with subtle SVG connector curves
+      let nodesHtml = '';
       p.dependencies.forEach((dep) => {
-        const isCritical = dep.type === 'CRITICAL';
         const buf = Number(dep.buffer) || 0;
         const pen = Number(dep.penalty) || 0;
-        const isSlipped = isCritical && (m.projectedDelay > buf);
-        const damage = isCritical ? Math.round(Math.max(0, m.projectedDelay - buf) * pen) : 0;
+        const isCritical = dep.type === 'CRITICAL';
+        const delayApplied = isCritical ? Math.max(0, m.projectedDelay - buf) : 0;
+        const isSlipped = delayApplied > 0 && isCritical;
 
-        html += `
-          <div class="p-2.5 rounded-xl border transition-all ${isSlipped ? 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-200' : (isCritical ? 'bg-white border-slate-200 hover:border-brand-300' : 'bg-emerald-50/40 border-emerald-200')} shadow-2xs flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-1 gap-1">
-                <span class="text-[9.5px] font-mono font-bold text-slate-400">#${dep.id}</span>
-                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded ${isSlipped ? 'bg-rose-600 text-white animate-pulse' : (isCritical ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-800')}">
-                  ${isSlipped ? 'PENALE ATTIVA' : (isCritical ? 'CRITICO' : 'FLOAT LIBERO')}
+        const borderAccent = isSlipped 
+          ? 'border-rose-400 bg-rose-50/40 ring-1 ring-rose-200' 
+          : (isCritical ? 'border-indigo-200 hover:border-indigo-400 bg-white' : 'border-slate-200 hover:border-emerald-300 bg-white');
+
+        const pillBadge = isSlipped
+          ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono-num bg-rose-600 text-white shadow-2xs">
+               <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+               PENALE ${currentLang === 'en' ? 'ACTIVE' : 'ATTIVA'}
+             </span>`
+          : (isCritical 
+              ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono-num bg-indigo-50 text-indigo-700 border border-indigo-200/80">
+                   <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                   ${currentLang === 'en' ? 'CRITICAL' : 'CRITICO'}
+                 </span>`
+              : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold font-mono-num bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                   FLOAT LIBERO
+                 </span>`
+            );
+
+        nodesHtml += `
+          <div class="relative flex items-center justify-between p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl border transition-all duration-150 ${borderAccent} shadow-2xs group">
+            <!-- Barra Accent Sinistra -->
+            <div class="absolute left-0 top-2 bottom-2 w-1 rounded-r ${isCritical ? (isSlipped ? 'bg-rose-500' : 'bg-indigo-500') : 'bg-emerald-500'}"></div>
+            
+            <div class="pl-2 flex-1 min-w-0 pr-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-[10px] font-bold font-mono-num text-slate-400">#${dep.id}</span>
+                <h4 class="text-xs font-bold text-slate-900 truncate tracking-tight group-hover:text-brand-600 transition-colors">${dep.name}</h4>
+              </div>
+              <div class="flex items-center space-x-3 text-[11px] font-mono-num text-slate-500 mt-0.5">
+                <span class="flex items-center gap-1">
+                  <span class="text-[10px] text-slate-400 font-sans">Buffer:</span>
+                  <strong class="font-bold text-slate-700">${buf} gg</strong>
+                </span>
+                <span class="text-slate-300">•</span>
+                <span class="flex items-center gap-1">
+                  <span class="text-[10px] text-slate-400 font-sans">Penale:</span>
+                  <strong class="${isCritical ? 'text-rose-600' : 'text-slate-700'} font-bold">€ ${pen.toLocaleString('it-IT')}/gg</strong>
                 </span>
               </div>
-              <h5 class="text-xs font-bold text-slate-800 leading-snug line-clamp-1" title="${dep.name}">${dep.name}</h5>
             </div>
 
-            <div class="mt-2 pt-2 border-t border-slate-100/80 flex items-center justify-between text-[10px] font-mono">
-              <span class="text-slate-500">Buffer: <strong class="text-slate-800">${buf} gg</strong></span>
-              <span class="text-slate-500">Penale: <strong class="text-slate-800">€${pen.toLocaleString('it-IT')}/gg</strong></span>
-              <strong class="${damage > 0 ? 'text-rose-600 font-bold' : 'text-slate-400'}">€ ${damage.toLocaleString('it-IT')}</strong>
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              ${pillBadge}
             </div>
           </div>
         `;
       });
 
-      html += `
+      // Assemble full modern flex card view
+      container.innerHTML = `
+        <div class="flex flex-col md:flex-row items-stretch gap-3 md:gap-5">
+          
+          <!-- NODO RADICE / PROGRAMMA CORE -->
+          <div class="md:w-56 flex-shrink-0 bg-slate-900 text-white rounded-xl p-3.5 flex flex-col justify-between border border-slate-800 shadow-sm relative overflow-hidden">
+            <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">
+                <span class="inline-flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full ${isDelayed ? 'bg-rose-500 animate-ping' : 'bg-emerald-400'}"></span>
+                  ${currentLang === 'en' ? 'Core Program' : 'Iniziativa Core'}
+                </span>
+                <span class="text-indigo-400 font-bold">${p.code}</span>
+              </div>
+              <h3 class="text-xs font-extrabold text-white leading-snug tracking-tight line-clamp-2">${p.name}</h3>
+            </div>
+
+            <div class="mt-3 pt-2.5 border-t border-slate-800/90 flex items-baseline justify-between font-mono-num">
+              <span class="text-[10px] text-slate-400 font-sans font-medium">Scostamento</span>
+              <span class="text-sm font-black ${isDelayed ? 'text-rose-400' : 'text-emerald-400'}">+${m.projectedDelay} gg</span>
+            </div>
           </div>
+
+          <!-- FRECCIA SEPARATORE CENTRALE -->
+          <div class="hidden md:flex items-center justify-center text-slate-300">
+            <svg class="w-5 h-5 text-slate-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </div>
+
+          <!-- LISTA DEI NODI DELIVERABLE -->
+          <div class="flex-1 space-y-2 min-w-0">
+            ${nodesHtml}
+          </div>
+
         </div>
       `;
 
-      container.innerHTML = html;
+      const metaEl = document.getElementById('cpmTopologyMeta');
+      if (metaEl) {
+        metaEl.innerText = `${p.dependencies.length} ${currentLang === 'en' ? 'Nodes' : 'Nodi'} • Max Slip: +${m.projectedDelay} gg`;
+      }
     }
 
     function renderCPMTable(p, m) {
@@ -2436,7 +2507,7 @@
       p.approvalDays = 14;
       p.stakeholders = 5;
       p.rigidity = 3;
-      p.activeMitigation = null;
+      state.activeMitigation = null;
 
       loadActiveProjectIntoControls();
       refreshAllViews();
@@ -2474,6 +2545,23 @@
       setElText('kpiExposureRatio', `${m.exposureRatio}% cap`);
 
       setElText('circleParalysis', `${m.paralysisIndex}%`);
+      const gaugeEl = document.getElementById('circleParalysisGauge');
+      const trackEl = document.getElementById('circleParalysisTrack');
+      if (gaugeEl) {
+        gaugeEl.setAttribute('stroke-dasharray', `${Math.min(100, Math.max(0, m.paralysisIndex))}, 100`);
+        let strokeColor = '#f59e0b';
+        let trackColor = '#fef3c7';
+        if (m.paralysisIndex < 35) {
+          strokeColor = '#10b981';
+          trackColor = '#d1fae5';
+        } else if (m.paralysisIndex >= 65) {
+          strokeColor = '#f43f5e';
+          trackColor = '#ffe4e6';
+        }
+        gaugeEl.setAttribute('stroke', strokeColor);
+        if (trackEl) trackEl.setAttribute('stroke', trackColor);
+      }
+
       const pTxt = document.getElementById('txtParalysisStatus');
       if (pTxt) {
         if (m.paralysisIndex < 35) {
@@ -2509,15 +2597,15 @@
       renderRiskMatrixHeatmap(p);
       renderRiskCards(p);
 
-      setElText('evmCPI', m.cpi.toFixed(2));
-      setElText('evmSPI', m.spi.toFixed(2));
+      setElText('evmCPI', p.cpi.toFixed(2));
+      setElText('evmSPI', p.spi.toFixed(2));
       
       const cpiBadge = document.getElementById('evmCPIBadge');
       if (cpiBadge) {
-        if (m.cpi >= 1.0) {
+        if (p.cpi >= 1.0) {
           cpiBadge.innerText = currentLang === 'en' ? 'Under Budget ✓' : 'Under Budget ✓';
           cpiBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700';
-        } else if (m.cpi >= 0.85) {
+        } else if (p.cpi >= 0.85) {
           cpiBadge.innerText = currentLang === 'en' ? 'Over Budget' : 'Over Budget';
           cpiBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700';
         } else {
@@ -2528,10 +2616,10 @@
 
       const spiBadge = document.getElementById('evmSPIBadge');
       if (spiBadge) {
-        if (m.spi >= 0.95) {
+        if (p.spi >= 0.95) {
           spiBadge.innerText = currentLang === 'en' ? 'On Schedule ✓' : 'On Schedule ✓';
           spiBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700';
-        } else if (m.spi >= 0.75) {
+        } else if (p.spi >= 0.75) {
           spiBadge.innerText = currentLang === 'en' ? 'Behind Sched.' : 'In Ritardo';
           spiBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700';
         } else {
@@ -2562,7 +2650,7 @@
 
       const econStatus = document.getElementById('evmEconomyStatus');
       if (econStatus) {
-        if (m.cpi >= 1.0 && m.spi >= 0.95) {
+        if (p.cpi >= 1.0 && p.spi >= 0.95) {
           econStatus.innerText = currentLang === 'en' ? 'Compliant State ✓' : 'Stato Conforme ✓';
           econStatus.parentElement.className = 'text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-lg';
         } else {
@@ -2574,7 +2662,7 @@
       setElText('aiRationalText', currentLang === 'en' ? state.aiRationaleTextEn : state.aiRationaleTextIt);
       const profBadge = document.getElementById('aiRationalProfileBadge');
       if (profBadge) {
-        profBadge.innerText = p.domain || 'Analisi di Settore';
+        profBadge.innerText = state.aiRationalProfileBadge || (p.domain || 'Analisi di Settore');
       }
 
       setElText('dossierProgramTitle', p.name);
@@ -2582,12 +2670,11 @@
       setElText('dossierDirectCost', `€ ${m.directCost.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}`);
       setElText('dossierIndirectCost', `€ ${m.indirectCost.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}`);
       setElText('dossierTotalExposure', `€ ${m.totalExposure.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}`);
-      setElText('dossierEVMRatio', `${m.cpi.toFixed(2)} / ${m.spi.toFixed(2)}`);
+      setElText('dossierEVMRatio', `${p.cpi.toFixed(2)} / ${p.spi.toFixed(2)}`);
       setElText('dossierEAC', `€ ${m.EAC.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}`);
       renderDossierOptionsTable();
 
       renderPortfolioOverview();
-      renderMitigationCards();
     }
 
     function renderDossierOptionsTable() {
@@ -2595,10 +2682,8 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      const p = getActiveProject();
-
       state.raciScopes.forEach((sc, idx) => {
-        const isSelected = p && p.activeMitigation === idx;
+        const isSelected = state.activeMitigation === idx;
         const ownership = getScopeOwnershipLabel(sc.roles);
         const costStr = sc.cost === 0 ? (currentLang === 'en' ? '€ 0 (Zero Cost)' : '€ 0 (Zero Cost)') : `+€ ${Number(sc.cost).toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}`;
 
@@ -3007,24 +3092,20 @@
       dd.value = state.activeProjectId;
     }
 
-    // Risolto Bug: applicazione mitigazione strettamente al progetto corrente
     function applyMitigationLever(leverNumber) {
-      const p = getActiveProject();
-      if (!p) return;
-
-      if (p.activeMitigation === leverNumber) {
-        p.activeMitigation = null;
+      if (state.activeMitigation === leverNumber) {
+        state.activeMitigation = null;
       } else {
-        p.activeMitigation = leverNumber;
+        state.activeMitigation = leverNumber;
       }
-
+      renderMitigationCards();
       refreshAllViews();
 
-      if (p.activeMitigation !== null && state.raciScopes[p.activeMitigation]) {
-        const sc = state.raciScopes[p.activeMitigation];
-        showSyncToast(currentLang === 'en' ? `Simulation Active on ${p.code}: ${sc.title} (-${sc.recovery}d)` : `Simulazione Attiva su ${p.code}: ${sc.title} (-${sc.recovery}gg)`);
+      if (state.activeMitigation !== null && state.raciScopes[state.activeMitigation]) {
+        const sc = state.raciScopes[state.activeMitigation];
+        showSyncToast(currentLang === 'en' ? `Simulation Active: ${sc.title} (-${sc.recovery}d)` : `Simulazione Attiva: ${sc.title} (-${sc.recovery}gg)`);
       } else {
-        showSyncToast(currentLang === 'en' ? `Simulation reset on ${p.code}.` : `Simulazione mitigazione azzerata su ${p.code}.`);
+        showSyncToast(currentLang === 'en' ? 'Simulation reset.' : 'Simulazione mitigazione azzerata.');
       }
     }
 
@@ -3032,7 +3113,7 @@
       let csv = "ID,Codice,Iniziativa,Settore,Budget Stanziato,Durata Mesi,Burn Rate gg,Ritardo gg,Esposizione Totale,CPI,SPI\n";
       state.projects.forEach(p => {
         const m = calculateProjectMetrics(p);
-        csv += `"${p.id}","${p.code}","${p.name}","${p.domain}",${p.budget},${p.duration},${p.burnRate},${m.projectedDelay},${m.totalExposure},${m.cpi.toFixed(2)},${m.spi.toFixed(2)}\n`;
+        csv += `"${p.id}","${p.code}","${p.name}","${p.domain}",${p.budget},${p.duration},${p.burnRate},${m.projectedDelay},${m.totalExposure},${p.cpi},${p.spi}\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -3063,8 +3144,8 @@
         approvalDays: 12,
         stakeholders: 4,
         rigidity: 3,
-        activeMitigation: null,
-        currentMonth: 6,
+        cpi: 0.95,
+        spi: 0.88,
         dependencies: [
           { id: 1, name: 'Fase di Discovery & Setup Governance', type: 'CRITICAL', buffer: 0, penalty: 1500 },
           { id: 2, name: 'Cutover & Rilascio Deliverable Core', type: 'CRITICAL', buffer: 2, penalty: 2000 }
@@ -3107,7 +3188,6 @@
       showSyncToast(currentLang === 'en' ? `New dependency #${newId} added!` : `Nuova dipendenza #${newId} aggiunta al Percorso Critico!`);
     }
 
-    // MOTORE DI STAMPA PDF OTTIMIZZATO: SENZA SPAZI VUOTI & DENSO DI CONTENUTO
     function triggerPrintReport() {
       const p = getActiveProject();
       const m = calculateProjectMetrics(p);
@@ -3162,7 +3242,7 @@
           <div class="print-card rounded-lg p-2.5 space-y-1.5">
             <div class="flex justify-between items-center border-b border-slate-200 pb-1">
               <strong class="text-[9.5px] uppercase font-bold text-slate-900">Earned Value Management (EVM) & Salute Economica</strong>
-              <span class="font-mono text-[9px] font-bold text-slate-600">CPI: ${m.cpi.toFixed(2)} | SPI: ${m.spi.toFixed(2)}</span>
+              <span class="font-mono text-[9px] font-bold text-slate-600">CPI: ${p.cpi.toFixed(2)} | SPI: ${p.spi.toFixed(2)}</span>
             </div>
             <div class="grid grid-cols-4 gap-2 text-center text-[9px] font-mono pt-0.5">
               <div class="p-1.5 rounded bg-slate-50 border border-slate-200">
