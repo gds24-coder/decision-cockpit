@@ -315,7 +315,18 @@
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+            <table class="w-full text-left text-xs table-fixed">
+              <colgroup>
+                <col style="width:26%">
+                <col style="width:10%">
+                <col style="width:11%">
+                <col style="width:7%">
+                <col style="width:9%">
+                <col style="width:8%">
+                <col style="width:11%">
+                <col style="width:10%">
+                <col style="width:8%">
+              </colgroup>
               <thead class="bg-slate-50 text-slate-600 uppercase text-[10px] tracking-wider border-b border-slate-200">
                 <tr>
                   <th class="py-3 px-4" data-i18n="th_initiative">Codice & Iniziativa (Rinominabile)</th>
@@ -1584,7 +1595,6 @@
     const state = {
       activeView: 'dashboard',
       activeProjectId: 'P01',
-      activeMitigation: null,
       projects: ALL_30_SCENARIOS.slice(0, 10),
       aiRationaleTextIt: "Il motore IA analizza settore, durata e burn rate del progetto attivo per calibrare deliverable, buffer e penali CPM.",
       aiRationaleTextEn: "AI engine inspects active sector, duration, and burn rate to calibrate deliverables, buffers, and CPM penalties.",
@@ -1679,6 +1689,7 @@
           rigidity: sc.rig,
           cpi: sc.cpi,
           spi: sc.spi,
+          activeMitigation: null,
           dependencies: [
             { id: 1, name: `Audit di Architettura & Cybersecurity Cloud`, type: 'CRITICAL', buffer: 0, penalty: Math.round(sc.r * 0.45) },
             { id: 2, name: `Cutover Tecnico in Produzione & Collaudo E2E`, type: 'CRITICAL', buffer: 1, penalty: Math.round(sc.r * 0.65) },
@@ -1777,35 +1788,35 @@
 
         row.innerHTML = `
           <td class="py-3 px-4">
-            <div class="flex items-center space-x-2.5">
-              <div class="w-2 h-2 rounded-full ${isCurrent ? 'bg-brand-600 ring-4 ring-brand-100' : 'bg-slate-300'}"></div>
-              <div class="flex-1 min-w-[220px]" onclick="event.stopPropagation()">
-                <input type="text" value="${prj.name.replace(/"/g, '&quot;')}" onchange="handlePortfolioProjectNameChange('${prj.id}', this.value)" class="w-full font-bold text-slate-900 bg-transparent hover:bg-slate-100 focus:bg-white border border-transparent focus:border-brand-500 rounded px-1.5 py-0.5 text-xs outline-none transition cursor-text" title="Clicca per rinominare l'iniziativa">
-                <span class="text-[10px] text-slate-400 font-mono block px-1.5">${prj.code}</span>
+            <div class="flex items-center space-x-2.5 min-w-0">
+              <div class="w-2 h-2 rounded-full flex-shrink-0 ${isCurrent ? 'bg-brand-600 ring-4 ring-brand-100' : 'bg-slate-300'}"></div>
+              <div class="flex-1 min-w-0" onclick="event.stopPropagation()">
+                <input type="text" value="${prj.name.replace(/"/g, '&quot;')}" onchange="handlePortfolioProjectNameChange('${prj.id}', this.value)" class="w-full min-w-0 truncate font-bold text-slate-900 bg-transparent hover:bg-slate-100 focus:bg-white border border-transparent focus:border-brand-500 rounded px-1.5 py-0.5 text-xs outline-none transition cursor-text" title="${prj.name.replace(/"/g, '&quot;')} — clicca per rinominare l'iniziativa">
+                <span class="text-[10px] text-slate-400 font-mono block px-1.5 truncate">${prj.code}</span>
               </div>
             </div>
           </td>
-          <td class="py-3 px-3">
-            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+          <td class="py-3 px-3 min-w-0">
+            <span class="inline-block max-w-full truncate align-bottom px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200" title="${prj.domain.replace(/"/g, '&quot;')}">
               ${prj.domain}
             </span>
           </td>
-          <td class="py-3 px-3 text-right font-mono font-bold text-slate-900">
+          <td class="py-3 px-3 text-right font-mono font-bold text-slate-900 whitespace-nowrap">
             € ${prj.budget.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}
           </td>
-          <td class="py-3 px-3 text-center font-mono text-slate-600">
+          <td class="py-3 px-3 text-center font-mono text-slate-600 whitespace-nowrap">
             ${prj.duration} ${currentLang === 'en' ? 'mos' : 'mesi'}
           </td>
-          <td class="py-3 px-3 text-right font-mono text-slate-600">
+          <td class="py-3 px-3 text-right font-mono text-slate-600 whitespace-nowrap">
             € ${prj.burnRate.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}
           </td>
-          <td class="py-3 px-3 text-center font-mono font-bold ${m.projectedDelay > 20 ? 'text-rose-600' : 'text-amber-600'}">
+          <td class="py-3 px-3 text-center font-mono font-bold whitespace-nowrap ${m.projectedDelay > 20 ? 'text-rose-600' : 'text-amber-600'}">
             +${m.projectedDelay} gg
           </td>
-          <td class="py-3 px-3 text-right font-mono font-bold text-purple-700">
+          <td class="py-3 px-3 text-right font-mono font-bold text-purple-700 whitespace-nowrap">
             € ${m.totalExposure.toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}
           </td>
-          <td class="py-3 px-3 text-center">
+          <td class="py-3 px-3 text-center whitespace-nowrap">
             <span class="font-mono text-[11px] px-2 py-0.5 rounded ${prj.cpi < 0.9 ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}">
               ${prj.cpi.toFixed(2)} / ${prj.spi.toFixed(2)}
             </span>
@@ -1874,8 +1885,8 @@
 
       let recovery = 0;
       let activeMitigationExtraCost = 0;
-      if (state.activeMitigation !== null && state.raciScopes[state.activeMitigation]) {
-        const activeScope = state.raciScopes[state.activeMitigation];
+      if (p.activeMitigation !== null && p.activeMitigation !== undefined && state.raciScopes[p.activeMitigation]) {
+        const activeScope = state.raciScopes[p.activeMitigation];
         recovery = Number(activeScope.recovery) || 0;
         activeMitigationExtraCost = Number(activeScope.cost) || 0;
       }
@@ -1911,15 +1922,27 @@
       ));
 
       const BAC = p.budget;
+      // Semplificazione nota: senza una % di avanzamento reale in input, il PV è fissato
+      // convenzionalmente al 50% del budget per ogni progetto (stesso valore a prescindere
+      // dallo stato di avanzamento effettivo). Va rivisto se/quando si introduce un dato di
+      // avanzamento reale (es. % completamento o data "as-of").
       const progressFactor = 0.50;
       const PV = Math.round(BAC * progressFactor);
       
       const dynamicSPI = Math.max(0.35, Math.min(1.05, 1 - (projectedDelay / (totalPlannedWorkDays * 1.5))));
       const EV = Math.round(PV * dynamicSPI);
       
-      const AC = Math.round(PV + directCost + (indirectCost * 0.35));
+      // Peso dell'indirectCost (danno CPM) dentro l'Actual Cost: solo il 35% del danno
+      // indiretto viene contabilizzato come costo consuntivo, il resto resta esposizione
+      // potenziale non ancora "a bilancio".
+      const INDIRECT_COST_WEIGHT_IN_AC = 0.35;
+      const AC = Math.round(PV + directCost + (indirectCost * INDIRECT_COST_WEIGHT_IN_AC));
       const dynamicCPI = AC > 0 ? (EV / AC) : 1;
-      const EAC = dynamicCPI > 0 ? Math.round(BAC / dynamicCPI) : BAC;
+      // EAC "schedule-cost constrained": tiene conto sia del CPI sia dello SPI, non solo del CPI.
+      // Con un progetto in forte ritardo (SPI basso) l'EAC sale anche se il CPI resta accettabile,
+      // invece di ignorare completamente l'impatto del ritardo come farebbe BAC/CPI da solo.
+      const scheduleCostFactor = dynamicCPI * dynamicSPI;
+      const EAC = scheduleCostFactor > 0 ? Math.round(AC + (BAC - EV) / scheduleCostFactor) : BAC;
       const SV = EV - PV;
       const CV = EV - AC;
 
@@ -2078,7 +2101,7 @@
           p.approvalDays = Math.max(2, Math.round(p.approvalDays * 0.35));
           p.stakeholders = Math.max(2, p.stakeholders - 3);
           p.scope = Math.max(1, p.scope - 1);
-          state.activeMitigation = 2;
+          p.activeMitigation = 2;
         } else if (selectedAIProfile === 'worstcase') {
           bufMultiplier = 0.3;
           penMultiplier = 1.40;
@@ -2087,7 +2110,7 @@
           p.approvalDays = Math.max(8, Math.round(p.approvalDays * 1.2));
           p.stakeholders = Math.min(8, p.stakeholders + 1);
           p.scope = Math.min(5, p.scope + 1);
-          state.activeMitigation = null;
+          p.activeMitigation = null;
         } else {
           bufMultiplier = 1.0;
           penMultiplier = 1.0;
@@ -2095,7 +2118,7 @@
           profileLabelEn = 'Standard / Realistic';
           p.approvalDays = Math.max(3, Math.round(p.approvalDays * 0.50));
           p.stakeholders = Math.max(2, p.stakeholders - 2);
-          state.activeMitigation = 2;
+          p.activeMitigation = 2;
         }
 
         p.dependencies = template.map((item, idx) => {
@@ -2159,8 +2182,9 @@
       if (!container) return;
       container.innerHTML = '';
 
+      const activeProjectForCards = getActiveProject();
       state.raciScopes.forEach((sc, sIdx) => {
-        const isSelected = state.activeMitigation === sIdx;
+        const isSelected = activeProjectForCards && activeProjectForCards.activeMitigation === sIdx;
         const ownership = getScopeOwnershipLabel(sc.roles);
         const badgeColorMap = {
           rose: 'text-rose-600 bg-rose-50 border-rose-200',
@@ -2303,11 +2327,16 @@
         showSyncToast(currentLang === 'en' ? "Cannot delete the last RACI scope." : "Impossibile eliminare l'ultimo ambito RACI.");
         return;
       }
-      if (state.activeMitigation === sIdx) {
-        state.activeMitigation = null;
-      } else if (state.activeMitigation !== null && state.activeMitigation > sIdx) {
-        state.activeMitigation--;
-      }
+      // raciScopes è un catalogo condiviso: se una leva viene rimossa, l'indice selezionato
+      // va corretto su OGNI progetto (non solo su quello attivo), altrimenti dopo lo splice
+      // ogni progetto punterebbe alla leva sbagliata.
+      state.projects.forEach(prj => {
+        if (prj.activeMitigation === sIdx) {
+          prj.activeMitigation = null;
+        } else if (prj.activeMitigation !== null && prj.activeMitigation !== undefined && prj.activeMitigation > sIdx) {
+          prj.activeMitigation--;
+        }
+      });
       state.raciScopes.splice(sIdx, 1);
       renderRACITable();
       renderMitigationCards();
@@ -2507,7 +2536,7 @@
       p.approvalDays = 14;
       p.stakeholders = 5;
       p.rigidity = 3;
-      state.activeMitigation = null;
+      p.activeMitigation = null;
 
       loadActiveProjectIntoControls();
       refreshAllViews();
@@ -2682,22 +2711,81 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
+      const activeProjectForDossier = getActiveProject();
+
+      // Ricalcola il baseDelay "puro" del progetto (senza alcuna leva applicata),
+      // così da poter derivare per ogni leva il recupero EFFETTIVAMENTE ottenibile
+      // su questo specifico progetto, rispettando il floor minimo di 2gg usato
+      // in calculateProjectMetrics(). Evita il disallineamento visivo con la card
+      // KPI "Ritardo Stimato" del Dossier quando il baseDelay è basso.
+      let baseDelayForDossier = null;
+      if (activeProjectForDossier) {
+        const p = activeProjectForDossier;
+        baseDelayForDossier = Math.round(
+          (p.approvalDays * 1.6) +
+          (p.stakeholders * 3.5) +
+          (p.scope * 4.0) +
+          (p.rigidity * 2.2)
+        );
+      }
+
       state.raciScopes.forEach((sc, idx) => {
-        const isSelected = state.activeMitigation === idx;
+        const isSelected = activeProjectForDossier && activeProjectForDossier.activeMitigation === idx;
         const ownership = getScopeOwnershipLabel(sc.roles);
         const costStr = sc.cost === 0 ? (currentLang === 'en' ? '€ 0 (Zero Cost)' : '€ 0 (Zero Cost)') : `+€ ${Number(sc.cost).toLocaleString(currentLang === 'en' ? 'en-US' : 'it-IT')}`;
+
+        const nominalRecovery = Number(sc.recovery) || 0;
+        let effectiveRecovery = nominalRecovery;
+        let isCapped = false;
+        if (baseDelayForDossier !== null) {
+          const projectedIfApplied = Math.max(2, baseDelayForDossier - nominalRecovery);
+          effectiveRecovery = baseDelayForDossier - projectedIfApplied;
+          isCapped = effectiveRecovery < nominalRecovery;
+        }
+
+        const recoveryCellTitle = isCapped
+          ? (currentLang === 'en'
+              ? `Nominal lever recovery is -${nominalRecovery}gg, but capped to -${effectiveRecovery}gg on this project (min. 2 residual days)`
+              : `Recupero nominale della leva: -${nominalRecovery}gg, ma limitato a -${effectiveRecovery}gg su questo progetto (minimo 2gg residui)`)
+          : '';
+        const recoveryCellHtml = isCapped
+          ? `-${effectiveRecovery} gg <span class="text-amber-600 font-bold" title="${recoveryCellTitle}">*</span>`
+          : `-${effectiveRecovery} gg`;
 
         const tr = document.createElement('tr');
         tr.className = isSelected ? 'bg-indigo-50/70 font-semibold' : 'hover:bg-slate-50';
         tr.innerHTML = `
           <td class="py-2.5 px-3 font-bold text-slate-800">${currentLang === 'en' ? 'Lever' : 'Leva'} ${idx + 1}: ${sc.title}</td>
           <td class="py-2.5 px-3 text-slate-600">${sc.desc}</td>
-          <td class="py-2.5 px-3 text-center text-emerald-600 font-bold">-${sc.recovery} gg</td>
+          <td class="py-2.5 px-3 text-center text-emerald-600 font-bold" title="${recoveryCellTitle}">${recoveryCellHtml}</td>
           <td class="py-2.5 px-3 text-right font-mono ${sc.cost > 0 ? 'text-rose-600' : 'text-emerald-700'} font-bold">${costStr}</td>
           <td class="py-2.5 px-3 text-center text-slate-700 font-mono text-[11px] font-bold">${ownership}</td>
         `;
         tbody.appendChild(tr);
       });
+
+      if (baseDelayForDossier !== null) {
+        const noteId = 'dossierRecoveryCapNote';
+        let noteEl = document.getElementById(noteId);
+        const anyCapped = state.raciScopes.some(sc => {
+          const nom = Number(sc.recovery) || 0;
+          return (baseDelayForDossier - Math.max(2, baseDelayForDossier - nom)) < nom;
+        });
+        if (anyCapped) {
+          if (!noteEl) {
+            noteEl = document.createElement('p');
+            noteEl.id = noteId;
+            noteEl.className = 'text-[10px] text-amber-600 font-medium mt-1.5';
+            tbody.parentElement.insertAdjacentElement('afterend', noteEl);
+          }
+          noteEl.innerText = currentLang === 'en'
+            ? '* Recovery capped by the 2-day minimum residual delay floor for this project.'
+            : '* Recupero limitato dal floor minimo di 2gg di ritardo residuo per questo progetto.';
+          noteEl.style.display = '';
+        } else if (noteEl) {
+          noteEl.style.display = 'none';
+        }
+      }
     }
 
     function toggleCPMType(idx) {
@@ -3093,16 +3181,18 @@
     }
 
     function applyMitigationLever(leverNumber) {
-      if (state.activeMitigation === leverNumber) {
-        state.activeMitigation = null;
+      const p = getActiveProject();
+      if (!p) return;
+      if (p.activeMitigation === leverNumber) {
+        p.activeMitigation = null;
       } else {
-        state.activeMitigation = leverNumber;
+        p.activeMitigation = leverNumber;
       }
       renderMitigationCards();
       refreshAllViews();
 
-      if (state.activeMitigation !== null && state.raciScopes[state.activeMitigation]) {
-        const sc = state.raciScopes[state.activeMitigation];
+      if (p.activeMitigation !== null && state.raciScopes[p.activeMitigation]) {
+        const sc = state.raciScopes[p.activeMitigation];
         showSyncToast(currentLang === 'en' ? `Simulation Active: ${sc.title} (-${sc.recovery}d)` : `Simulazione Attiva: ${sc.title} (-${sc.recovery}gg)`);
       } else {
         showSyncToast(currentLang === 'en' ? 'Simulation reset.' : 'Simulazione mitigazione azzerata.');
